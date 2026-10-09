@@ -1,12 +1,48 @@
 import contextlib
 import io
+import re
 import tempfile
 import unittest
+from html.parser import HTMLParser
 from pathlib import Path
 
 from statementtrace.cli import demo_inputs, main
 from statementtrace.contracts import ContractError, canonical, digest, read_json
 from statementtrace.report import FILES, build, verify, write_report
+
+
+class ReportSelectors(HTMLParser):
+    """Read selector values using the HTML option value fallback rule."""
+
+    def __init__(self):
+        super().__init__()
+        self.select = None
+        self.option = None
+        self.values = {}
+        self.panels = set()
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "select":
+            self.select = attrs["id"]
+            self.values[self.select] = []
+        elif tag == "option":
+            self.option = (attrs, [])
+        elif tag == "section":
+            self.panels.add((attrs["data-cutoff"], attrs["data-period"]))
+
+    def handle_data(self, data):
+        if self.option is not None:
+            self.option[1].append(data)
+
+    def handle_endtag(self, tag):
+        if tag == "option":
+            attrs, text = self.option
+            fallback = re.sub(r"[ \t\n\r\f]+", " ", "".join(text)).strip(" \t\n\r\f")
+            self.values[self.select].append(attrs.get("value", fallback))
+            self.option = None
+        elif tag == "select":
+            self.select = None
 
 
 class ReportTests(unittest.TestCase):
@@ -91,6 +127,27 @@ class ReportTests(unittest.TestCase):
         self.assertNotIn(self.data["entityName"], raw)
         self.assertIn("&lt;script&gt;", raw)
         self.assertNotIn("<img", raw)
+
+    def test_custom_period_labels_match_browser_option_values(self):
+        labels = [" FY 2023\t ", 'FY\n2024 " & <annual>']
+        for period, label in zip(self.request["periods"], labels, strict=True):
+            period["label"] = label
+        parsed = ReportSelectors()
+        parsed.feed(build(self.data, self.request)["index.html"].decode())
+        self.assertEqual(parsed.values["period"], labels)
+        self.assertEqual(
+            {(cutoff, label) for cutoff in parsed.values["cutoff"] for label in parsed.values["period"]},
+            parsed.panels,
+        )
+
+    def test_labels_with_the_same_normalized_text_stay_distinct(self):
+        labels = ["Annual", " Annual "]
+        for period, label in zip(self.request["periods"], labels, strict=True):
+            period["label"] = label
+        parsed = ReportSelectors()
+        parsed.feed(build(self.data, self.request)["index.html"].decode())
+        self.assertEqual(parsed.values["period"], labels)
+        self.assertEqual(len(set(parsed.values["period"])), 2)
 
 
 if __name__ == "__main__":
