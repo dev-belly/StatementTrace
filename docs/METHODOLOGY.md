@@ -6,6 +6,8 @@ Selection matches the configured fiscal start/end for duration facts, or only th
 
 `fy` is retained as filing metadata, not used as a period selector. A later filing may repeat older-period facts. Cutoffs use the SEC **filed date**, not acceptance timestamps: the 2023 filing was accepted November 2 but has a November 3 filed date. No intraday trading availability is claimed.
 
+Configured period labels are unique identifiers, not inferred year numbers. Report selector values preserve the full label, including whitespace, quotes and escaped markup, so each selected cutoff/period pair resolves to its corresponding panel. Explicit values avoid the [HTML option text fallback](https://html.spec.whatwg.org/multipage/form-elements.html#the-option-element), which strips and collapses ASCII whitespace and can make distinct labels collide.
+
 Monetary inputs are integer USD; booleans, floats and numeric strings fail. Negative income/equity is supported. Derived values use exact fractions, with isolated half-even decimal display.
 
 | Output | Formula |

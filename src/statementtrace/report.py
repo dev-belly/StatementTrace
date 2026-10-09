@@ -70,7 +70,7 @@ def render(analysis):
     periods = list(dict.fromkeys(p["period"]["label"] for p in analysis["panels"]))
 
     def options(values):
-        return "".join(f"<option>{esc(v)}</option>" for v in values)
+        return "".join(f"<option value='{esc(v, quote=True)}'>{esc(v)}</option>" for v in values)
 
     return (
         "<!doctype html><html lang='en'><meta charset='utf-8'>"
