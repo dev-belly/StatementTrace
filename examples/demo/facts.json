@@ -1,0 +1,430 @@
+{
+  "_statementtrace": {
+    "kind": "manually_curated_public_filing_excerpt",
+    "note": "33 constructed CompanyFacts-shaped records transcribed from 2023/2024 10-K tables. This is not an unmodified SEC API response. Comparative FY2023 values are unchanged; no actual restatement is claimed.",
+    "scale": 1000000,
+    "sources": [
+      "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm",
+      "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm"
+    ],
+    "stored_unit": "USD",
+    "table_unit": "USD millions"
+  },
+  "cik": 320193,
+  "entityName": "Apple Inc.",
+  "facts": {
+    "us-gaap": {
+      "Assets": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "balance_sheet",
+              "val": 352583000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 352583000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 364980000000
+            }
+          ]
+        }
+      },
+      "AssetsCurrent": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "balance_sheet",
+              "val": 143566000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 143566000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 152987000000
+            }
+          ]
+        }
+      },
+      "CashAndCashEquivalentsAtCarryingValue": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "balance_sheet",
+              "val": 29965000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 29965000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 29943000000
+            }
+          ]
+        }
+      },
+      "Liabilities": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "balance_sheet",
+              "val": 290437000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 290437000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 308030000000
+            }
+          ]
+        }
+      },
+      "LiabilitiesCurrent": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "balance_sheet",
+              "val": 145308000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 145308000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 176392000000
+            }
+          ]
+        }
+      },
+      "NetCashProvidedByUsedInOperatingActivities": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "cash_flows",
+              "start": "2022-09-25",
+              "val": 110543000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "cash_flows",
+              "start": "2022-09-25",
+              "val": 110543000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "cash_flows",
+              "start": "2023-10-01",
+              "val": 118254000000
+            }
+          ]
+        }
+      },
+      "NetIncomeLoss": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "operations",
+              "start": "2022-09-25",
+              "val": 96995000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "operations",
+              "start": "2022-09-25",
+              "val": 96995000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "operations",
+              "start": "2023-10-01",
+              "val": 93736000000
+            }
+          ]
+        }
+      },
+      "OperatingIncomeLoss": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "operations",
+              "start": "2022-09-25",
+              "val": 114301000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "operations",
+              "start": "2022-09-25",
+              "val": 114301000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "operations",
+              "start": "2023-10-01",
+              "val": 123216000000
+            }
+          ]
+        }
+      },
+      "PaymentsToAcquirePropertyPlantAndEquipment": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "cash_flows",
+              "start": "2022-09-25",
+              "val": 10959000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "cash_flows",
+              "start": "2022-09-25",
+              "val": 10959000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "cash_flows",
+              "start": "2023-10-01",
+              "val": 9447000000
+            }
+          ]
+        }
+      },
+      "RevenueFromContractWithCustomerExcludingAssessedTax": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "operations",
+              "start": "2022-09-25",
+              "val": 383285000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "operations",
+              "start": "2022-09-25",
+              "val": 383285000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "operations",
+              "start": "2023-10-01",
+              "val": 391035000000
+            }
+          ]
+        }
+      },
+      "StockholdersEquity": {
+        "units": {
+          "USD": [
+            {
+              "accn": "0000320193-23-000106",
+              "end": "2023-09-30",
+              "filed": "2023-11-03",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2023,
+              "source_section": "balance_sheet",
+              "val": 62146000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2023-09-30",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 62146000000
+            },
+            {
+              "accn": "0000320193-24-000123",
+              "end": "2024-09-28",
+              "filed": "2024-11-01",
+              "form": "10-K",
+              "fp": "FY",
+              "fy": 2024,
+              "source_section": "balance_sheet",
+              "val": 56950000000
+            }
+          ]
+        }
+      }
+    }
+  }
+}
