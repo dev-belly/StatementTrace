@@ -8,6 +8,8 @@
 
 Which numbers were publicly filed by this cutoff, and which records produced this ratio? StatementTrace answers with a reproducible report from SEC CompanyFacts-shaped JSON. The offline demo uses **33 manually curated records from Apple's 2023/2024 Form 10-K tables**; it is not an unmodified API download.
 
+**[Try the live financial report](https://dev-belly.github.io/StatementTrace/)** · [中文面试讲解](docs/INTERVIEW.md)
+
 ![StatementTrace demo](docs/preview.svg)
 
 ## Quick start
