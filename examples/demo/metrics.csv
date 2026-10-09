@@ -1,0 +1,55 @@
+as_of,period,metric,formula,unit,status,exact,display,missing
+2023-11-03,2023,net_margin,net_income / revenue,ratio,ok,19399/76657,0.253062,
+2023-11-03,2023,operating_margin,operating_income / revenue,ratio,ok,114301/383285,0.298214,
+2023-11-03,2023,cash_conversion,operating_cash_flow / net_income,ratio,ok,110543/96995,1.139677,
+2023-11-03,2023,current_ratio,current_assets / current_liabilities,ratio,ok,71783/72654,0.988012,
+2023-11-03,2023,liability_ratio,liabilities / assets,ratio,ok,41491/50369,0.823741,
+2023-11-03,2023,free_cash_flow,operating_cash_flow - capex,USD,ok,99584000000/1,99584000000.000000,
+2023-11-03,2023,fcf_margin,(operating_cash_flow - capex) / revenue,ratio,ok,99584/383285,0.259817,
+2023-11-03,2023,balance_residual,assets - liabilities - equity,USD,ok,0/1,0.000000,
+2023-11-03,2023,revenue_growth,revenue / previous_period_revenue - 1,ratio,missing_input,,,previous_period_revenue
+2023-11-03,2024,net_margin,net_income / revenue,ratio,missing_input,,,net_income;revenue
+2023-11-03,2024,operating_margin,operating_income / revenue,ratio,missing_input,,,operating_income;revenue
+2023-11-03,2024,cash_conversion,operating_cash_flow / net_income,ratio,missing_input,,,operating_cash_flow;net_income
+2023-11-03,2024,current_ratio,current_assets / current_liabilities,ratio,missing_input,,,current_assets;current_liabilities
+2023-11-03,2024,liability_ratio,liabilities / assets,ratio,missing_input,,,liabilities;assets
+2023-11-03,2024,free_cash_flow,operating_cash_flow - capex,USD,missing_input,,,operating_cash_flow;capex
+2023-11-03,2024,fcf_margin,(operating_cash_flow - capex) / revenue,ratio,missing_input,,,operating_cash_flow;capex;revenue
+2023-11-03,2024,balance_residual,assets - liabilities - equity,USD,missing_input,,,assets;liabilities;equity
+2023-11-03,2024,revenue_growth,revenue / previous_period_revenue - 1,ratio,missing_input,,,revenue
+2024-10-31,2023,net_margin,net_income / revenue,ratio,ok,19399/76657,0.253062,
+2024-10-31,2023,operating_margin,operating_income / revenue,ratio,ok,114301/383285,0.298214,
+2024-10-31,2023,cash_conversion,operating_cash_flow / net_income,ratio,ok,110543/96995,1.139677,
+2024-10-31,2023,current_ratio,current_assets / current_liabilities,ratio,ok,71783/72654,0.988012,
+2024-10-31,2023,liability_ratio,liabilities / assets,ratio,ok,41491/50369,0.823741,
+2024-10-31,2023,free_cash_flow,operating_cash_flow - capex,USD,ok,99584000000/1,99584000000.000000,
+2024-10-31,2023,fcf_margin,(operating_cash_flow - capex) / revenue,ratio,ok,99584/383285,0.259817,
+2024-10-31,2023,balance_residual,assets - liabilities - equity,USD,ok,0/1,0.000000,
+2024-10-31,2023,revenue_growth,revenue / previous_period_revenue - 1,ratio,missing_input,,,previous_period_revenue
+2024-10-31,2024,net_margin,net_income / revenue,ratio,missing_input,,,net_income;revenue
+2024-10-31,2024,operating_margin,operating_income / revenue,ratio,missing_input,,,operating_income;revenue
+2024-10-31,2024,cash_conversion,operating_cash_flow / net_income,ratio,missing_input,,,operating_cash_flow;net_income
+2024-10-31,2024,current_ratio,current_assets / current_liabilities,ratio,missing_input,,,current_assets;current_liabilities
+2024-10-31,2024,liability_ratio,liabilities / assets,ratio,missing_input,,,liabilities;assets
+2024-10-31,2024,free_cash_flow,operating_cash_flow - capex,USD,missing_input,,,operating_cash_flow;capex
+2024-10-31,2024,fcf_margin,(operating_cash_flow - capex) / revenue,ratio,missing_input,,,operating_cash_flow;capex;revenue
+2024-10-31,2024,balance_residual,assets - liabilities - equity,USD,missing_input,,,assets;liabilities;equity
+2024-10-31,2024,revenue_growth,revenue / previous_period_revenue - 1,ratio,missing_input,,,revenue
+2024-11-01,2023,net_margin,net_income / revenue,ratio,ok,19399/76657,0.253062,
+2024-11-01,2023,operating_margin,operating_income / revenue,ratio,ok,114301/383285,0.298214,
+2024-11-01,2023,cash_conversion,operating_cash_flow / net_income,ratio,ok,110543/96995,1.139677,
+2024-11-01,2023,current_ratio,current_assets / current_liabilities,ratio,ok,71783/72654,0.988012,
+2024-11-01,2023,liability_ratio,liabilities / assets,ratio,ok,41491/50369,0.823741,
+2024-11-01,2023,free_cash_flow,operating_cash_flow - capex,USD,ok,99584000000/1,99584000000.000000,
+2024-11-01,2023,fcf_margin,(operating_cash_flow - capex) / revenue,ratio,ok,99584/383285,0.259817,
+2024-11-01,2023,balance_residual,assets - liabilities - equity,USD,ok,0/1,0.000000,
+2024-11-01,2023,revenue_growth,revenue / previous_period_revenue - 1,ratio,missing_input,,,previous_period_revenue
+2024-11-01,2024,net_margin,net_income / revenue,ratio,ok,93736/391035,0.239713,
+2024-11-01,2024,operating_margin,operating_income / revenue,ratio,ok,41072/130345,0.315102,
+2024-11-01,2024,cash_conversion,operating_cash_flow / net_income,ratio,ok,59127/46868,1.261564,
+2024-11-01,2024,current_ratio,current_assets / current_liabilities,ratio,ok,152987/176392,0.867313,
+2024-11-01,2024,liability_ratio,liabilities / assets,ratio,ok,30803/36498,0.843964,
+2024-11-01,2024,free_cash_flow,operating_cash_flow - capex,USD,ok,108807000000/1,108807000000.000000,
+2024-11-01,2024,fcf_margin,(operating_cash_flow - capex) / revenue,ratio,ok,36269/130345,0.278254,
+2024-11-01,2024,balance_residual,assets - liabilities - equity,USD,ok,0/1,0.000000,
+2024-11-01,2024,revenue_growth,revenue / previous_period_revenue - 1,ratio,ok,1550/76657,0.020220,

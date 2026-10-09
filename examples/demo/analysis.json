@@ -1,0 +1,3177 @@
+{
+  "cik": 320193,
+  "cutoff_policy": "SEC filed date <= as_of; date granularity, no intraday claim",
+  "decisions": [
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+      "metric": "revenue",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+      "metric": "revenue",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+      "metric": "revenue",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "055a79abfd16b5b07902195b036068f537f22e68cdfe93ebb8c5b2a4e5529c18",
+      "metric": "operating_income",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "2b88e06fea4035ae94d7444d00f6c715e6ed67a3d0194cbc6022f4c84721c0a4",
+      "metric": "operating_income",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "973807d1911eb137fb5730275c04f39769c0ffbd661bdc1249f305c529c97699",
+      "metric": "operating_income",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "0b3251fc98a4b63409c7ef9cc9ba7b4751bad3915b65d6e0cf9edca6017c5ca4",
+      "metric": "net_income",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "ac7be940bcc7bea67b5caba7012d0e550eb4b912dca0adf586122f1f4a43cadf",
+      "metric": "net_income",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+      "metric": "net_income",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "003e612d3e1276a6af626807850db839af1ea9fe05b513153be1349be66cc249",
+      "metric": "operating_cash_flow",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+      "metric": "operating_cash_flow",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "d366fc430e23a8010e3ff575e8b3c52cd3a50c21e30955b4ba028f08c9e1cbd2",
+      "metric": "operating_cash_flow",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "18fa3088d1c656842bbf0a48e22abba25d0740bbd98396074b78ae31c11a07a4",
+      "metric": "capex",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+      "metric": "capex",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "c174ac7f89f8f845a801e23e1b77711a1d137f1d82cc1d8e928de847abf722c4",
+      "metric": "capex",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+      "metric": "assets",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "bf66e05fcc98649248f887805ac52fa56daaec0af05b9f9337d08c210c248dfb",
+      "metric": "assets",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "e2484f97b92bf4bea92937c98f0e97cb56a9f7ffc79a1219e78482699e6b544d",
+      "metric": "assets",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+      "metric": "liabilities",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "3a57576b15822534c32769929f3da27623d0add2331b7c2d4faab9661112076a",
+      "metric": "liabilities",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "595aa3d3eb6569e5b6918ea000bf37ddf2a9b33b617d3a60d7213e428676e664",
+      "metric": "liabilities",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "4d224c603ad01408e160d104750048c80069d18beafee3204b0d8d6ce094958a",
+      "metric": "equity",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "71990ebae271368aad3b24cf17b06d7d47ae804ef1418a76d9a81b353ef8e2fb",
+      "metric": "equity",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "bbcc43e732e5ace976fbd601c6000792eb9a826aa8cf9b07c4efe1021228ec6c",
+      "metric": "equity",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "0499f05df1773de02cc9104507fec273e4ca3f38791ee2a6e6e46e5032025016",
+      "metric": "current_assets",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "1fbe7566069937ae7364539c61b16f0d9fb95d91c8aa934a22d2b4e7ba41dff2",
+      "metric": "current_assets",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "fec5efa70ba8a922fa832d0dee8d9c866548752d88859163bb32e4b5a3c703bc",
+      "metric": "current_assets",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "672601608ddafec94357f5aeddce4133d14626f2f353fa7baa2c10bdf294b4e3",
+      "metric": "current_liabilities",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "75a4639e0efa1074c719620b18d11576406a60672b0049502e4218c4f4c0e570",
+      "metric": "current_liabilities",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "af3aa9b92f19d92a28b427488cac5700d14b73a45693c1271a76846bccbd4f1f",
+      "metric": "current_liabilities",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "94e7e346c32e6de43bd78499f70707f2852cbf337e21a9aa41ef288fd3048fad",
+      "metric": "cash",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "9ee22fd299152448a0c8b5972fd5561a3f6e40c386004687494509854e4e372d",
+      "metric": "cash",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "b1faaf8452f3121c7a762bca53ad2aac3073659218e23ae6f12ebe517a6ca204",
+      "metric": "cash",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+      "metric": "revenue",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+      "metric": "revenue",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+      "metric": "revenue",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "055a79abfd16b5b07902195b036068f537f22e68cdfe93ebb8c5b2a4e5529c18",
+      "metric": "operating_income",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "2b88e06fea4035ae94d7444d00f6c715e6ed67a3d0194cbc6022f4c84721c0a4",
+      "metric": "operating_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "973807d1911eb137fb5730275c04f39769c0ffbd661bdc1249f305c529c97699",
+      "metric": "operating_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "0b3251fc98a4b63409c7ef9cc9ba7b4751bad3915b65d6e0cf9edca6017c5ca4",
+      "metric": "net_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "ac7be940bcc7bea67b5caba7012d0e550eb4b912dca0adf586122f1f4a43cadf",
+      "metric": "net_income",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+      "metric": "net_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "003e612d3e1276a6af626807850db839af1ea9fe05b513153be1349be66cc249",
+      "metric": "operating_cash_flow",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+      "metric": "operating_cash_flow",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "d366fc430e23a8010e3ff575e8b3c52cd3a50c21e30955b4ba028f08c9e1cbd2",
+      "metric": "operating_cash_flow",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "18fa3088d1c656842bbf0a48e22abba25d0740bbd98396074b78ae31c11a07a4",
+      "metric": "capex",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+      "metric": "capex",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "c174ac7f89f8f845a801e23e1b77711a1d137f1d82cc1d8e928de847abf722c4",
+      "metric": "capex",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+      "metric": "assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "bf66e05fcc98649248f887805ac52fa56daaec0af05b9f9337d08c210c248dfb",
+      "metric": "assets",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "e2484f97b92bf4bea92937c98f0e97cb56a9f7ffc79a1219e78482699e6b544d",
+      "metric": "assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+      "metric": "liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "3a57576b15822534c32769929f3da27623d0add2331b7c2d4faab9661112076a",
+      "metric": "liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "595aa3d3eb6569e5b6918ea000bf37ddf2a9b33b617d3a60d7213e428676e664",
+      "metric": "liabilities",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "4d224c603ad01408e160d104750048c80069d18beafee3204b0d8d6ce094958a",
+      "metric": "equity",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "71990ebae271368aad3b24cf17b06d7d47ae804ef1418a76d9a81b353ef8e2fb",
+      "metric": "equity",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "bbcc43e732e5ace976fbd601c6000792eb9a826aa8cf9b07c4efe1021228ec6c",
+      "metric": "equity",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "0499f05df1773de02cc9104507fec273e4ca3f38791ee2a6e6e46e5032025016",
+      "metric": "current_assets",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "1fbe7566069937ae7364539c61b16f0d9fb95d91c8aa934a22d2b4e7ba41dff2",
+      "metric": "current_assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "fec5efa70ba8a922fa832d0dee8d9c866548752d88859163bb32e4b5a3c703bc",
+      "metric": "current_assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "672601608ddafec94357f5aeddce4133d14626f2f353fa7baa2c10bdf294b4e3",
+      "metric": "current_liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "75a4639e0efa1074c719620b18d11576406a60672b0049502e4218c4f4c0e570",
+      "metric": "current_liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "af3aa9b92f19d92a28b427488cac5700d14b73a45693c1271a76846bccbd4f1f",
+      "metric": "current_liabilities",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "94e7e346c32e6de43bd78499f70707f2852cbf337e21a9aa41ef288fd3048fad",
+      "metric": "cash",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "9ee22fd299152448a0c8b5972fd5561a3f6e40c386004687494509854e4e372d",
+      "metric": "cash",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2023-11-03",
+      "fact_id": "b1faaf8452f3121c7a762bca53ad2aac3073659218e23ae6f12ebe517a6ca204",
+      "metric": "cash",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+      "metric": "revenue",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+      "metric": "revenue",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+      "metric": "revenue",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "055a79abfd16b5b07902195b036068f537f22e68cdfe93ebb8c5b2a4e5529c18",
+      "metric": "operating_income",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "2b88e06fea4035ae94d7444d00f6c715e6ed67a3d0194cbc6022f4c84721c0a4",
+      "metric": "operating_income",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "973807d1911eb137fb5730275c04f39769c0ffbd661bdc1249f305c529c97699",
+      "metric": "operating_income",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "0b3251fc98a4b63409c7ef9cc9ba7b4751bad3915b65d6e0cf9edca6017c5ca4",
+      "metric": "net_income",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "ac7be940bcc7bea67b5caba7012d0e550eb4b912dca0adf586122f1f4a43cadf",
+      "metric": "net_income",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+      "metric": "net_income",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "003e612d3e1276a6af626807850db839af1ea9fe05b513153be1349be66cc249",
+      "metric": "operating_cash_flow",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+      "metric": "operating_cash_flow",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "d366fc430e23a8010e3ff575e8b3c52cd3a50c21e30955b4ba028f08c9e1cbd2",
+      "metric": "operating_cash_flow",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "18fa3088d1c656842bbf0a48e22abba25d0740bbd98396074b78ae31c11a07a4",
+      "metric": "capex",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+      "metric": "capex",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "c174ac7f89f8f845a801e23e1b77711a1d137f1d82cc1d8e928de847abf722c4",
+      "metric": "capex",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+      "metric": "assets",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "bf66e05fcc98649248f887805ac52fa56daaec0af05b9f9337d08c210c248dfb",
+      "metric": "assets",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "e2484f97b92bf4bea92937c98f0e97cb56a9f7ffc79a1219e78482699e6b544d",
+      "metric": "assets",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+      "metric": "liabilities",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "3a57576b15822534c32769929f3da27623d0add2331b7c2d4faab9661112076a",
+      "metric": "liabilities",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "595aa3d3eb6569e5b6918ea000bf37ddf2a9b33b617d3a60d7213e428676e664",
+      "metric": "liabilities",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "4d224c603ad01408e160d104750048c80069d18beafee3204b0d8d6ce094958a",
+      "metric": "equity",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "71990ebae271368aad3b24cf17b06d7d47ae804ef1418a76d9a81b353ef8e2fb",
+      "metric": "equity",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "bbcc43e732e5ace976fbd601c6000792eb9a826aa8cf9b07c4efe1021228ec6c",
+      "metric": "equity",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "0499f05df1773de02cc9104507fec273e4ca3f38791ee2a6e6e46e5032025016",
+      "metric": "current_assets",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "1fbe7566069937ae7364539c61b16f0d9fb95d91c8aa934a22d2b4e7ba41dff2",
+      "metric": "current_assets",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "fec5efa70ba8a922fa832d0dee8d9c866548752d88859163bb32e4b5a3c703bc",
+      "metric": "current_assets",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "672601608ddafec94357f5aeddce4133d14626f2f353fa7baa2c10bdf294b4e3",
+      "metric": "current_liabilities",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "75a4639e0efa1074c719620b18d11576406a60672b0049502e4218c4f4c0e570",
+      "metric": "current_liabilities",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "af3aa9b92f19d92a28b427488cac5700d14b73a45693c1271a76846bccbd4f1f",
+      "metric": "current_liabilities",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "94e7e346c32e6de43bd78499f70707f2852cbf337e21a9aa41ef288fd3048fad",
+      "metric": "cash",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "9ee22fd299152448a0c8b5972fd5561a3f6e40c386004687494509854e4e372d",
+      "metric": "cash",
+      "period": "2023",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "b1faaf8452f3121c7a762bca53ad2aac3073659218e23ae6f12ebe517a6ca204",
+      "metric": "cash",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+      "metric": "revenue",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+      "metric": "revenue",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+      "metric": "revenue",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "055a79abfd16b5b07902195b036068f537f22e68cdfe93ebb8c5b2a4e5529c18",
+      "metric": "operating_income",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "2b88e06fea4035ae94d7444d00f6c715e6ed67a3d0194cbc6022f4c84721c0a4",
+      "metric": "operating_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "973807d1911eb137fb5730275c04f39769c0ffbd661bdc1249f305c529c97699",
+      "metric": "operating_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "0b3251fc98a4b63409c7ef9cc9ba7b4751bad3915b65d6e0cf9edca6017c5ca4",
+      "metric": "net_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "ac7be940bcc7bea67b5caba7012d0e550eb4b912dca0adf586122f1f4a43cadf",
+      "metric": "net_income",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+      "metric": "net_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "003e612d3e1276a6af626807850db839af1ea9fe05b513153be1349be66cc249",
+      "metric": "operating_cash_flow",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+      "metric": "operating_cash_flow",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "d366fc430e23a8010e3ff575e8b3c52cd3a50c21e30955b4ba028f08c9e1cbd2",
+      "metric": "operating_cash_flow",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "18fa3088d1c656842bbf0a48e22abba25d0740bbd98396074b78ae31c11a07a4",
+      "metric": "capex",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+      "metric": "capex",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "c174ac7f89f8f845a801e23e1b77711a1d137f1d82cc1d8e928de847abf722c4",
+      "metric": "capex",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+      "metric": "assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "bf66e05fcc98649248f887805ac52fa56daaec0af05b9f9337d08c210c248dfb",
+      "metric": "assets",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "e2484f97b92bf4bea92937c98f0e97cb56a9f7ffc79a1219e78482699e6b544d",
+      "metric": "assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+      "metric": "liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "3a57576b15822534c32769929f3da27623d0add2331b7c2d4faab9661112076a",
+      "metric": "liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "595aa3d3eb6569e5b6918ea000bf37ddf2a9b33b617d3a60d7213e428676e664",
+      "metric": "liabilities",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "4d224c603ad01408e160d104750048c80069d18beafee3204b0d8d6ce094958a",
+      "metric": "equity",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "71990ebae271368aad3b24cf17b06d7d47ae804ef1418a76d9a81b353ef8e2fb",
+      "metric": "equity",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "bbcc43e732e5ace976fbd601c6000792eb9a826aa8cf9b07c4efe1021228ec6c",
+      "metric": "equity",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "0499f05df1773de02cc9104507fec273e4ca3f38791ee2a6e6e46e5032025016",
+      "metric": "current_assets",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "1fbe7566069937ae7364539c61b16f0d9fb95d91c8aa934a22d2b4e7ba41dff2",
+      "metric": "current_assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "fec5efa70ba8a922fa832d0dee8d9c866548752d88859163bb32e4b5a3c703bc",
+      "metric": "current_assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "672601608ddafec94357f5aeddce4133d14626f2f353fa7baa2c10bdf294b4e3",
+      "metric": "current_liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "75a4639e0efa1074c719620b18d11576406a60672b0049502e4218c4f4c0e570",
+      "metric": "current_liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "af3aa9b92f19d92a28b427488cac5700d14b73a45693c1271a76846bccbd4f1f",
+      "metric": "current_liabilities",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "94e7e346c32e6de43bd78499f70707f2852cbf337e21a9aa41ef288fd3048fad",
+      "metric": "cash",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "9ee22fd299152448a0c8b5972fd5561a3f6e40c386004687494509854e4e372d",
+      "metric": "cash",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-10-31",
+      "fact_id": "b1faaf8452f3121c7a762bca53ad2aac3073659218e23ae6f12ebe517a6ca204",
+      "metric": "cash",
+      "period": "2024",
+      "reason": "future_filing"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+      "metric": "revenue",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+      "metric": "revenue",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+      "metric": "revenue",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "055a79abfd16b5b07902195b036068f537f22e68cdfe93ebb8c5b2a4e5529c18",
+      "metric": "operating_income",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "2b88e06fea4035ae94d7444d00f6c715e6ed67a3d0194cbc6022f4c84721c0a4",
+      "metric": "operating_income",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "973807d1911eb137fb5730275c04f39769c0ffbd661bdc1249f305c529c97699",
+      "metric": "operating_income",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "0b3251fc98a4b63409c7ef9cc9ba7b4751bad3915b65d6e0cf9edca6017c5ca4",
+      "metric": "net_income",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "ac7be940bcc7bea67b5caba7012d0e550eb4b912dca0adf586122f1f4a43cadf",
+      "metric": "net_income",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+      "metric": "net_income",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "003e612d3e1276a6af626807850db839af1ea9fe05b513153be1349be66cc249",
+      "metric": "operating_cash_flow",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+      "metric": "operating_cash_flow",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "d366fc430e23a8010e3ff575e8b3c52cd3a50c21e30955b4ba028f08c9e1cbd2",
+      "metric": "operating_cash_flow",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "18fa3088d1c656842bbf0a48e22abba25d0740bbd98396074b78ae31c11a07a4",
+      "metric": "capex",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+      "metric": "capex",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "c174ac7f89f8f845a801e23e1b77711a1d137f1d82cc1d8e928de847abf722c4",
+      "metric": "capex",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+      "metric": "assets",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "bf66e05fcc98649248f887805ac52fa56daaec0af05b9f9337d08c210c248dfb",
+      "metric": "assets",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "e2484f97b92bf4bea92937c98f0e97cb56a9f7ffc79a1219e78482699e6b544d",
+      "metric": "assets",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+      "metric": "liabilities",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "3a57576b15822534c32769929f3da27623d0add2331b7c2d4faab9661112076a",
+      "metric": "liabilities",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "595aa3d3eb6569e5b6918ea000bf37ddf2a9b33b617d3a60d7213e428676e664",
+      "metric": "liabilities",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "4d224c603ad01408e160d104750048c80069d18beafee3204b0d8d6ce094958a",
+      "metric": "equity",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "71990ebae271368aad3b24cf17b06d7d47ae804ef1418a76d9a81b353ef8e2fb",
+      "metric": "equity",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "bbcc43e732e5ace976fbd601c6000792eb9a826aa8cf9b07c4efe1021228ec6c",
+      "metric": "equity",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "0499f05df1773de02cc9104507fec273e4ca3f38791ee2a6e6e46e5032025016",
+      "metric": "current_assets",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "1fbe7566069937ae7364539c61b16f0d9fb95d91c8aa934a22d2b4e7ba41dff2",
+      "metric": "current_assets",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "fec5efa70ba8a922fa832d0dee8d9c866548752d88859163bb32e4b5a3c703bc",
+      "metric": "current_assets",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "672601608ddafec94357f5aeddce4133d14626f2f353fa7baa2c10bdf294b4e3",
+      "metric": "current_liabilities",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "75a4639e0efa1074c719620b18d11576406a60672b0049502e4218c4f4c0e570",
+      "metric": "current_liabilities",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "af3aa9b92f19d92a28b427488cac5700d14b73a45693c1271a76846bccbd4f1f",
+      "metric": "current_liabilities",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "94e7e346c32e6de43bd78499f70707f2852cbf337e21a9aa41ef288fd3048fad",
+      "metric": "cash",
+      "period": "2023",
+      "reason": "superseded"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "9ee22fd299152448a0c8b5972fd5561a3f6e40c386004687494509854e4e372d",
+      "metric": "cash",
+      "period": "2023",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "b1faaf8452f3121c7a762bca53ad2aac3073659218e23ae6f12ebe517a6ca204",
+      "metric": "cash",
+      "period": "2023",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+      "metric": "revenue",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+      "metric": "revenue",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+      "metric": "revenue",
+      "period": "2024",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "055a79abfd16b5b07902195b036068f537f22e68cdfe93ebb8c5b2a4e5529c18",
+      "metric": "operating_income",
+      "period": "2024",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "2b88e06fea4035ae94d7444d00f6c715e6ed67a3d0194cbc6022f4c84721c0a4",
+      "metric": "operating_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "973807d1911eb137fb5730275c04f39769c0ffbd661bdc1249f305c529c97699",
+      "metric": "operating_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "0b3251fc98a4b63409c7ef9cc9ba7b4751bad3915b65d6e0cf9edca6017c5ca4",
+      "metric": "net_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "ac7be940bcc7bea67b5caba7012d0e550eb4b912dca0adf586122f1f4a43cadf",
+      "metric": "net_income",
+      "period": "2024",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+      "metric": "net_income",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "003e612d3e1276a6af626807850db839af1ea9fe05b513153be1349be66cc249",
+      "metric": "operating_cash_flow",
+      "period": "2024",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+      "metric": "operating_cash_flow",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "d366fc430e23a8010e3ff575e8b3c52cd3a50c21e30955b4ba028f08c9e1cbd2",
+      "metric": "operating_cash_flow",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "18fa3088d1c656842bbf0a48e22abba25d0740bbd98396074b78ae31c11a07a4",
+      "metric": "capex",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+      "metric": "capex",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "c174ac7f89f8f845a801e23e1b77711a1d137f1d82cc1d8e928de847abf722c4",
+      "metric": "capex",
+      "period": "2024",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+      "metric": "assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "bf66e05fcc98649248f887805ac52fa56daaec0af05b9f9337d08c210c248dfb",
+      "metric": "assets",
+      "period": "2024",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "e2484f97b92bf4bea92937c98f0e97cb56a9f7ffc79a1219e78482699e6b544d",
+      "metric": "assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+      "metric": "liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "3a57576b15822534c32769929f3da27623d0add2331b7c2d4faab9661112076a",
+      "metric": "liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "595aa3d3eb6569e5b6918ea000bf37ddf2a9b33b617d3a60d7213e428676e664",
+      "metric": "liabilities",
+      "period": "2024",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "4d224c603ad01408e160d104750048c80069d18beafee3204b0d8d6ce094958a",
+      "metric": "equity",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "71990ebae271368aad3b24cf17b06d7d47ae804ef1418a76d9a81b353ef8e2fb",
+      "metric": "equity",
+      "period": "2024",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "bbcc43e732e5ace976fbd601c6000792eb9a826aa8cf9b07c4efe1021228ec6c",
+      "metric": "equity",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "0499f05df1773de02cc9104507fec273e4ca3f38791ee2a6e6e46e5032025016",
+      "metric": "current_assets",
+      "period": "2024",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "1fbe7566069937ae7364539c61b16f0d9fb95d91c8aa934a22d2b4e7ba41dff2",
+      "metric": "current_assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "fec5efa70ba8a922fa832d0dee8d9c866548752d88859163bb32e4b5a3c703bc",
+      "metric": "current_assets",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "672601608ddafec94357f5aeddce4133d14626f2f353fa7baa2c10bdf294b4e3",
+      "metric": "current_liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "75a4639e0efa1074c719620b18d11576406a60672b0049502e4218c4f4c0e570",
+      "metric": "current_liabilities",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "af3aa9b92f19d92a28b427488cac5700d14b73a45693c1271a76846bccbd4f1f",
+      "metric": "current_liabilities",
+      "period": "2024",
+      "reason": "selected"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "94e7e346c32e6de43bd78499f70707f2852cbf337e21a9aa41ef288fd3048fad",
+      "metric": "cash",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "9ee22fd299152448a0c8b5972fd5561a3f6e40c386004687494509854e4e372d",
+      "metric": "cash",
+      "period": "2024",
+      "reason": "wrong_period"
+    },
+    {
+      "as_of": "2024-11-01",
+      "fact_id": "b1faaf8452f3121c7a762bca53ad2aac3073659218e23ae6f12ebe517a6ca204",
+      "metric": "cash",
+      "period": "2024",
+      "reason": "selected"
+    }
+  ],
+  "entity": "Apple Inc.",
+  "fact_count": 33,
+  "panels": [
+    {
+      "as_of": "2023-11-03",
+      "duration_days": 371,
+      "facts": {
+        "assets": {
+          "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 352583000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "Assets",
+          "unit": "USD"
+        },
+        "capex": {
+          "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "cash_flows",
+            "start": "2022-09-25",
+            "val": 10959000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+          "unit": "USD"
+        },
+        "cash": {
+          "fact_id": "94e7e346c32e6de43bd78499f70707f2852cbf337e21a9aa41ef288fd3048fad",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 29965000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "CashAndCashEquivalentsAtCarryingValue",
+          "unit": "USD"
+        },
+        "current_assets": {
+          "fact_id": "fec5efa70ba8a922fa832d0dee8d9c866548752d88859163bb32e4b5a3c703bc",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 143566000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "AssetsCurrent",
+          "unit": "USD"
+        },
+        "current_liabilities": {
+          "fact_id": "672601608ddafec94357f5aeddce4133d14626f2f353fa7baa2c10bdf294b4e3",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 145308000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "LiabilitiesCurrent",
+          "unit": "USD"
+        },
+        "equity": {
+          "fact_id": "4d224c603ad01408e160d104750048c80069d18beafee3204b0d8d6ce094958a",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 62146000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "StockholdersEquity",
+          "unit": "USD"
+        },
+        "liabilities": {
+          "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 290437000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "Liabilities",
+          "unit": "USD"
+        },
+        "net_income": {
+          "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "operations",
+            "start": "2022-09-25",
+            "val": 96995000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "NetIncomeLoss",
+          "unit": "USD"
+        },
+        "operating_cash_flow": {
+          "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "cash_flows",
+            "start": "2022-09-25",
+            "val": 110543000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "NetCashProvidedByUsedInOperatingActivities",
+          "unit": "USD"
+        },
+        "operating_income": {
+          "fact_id": "973807d1911eb137fb5730275c04f39769c0ffbd661bdc1249f305c529c97699",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "operations",
+            "start": "2022-09-25",
+            "val": 114301000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "OperatingIncomeLoss",
+          "unit": "USD"
+        },
+        "revenue": {
+          "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "operations",
+            "start": "2022-09-25",
+            "val": 383285000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+          "unit": "USD"
+        }
+      },
+      "metrics": [
+        {
+          "display": "0.253062",
+          "exact": "19399/76657",
+          "formula": "net_income / revenue",
+          "inputs": [
+            {
+              "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+              "role": "net_income"
+            },
+            {
+              "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+              "role": "revenue"
+            }
+          ],
+          "metric": "net_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.298214",
+          "exact": "114301/383285",
+          "formula": "operating_income / revenue",
+          "inputs": [
+            {
+              "fact_id": "973807d1911eb137fb5730275c04f39769c0ffbd661bdc1249f305c529c97699",
+              "role": "operating_income"
+            },
+            {
+              "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+              "role": "revenue"
+            }
+          ],
+          "metric": "operating_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "1.139677",
+          "exact": "110543/96995",
+          "formula": "operating_cash_flow / net_income",
+          "inputs": [
+            {
+              "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+              "role": "net_income"
+            }
+          ],
+          "metric": "cash_conversion",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.988012",
+          "exact": "71783/72654",
+          "formula": "current_assets / current_liabilities",
+          "inputs": [
+            {
+              "fact_id": "fec5efa70ba8a922fa832d0dee8d9c866548752d88859163bb32e4b5a3c703bc",
+              "role": "current_assets"
+            },
+            {
+              "fact_id": "672601608ddafec94357f5aeddce4133d14626f2f353fa7baa2c10bdf294b4e3",
+              "role": "current_liabilities"
+            }
+          ],
+          "metric": "current_ratio",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.823741",
+          "exact": "41491/50369",
+          "formula": "liabilities / assets",
+          "inputs": [
+            {
+              "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+              "role": "liabilities"
+            },
+            {
+              "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+              "role": "assets"
+            }
+          ],
+          "metric": "liability_ratio",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "99584000000.000000",
+          "exact": "99584000000/1",
+          "formula": "operating_cash_flow - capex",
+          "inputs": [
+            {
+              "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+              "role": "capex"
+            }
+          ],
+          "metric": "free_cash_flow",
+          "missing": [],
+          "status": "ok",
+          "unit": "USD"
+        },
+        {
+          "display": "0.259817",
+          "exact": "99584/383285",
+          "formula": "(operating_cash_flow - capex) / revenue",
+          "inputs": [
+            {
+              "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+              "role": "capex"
+            },
+            {
+              "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+              "role": "revenue"
+            }
+          ],
+          "metric": "fcf_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.000000",
+          "exact": "0/1",
+          "formula": "assets - liabilities - equity",
+          "inputs": [
+            {
+              "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+              "role": "assets"
+            },
+            {
+              "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+              "role": "liabilities"
+            },
+            {
+              "fact_id": "4d224c603ad01408e160d104750048c80069d18beafee3204b0d8d6ce094958a",
+              "role": "equity"
+            }
+          ],
+          "metric": "balance_residual",
+          "missing": [],
+          "status": "ok",
+          "unit": "USD"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "revenue / previous_period_revenue - 1",
+          "inputs": [
+            {
+              "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+              "role": "revenue"
+            }
+          ],
+          "metric": "revenue_growth",
+          "missing": [
+            "previous_period_revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        }
+      ],
+      "period": {
+        "end": "2023-09-30",
+        "label": "2023",
+        "start": "2022-09-25"
+      }
+    },
+    {
+      "as_of": "2023-11-03",
+      "duration_days": 364,
+      "facts": {
+        "assets": null,
+        "capex": null,
+        "cash": null,
+        "current_assets": null,
+        "current_liabilities": null,
+        "equity": null,
+        "liabilities": null,
+        "net_income": null,
+        "operating_cash_flow": null,
+        "operating_income": null,
+        "revenue": null
+      },
+      "metrics": [
+        {
+          "display": "",
+          "exact": "",
+          "formula": "net_income / revenue",
+          "inputs": [],
+          "metric": "net_margin",
+          "missing": [
+            "net_income",
+            "revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "operating_income / revenue",
+          "inputs": [],
+          "metric": "operating_margin",
+          "missing": [
+            "operating_income",
+            "revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "operating_cash_flow / net_income",
+          "inputs": [],
+          "metric": "cash_conversion",
+          "missing": [
+            "operating_cash_flow",
+            "net_income"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "current_assets / current_liabilities",
+          "inputs": [],
+          "metric": "current_ratio",
+          "missing": [
+            "current_assets",
+            "current_liabilities"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "liabilities / assets",
+          "inputs": [],
+          "metric": "liability_ratio",
+          "missing": [
+            "liabilities",
+            "assets"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "operating_cash_flow - capex",
+          "inputs": [],
+          "metric": "free_cash_flow",
+          "missing": [
+            "operating_cash_flow",
+            "capex"
+          ],
+          "status": "missing_input",
+          "unit": "USD"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "(operating_cash_flow - capex) / revenue",
+          "inputs": [],
+          "metric": "fcf_margin",
+          "missing": [
+            "operating_cash_flow",
+            "capex",
+            "revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "assets - liabilities - equity",
+          "inputs": [],
+          "metric": "balance_residual",
+          "missing": [
+            "assets",
+            "liabilities",
+            "equity"
+          ],
+          "status": "missing_input",
+          "unit": "USD"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "revenue / previous_period_revenue - 1",
+          "inputs": [
+            {
+              "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+              "role": "previous_period_revenue"
+            }
+          ],
+          "metric": "revenue_growth",
+          "missing": [
+            "revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        }
+      ],
+      "period": {
+        "end": "2024-09-28",
+        "label": "2024",
+        "start": "2023-10-01"
+      }
+    },
+    {
+      "as_of": "2024-10-31",
+      "duration_days": 371,
+      "facts": {
+        "assets": {
+          "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 352583000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "Assets",
+          "unit": "USD"
+        },
+        "capex": {
+          "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "cash_flows",
+            "start": "2022-09-25",
+            "val": 10959000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+          "unit": "USD"
+        },
+        "cash": {
+          "fact_id": "94e7e346c32e6de43bd78499f70707f2852cbf337e21a9aa41ef288fd3048fad",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 29965000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "CashAndCashEquivalentsAtCarryingValue",
+          "unit": "USD"
+        },
+        "current_assets": {
+          "fact_id": "fec5efa70ba8a922fa832d0dee8d9c866548752d88859163bb32e4b5a3c703bc",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 143566000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "AssetsCurrent",
+          "unit": "USD"
+        },
+        "current_liabilities": {
+          "fact_id": "672601608ddafec94357f5aeddce4133d14626f2f353fa7baa2c10bdf294b4e3",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 145308000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "LiabilitiesCurrent",
+          "unit": "USD"
+        },
+        "equity": {
+          "fact_id": "4d224c603ad01408e160d104750048c80069d18beafee3204b0d8d6ce094958a",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 62146000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "StockholdersEquity",
+          "unit": "USD"
+        },
+        "liabilities": {
+          "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "balance_sheet",
+            "val": 290437000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "Liabilities",
+          "unit": "USD"
+        },
+        "net_income": {
+          "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "operations",
+            "start": "2022-09-25",
+            "val": 96995000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "NetIncomeLoss",
+          "unit": "USD"
+        },
+        "operating_cash_flow": {
+          "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "cash_flows",
+            "start": "2022-09-25",
+            "val": 110543000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "NetCashProvidedByUsedInOperatingActivities",
+          "unit": "USD"
+        },
+        "operating_income": {
+          "fact_id": "973807d1911eb137fb5730275c04f39769c0ffbd661bdc1249f305c529c97699",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "operations",
+            "start": "2022-09-25",
+            "val": 114301000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "OperatingIncomeLoss",
+          "unit": "USD"
+        },
+        "revenue": {
+          "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+          "record": {
+            "accn": "0000320193-23-000106",
+            "end": "2023-09-30",
+            "filed": "2023-11-03",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2023,
+            "source_section": "operations",
+            "start": "2022-09-25",
+            "val": 383285000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/0000320193-23-000106-index.htm",
+          "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+          "unit": "USD"
+        }
+      },
+      "metrics": [
+        {
+          "display": "0.253062",
+          "exact": "19399/76657",
+          "formula": "net_income / revenue",
+          "inputs": [
+            {
+              "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+              "role": "net_income"
+            },
+            {
+              "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+              "role": "revenue"
+            }
+          ],
+          "metric": "net_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.298214",
+          "exact": "114301/383285",
+          "formula": "operating_income / revenue",
+          "inputs": [
+            {
+              "fact_id": "973807d1911eb137fb5730275c04f39769c0ffbd661bdc1249f305c529c97699",
+              "role": "operating_income"
+            },
+            {
+              "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+              "role": "revenue"
+            }
+          ],
+          "metric": "operating_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "1.139677",
+          "exact": "110543/96995",
+          "formula": "operating_cash_flow / net_income",
+          "inputs": [
+            {
+              "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "f2700ee683dd3e015fd36b548c6ba5acb3af5d57c34eaa1c59221a5f9385c70d",
+              "role": "net_income"
+            }
+          ],
+          "metric": "cash_conversion",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.988012",
+          "exact": "71783/72654",
+          "formula": "current_assets / current_liabilities",
+          "inputs": [
+            {
+              "fact_id": "fec5efa70ba8a922fa832d0dee8d9c866548752d88859163bb32e4b5a3c703bc",
+              "role": "current_assets"
+            },
+            {
+              "fact_id": "672601608ddafec94357f5aeddce4133d14626f2f353fa7baa2c10bdf294b4e3",
+              "role": "current_liabilities"
+            }
+          ],
+          "metric": "current_ratio",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.823741",
+          "exact": "41491/50369",
+          "formula": "liabilities / assets",
+          "inputs": [
+            {
+              "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+              "role": "liabilities"
+            },
+            {
+              "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+              "role": "assets"
+            }
+          ],
+          "metric": "liability_ratio",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "99584000000.000000",
+          "exact": "99584000000/1",
+          "formula": "operating_cash_flow - capex",
+          "inputs": [
+            {
+              "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+              "role": "capex"
+            }
+          ],
+          "metric": "free_cash_flow",
+          "missing": [],
+          "status": "ok",
+          "unit": "USD"
+        },
+        {
+          "display": "0.259817",
+          "exact": "99584/383285",
+          "formula": "(operating_cash_flow - capex) / revenue",
+          "inputs": [
+            {
+              "fact_id": "9218edb7cee4d395f12940cac238dd42c4f08ffca4201d7af656f7ed73596ea0",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "9fbabc39dcefb5211039ae9ffd7465af969569593ee3472be29715e7542c1f9d",
+              "role": "capex"
+            },
+            {
+              "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+              "role": "revenue"
+            }
+          ],
+          "metric": "fcf_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.000000",
+          "exact": "0/1",
+          "formula": "assets - liabilities - equity",
+          "inputs": [
+            {
+              "fact_id": "62c6b6135c02755bfd39f9c20074479906b0ac3adb95bef61f8c2ac6fafbd41f",
+              "role": "assets"
+            },
+            {
+              "fact_id": "366b55f41ddb5536157a50ce2d68f048c1ed430864ccf1b0dfbdbda04e52d8f1",
+              "role": "liabilities"
+            },
+            {
+              "fact_id": "4d224c603ad01408e160d104750048c80069d18beafee3204b0d8d6ce094958a",
+              "role": "equity"
+            }
+          ],
+          "metric": "balance_residual",
+          "missing": [],
+          "status": "ok",
+          "unit": "USD"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "revenue / previous_period_revenue - 1",
+          "inputs": [
+            {
+              "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+              "role": "revenue"
+            }
+          ],
+          "metric": "revenue_growth",
+          "missing": [
+            "previous_period_revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        }
+      ],
+      "period": {
+        "end": "2023-09-30",
+        "label": "2023",
+        "start": "2022-09-25"
+      }
+    },
+    {
+      "as_of": "2024-10-31",
+      "duration_days": 364,
+      "facts": {
+        "assets": null,
+        "capex": null,
+        "cash": null,
+        "current_assets": null,
+        "current_liabilities": null,
+        "equity": null,
+        "liabilities": null,
+        "net_income": null,
+        "operating_cash_flow": null,
+        "operating_income": null,
+        "revenue": null
+      },
+      "metrics": [
+        {
+          "display": "",
+          "exact": "",
+          "formula": "net_income / revenue",
+          "inputs": [],
+          "metric": "net_margin",
+          "missing": [
+            "net_income",
+            "revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "operating_income / revenue",
+          "inputs": [],
+          "metric": "operating_margin",
+          "missing": [
+            "operating_income",
+            "revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "operating_cash_flow / net_income",
+          "inputs": [],
+          "metric": "cash_conversion",
+          "missing": [
+            "operating_cash_flow",
+            "net_income"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "current_assets / current_liabilities",
+          "inputs": [],
+          "metric": "current_ratio",
+          "missing": [
+            "current_assets",
+            "current_liabilities"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "liabilities / assets",
+          "inputs": [],
+          "metric": "liability_ratio",
+          "missing": [
+            "liabilities",
+            "assets"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "operating_cash_flow - capex",
+          "inputs": [],
+          "metric": "free_cash_flow",
+          "missing": [
+            "operating_cash_flow",
+            "capex"
+          ],
+          "status": "missing_input",
+          "unit": "USD"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "(operating_cash_flow - capex) / revenue",
+          "inputs": [],
+          "metric": "fcf_margin",
+          "missing": [
+            "operating_cash_flow",
+            "capex",
+            "revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "assets - liabilities - equity",
+          "inputs": [],
+          "metric": "balance_residual",
+          "missing": [
+            "assets",
+            "liabilities",
+            "equity"
+          ],
+          "status": "missing_input",
+          "unit": "USD"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "revenue / previous_period_revenue - 1",
+          "inputs": [
+            {
+              "fact_id": "1f6399e28518bd826d52428224ffa57b9cf480445ade3bf37457143fbf3d1f64",
+              "role": "previous_period_revenue"
+            }
+          ],
+          "metric": "revenue_growth",
+          "missing": [
+            "revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        }
+      ],
+      "period": {
+        "end": "2024-09-28",
+        "label": "2024",
+        "start": "2023-10-01"
+      }
+    },
+    {
+      "as_of": "2024-11-01",
+      "duration_days": 371,
+      "facts": {
+        "assets": {
+          "fact_id": "e2484f97b92bf4bea92937c98f0e97cb56a9f7ffc79a1219e78482699e6b544d",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 352583000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "Assets",
+          "unit": "USD"
+        },
+        "capex": {
+          "fact_id": "18fa3088d1c656842bbf0a48e22abba25d0740bbd98396074b78ae31c11a07a4",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "cash_flows",
+            "start": "2022-09-25",
+            "val": 10959000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+          "unit": "USD"
+        },
+        "cash": {
+          "fact_id": "9ee22fd299152448a0c8b5972fd5561a3f6e40c386004687494509854e4e372d",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 29965000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "CashAndCashEquivalentsAtCarryingValue",
+          "unit": "USD"
+        },
+        "current_assets": {
+          "fact_id": "1fbe7566069937ae7364539c61b16f0d9fb95d91c8aa934a22d2b4e7ba41dff2",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 143566000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "AssetsCurrent",
+          "unit": "USD"
+        },
+        "current_liabilities": {
+          "fact_id": "75a4639e0efa1074c719620b18d11576406a60672b0049502e4218c4f4c0e570",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 145308000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "LiabilitiesCurrent",
+          "unit": "USD"
+        },
+        "equity": {
+          "fact_id": "bbcc43e732e5ace976fbd601c6000792eb9a826aa8cf9b07c4efe1021228ec6c",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 62146000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "StockholdersEquity",
+          "unit": "USD"
+        },
+        "liabilities": {
+          "fact_id": "3a57576b15822534c32769929f3da27623d0add2331b7c2d4faab9661112076a",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 290437000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "Liabilities",
+          "unit": "USD"
+        },
+        "net_income": {
+          "fact_id": "0b3251fc98a4b63409c7ef9cc9ba7b4751bad3915b65d6e0cf9edca6017c5ca4",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "operations",
+            "start": "2022-09-25",
+            "val": 96995000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "NetIncomeLoss",
+          "unit": "USD"
+        },
+        "operating_cash_flow": {
+          "fact_id": "d366fc430e23a8010e3ff575e8b3c52cd3a50c21e30955b4ba028f08c9e1cbd2",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "cash_flows",
+            "start": "2022-09-25",
+            "val": 110543000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "NetCashProvidedByUsedInOperatingActivities",
+          "unit": "USD"
+        },
+        "operating_income": {
+          "fact_id": "2b88e06fea4035ae94d7444d00f6c715e6ed67a3d0194cbc6022f4c84721c0a4",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "operations",
+            "start": "2022-09-25",
+            "val": 114301000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "OperatingIncomeLoss",
+          "unit": "USD"
+        },
+        "revenue": {
+          "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2023-09-30",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "operations",
+            "start": "2022-09-25",
+            "val": 383285000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+          "unit": "USD"
+        }
+      },
+      "metrics": [
+        {
+          "display": "0.253062",
+          "exact": "19399/76657",
+          "formula": "net_income / revenue",
+          "inputs": [
+            {
+              "fact_id": "0b3251fc98a4b63409c7ef9cc9ba7b4751bad3915b65d6e0cf9edca6017c5ca4",
+              "role": "net_income"
+            },
+            {
+              "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+              "role": "revenue"
+            }
+          ],
+          "metric": "net_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.298214",
+          "exact": "114301/383285",
+          "formula": "operating_income / revenue",
+          "inputs": [
+            {
+              "fact_id": "2b88e06fea4035ae94d7444d00f6c715e6ed67a3d0194cbc6022f4c84721c0a4",
+              "role": "operating_income"
+            },
+            {
+              "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+              "role": "revenue"
+            }
+          ],
+          "metric": "operating_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "1.139677",
+          "exact": "110543/96995",
+          "formula": "operating_cash_flow / net_income",
+          "inputs": [
+            {
+              "fact_id": "d366fc430e23a8010e3ff575e8b3c52cd3a50c21e30955b4ba028f08c9e1cbd2",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "0b3251fc98a4b63409c7ef9cc9ba7b4751bad3915b65d6e0cf9edca6017c5ca4",
+              "role": "net_income"
+            }
+          ],
+          "metric": "cash_conversion",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.988012",
+          "exact": "71783/72654",
+          "formula": "current_assets / current_liabilities",
+          "inputs": [
+            {
+              "fact_id": "1fbe7566069937ae7364539c61b16f0d9fb95d91c8aa934a22d2b4e7ba41dff2",
+              "role": "current_assets"
+            },
+            {
+              "fact_id": "75a4639e0efa1074c719620b18d11576406a60672b0049502e4218c4f4c0e570",
+              "role": "current_liabilities"
+            }
+          ],
+          "metric": "current_ratio",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.823741",
+          "exact": "41491/50369",
+          "formula": "liabilities / assets",
+          "inputs": [
+            {
+              "fact_id": "3a57576b15822534c32769929f3da27623d0add2331b7c2d4faab9661112076a",
+              "role": "liabilities"
+            },
+            {
+              "fact_id": "e2484f97b92bf4bea92937c98f0e97cb56a9f7ffc79a1219e78482699e6b544d",
+              "role": "assets"
+            }
+          ],
+          "metric": "liability_ratio",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "99584000000.000000",
+          "exact": "99584000000/1",
+          "formula": "operating_cash_flow - capex",
+          "inputs": [
+            {
+              "fact_id": "d366fc430e23a8010e3ff575e8b3c52cd3a50c21e30955b4ba028f08c9e1cbd2",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "18fa3088d1c656842bbf0a48e22abba25d0740bbd98396074b78ae31c11a07a4",
+              "role": "capex"
+            }
+          ],
+          "metric": "free_cash_flow",
+          "missing": [],
+          "status": "ok",
+          "unit": "USD"
+        },
+        {
+          "display": "0.259817",
+          "exact": "99584/383285",
+          "formula": "(operating_cash_flow - capex) / revenue",
+          "inputs": [
+            {
+              "fact_id": "d366fc430e23a8010e3ff575e8b3c52cd3a50c21e30955b4ba028f08c9e1cbd2",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "18fa3088d1c656842bbf0a48e22abba25d0740bbd98396074b78ae31c11a07a4",
+              "role": "capex"
+            },
+            {
+              "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+              "role": "revenue"
+            }
+          ],
+          "metric": "fcf_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.000000",
+          "exact": "0/1",
+          "formula": "assets - liabilities - equity",
+          "inputs": [
+            {
+              "fact_id": "e2484f97b92bf4bea92937c98f0e97cb56a9f7ffc79a1219e78482699e6b544d",
+              "role": "assets"
+            },
+            {
+              "fact_id": "3a57576b15822534c32769929f3da27623d0add2331b7c2d4faab9661112076a",
+              "role": "liabilities"
+            },
+            {
+              "fact_id": "bbcc43e732e5ace976fbd601c6000792eb9a826aa8cf9b07c4efe1021228ec6c",
+              "role": "equity"
+            }
+          ],
+          "metric": "balance_residual",
+          "missing": [],
+          "status": "ok",
+          "unit": "USD"
+        },
+        {
+          "display": "",
+          "exact": "",
+          "formula": "revenue / previous_period_revenue - 1",
+          "inputs": [
+            {
+              "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+              "role": "revenue"
+            }
+          ],
+          "metric": "revenue_growth",
+          "missing": [
+            "previous_period_revenue"
+          ],
+          "status": "missing_input",
+          "unit": "ratio"
+        }
+      ],
+      "period": {
+        "end": "2023-09-30",
+        "label": "2023",
+        "start": "2022-09-25"
+      }
+    },
+    {
+      "as_of": "2024-11-01",
+      "duration_days": 364,
+      "facts": {
+        "assets": {
+          "fact_id": "bf66e05fcc98649248f887805ac52fa56daaec0af05b9f9337d08c210c248dfb",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 364980000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "Assets",
+          "unit": "USD"
+        },
+        "capex": {
+          "fact_id": "c174ac7f89f8f845a801e23e1b77711a1d137f1d82cc1d8e928de847abf722c4",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "cash_flows",
+            "start": "2023-10-01",
+            "val": 9447000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+          "unit": "USD"
+        },
+        "cash": {
+          "fact_id": "b1faaf8452f3121c7a762bca53ad2aac3073659218e23ae6f12ebe517a6ca204",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 29943000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "CashAndCashEquivalentsAtCarryingValue",
+          "unit": "USD"
+        },
+        "current_assets": {
+          "fact_id": "0499f05df1773de02cc9104507fec273e4ca3f38791ee2a6e6e46e5032025016",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 152987000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "AssetsCurrent",
+          "unit": "USD"
+        },
+        "current_liabilities": {
+          "fact_id": "af3aa9b92f19d92a28b427488cac5700d14b73a45693c1271a76846bccbd4f1f",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 176392000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "LiabilitiesCurrent",
+          "unit": "USD"
+        },
+        "equity": {
+          "fact_id": "71990ebae271368aad3b24cf17b06d7d47ae804ef1418a76d9a81b353ef8e2fb",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 56950000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "StockholdersEquity",
+          "unit": "USD"
+        },
+        "liabilities": {
+          "fact_id": "595aa3d3eb6569e5b6918ea000bf37ddf2a9b33b617d3a60d7213e428676e664",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "balance_sheet",
+            "val": 308030000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "Liabilities",
+          "unit": "USD"
+        },
+        "net_income": {
+          "fact_id": "ac7be940bcc7bea67b5caba7012d0e550eb4b912dca0adf586122f1f4a43cadf",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "operations",
+            "start": "2023-10-01",
+            "val": 93736000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "NetIncomeLoss",
+          "unit": "USD"
+        },
+        "operating_cash_flow": {
+          "fact_id": "003e612d3e1276a6af626807850db839af1ea9fe05b513153be1349be66cc249",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "cash_flows",
+            "start": "2023-10-01",
+            "val": 118254000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "NetCashProvidedByUsedInOperatingActivities",
+          "unit": "USD"
+        },
+        "operating_income": {
+          "fact_id": "055a79abfd16b5b07902195b036068f537f22e68cdfe93ebb8c5b2a4e5529c18",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "operations",
+            "start": "2023-10-01",
+            "val": 123216000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "OperatingIncomeLoss",
+          "unit": "USD"
+        },
+        "revenue": {
+          "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+          "record": {
+            "accn": "0000320193-24-000123",
+            "end": "2024-09-28",
+            "filed": "2024-11-01",
+            "form": "10-K",
+            "fp": "FY",
+            "fy": 2024,
+            "source_section": "operations",
+            "start": "2023-10-01",
+            "val": 391035000000
+          },
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm",
+          "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+          "unit": "USD"
+        }
+      },
+      "metrics": [
+        {
+          "display": "0.239713",
+          "exact": "93736/391035",
+          "formula": "net_income / revenue",
+          "inputs": [
+            {
+              "fact_id": "ac7be940bcc7bea67b5caba7012d0e550eb4b912dca0adf586122f1f4a43cadf",
+              "role": "net_income"
+            },
+            {
+              "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+              "role": "revenue"
+            }
+          ],
+          "metric": "net_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.315102",
+          "exact": "41072/130345",
+          "formula": "operating_income / revenue",
+          "inputs": [
+            {
+              "fact_id": "055a79abfd16b5b07902195b036068f537f22e68cdfe93ebb8c5b2a4e5529c18",
+              "role": "operating_income"
+            },
+            {
+              "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+              "role": "revenue"
+            }
+          ],
+          "metric": "operating_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "1.261564",
+          "exact": "59127/46868",
+          "formula": "operating_cash_flow / net_income",
+          "inputs": [
+            {
+              "fact_id": "003e612d3e1276a6af626807850db839af1ea9fe05b513153be1349be66cc249",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "ac7be940bcc7bea67b5caba7012d0e550eb4b912dca0adf586122f1f4a43cadf",
+              "role": "net_income"
+            }
+          ],
+          "metric": "cash_conversion",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.867313",
+          "exact": "152987/176392",
+          "formula": "current_assets / current_liabilities",
+          "inputs": [
+            {
+              "fact_id": "0499f05df1773de02cc9104507fec273e4ca3f38791ee2a6e6e46e5032025016",
+              "role": "current_assets"
+            },
+            {
+              "fact_id": "af3aa9b92f19d92a28b427488cac5700d14b73a45693c1271a76846bccbd4f1f",
+              "role": "current_liabilities"
+            }
+          ],
+          "metric": "current_ratio",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.843964",
+          "exact": "30803/36498",
+          "formula": "liabilities / assets",
+          "inputs": [
+            {
+              "fact_id": "595aa3d3eb6569e5b6918ea000bf37ddf2a9b33b617d3a60d7213e428676e664",
+              "role": "liabilities"
+            },
+            {
+              "fact_id": "bf66e05fcc98649248f887805ac52fa56daaec0af05b9f9337d08c210c248dfb",
+              "role": "assets"
+            }
+          ],
+          "metric": "liability_ratio",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "108807000000.000000",
+          "exact": "108807000000/1",
+          "formula": "operating_cash_flow - capex",
+          "inputs": [
+            {
+              "fact_id": "003e612d3e1276a6af626807850db839af1ea9fe05b513153be1349be66cc249",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "c174ac7f89f8f845a801e23e1b77711a1d137f1d82cc1d8e928de847abf722c4",
+              "role": "capex"
+            }
+          ],
+          "metric": "free_cash_flow",
+          "missing": [],
+          "status": "ok",
+          "unit": "USD"
+        },
+        {
+          "display": "0.278254",
+          "exact": "36269/130345",
+          "formula": "(operating_cash_flow - capex) / revenue",
+          "inputs": [
+            {
+              "fact_id": "003e612d3e1276a6af626807850db839af1ea9fe05b513153be1349be66cc249",
+              "role": "operating_cash_flow"
+            },
+            {
+              "fact_id": "c174ac7f89f8f845a801e23e1b77711a1d137f1d82cc1d8e928de847abf722c4",
+              "role": "capex"
+            },
+            {
+              "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+              "role": "revenue"
+            }
+          ],
+          "metric": "fcf_margin",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        },
+        {
+          "display": "0.000000",
+          "exact": "0/1",
+          "formula": "assets - liabilities - equity",
+          "inputs": [
+            {
+              "fact_id": "bf66e05fcc98649248f887805ac52fa56daaec0af05b9f9337d08c210c248dfb",
+              "role": "assets"
+            },
+            {
+              "fact_id": "595aa3d3eb6569e5b6918ea000bf37ddf2a9b33b617d3a60d7213e428676e664",
+              "role": "liabilities"
+            },
+            {
+              "fact_id": "71990ebae271368aad3b24cf17b06d7d47ae804ef1418a76d9a81b353ef8e2fb",
+              "role": "equity"
+            }
+          ],
+          "metric": "balance_residual",
+          "missing": [],
+          "status": "ok",
+          "unit": "USD"
+        },
+        {
+          "display": "0.020220",
+          "exact": "1550/76657",
+          "formula": "revenue / previous_period_revenue - 1",
+          "inputs": [
+            {
+              "fact_id": "7c06142e9003b63b065bde9104c5e5547b4075f5aeece8a3ae03dcd2e0d1bbd5",
+              "role": "revenue"
+            },
+            {
+              "fact_id": "19c20566e318a183bf8911d2d48e528bb77f07b6b95b8b9f1ad153faf961641a",
+              "role": "previous_period_revenue"
+            }
+          ],
+          "metric": "revenue_growth",
+          "missing": [],
+          "status": "ok",
+          "unit": "ratio"
+        }
+      ],
+      "period": {
+        "end": "2024-09-28",
+        "label": "2024",
+        "start": "2023-10-01"
+      }
+    }
+  ],
+  "schema_version": 1
+}
