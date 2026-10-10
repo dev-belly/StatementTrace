@@ -18,11 +18,23 @@ Which numbers were publicly filed by this cutoff, and which records produced thi
 git clone https://github.com/dev-belly/StatementTrace.git
 cd StatementTrace
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 python -m pip install -e .
 statementtrace demo --out output/demo
 statementtrace verify output/demo
 python -m http.server 8000 --directory output/demo
+```
+
+For **Windows PowerShell**, use the virtual environment directly; activation is optional:
+
+```powershell
+git clone https://github.com/dev-belly/StatementTrace.git
+cd StatementTrace
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\statementtrace.exe demo --out output/demo
+.\.venv\Scripts\statementtrace.exe verify output/demo
+.\.venv\Scripts\python.exe -m http.server 8000 --directory output/demo
 ```
 
 Open `http://localhost:8000`, choose a cutoff and fiscal year, inspect the formulas and follow selected facts to SEC filings. The committed report is in [examples/demo](examples/demo); GitHub displays HTML as source, so download or serve it locally.
@@ -65,7 +77,7 @@ statementtrace verify examples/demo
 
 Supply the issuer's actual fiscal calendar. Eleven configured US-GAAP concepts and integral USD raw values are supported; this is not a universal XBRL parser. Save external data separately following the [SEC API documentation](https://www.sec.gov/search-filings/edgar-application-programming-interfaces). The demo and verifier need no network access or credentials.
 
-Tests cover time cutoffs, comparative selection, 53-week periods, quarterly exclusions, ambiguity, exact arithmetic, malformed JSON and evidence tampering. An independent SQLite query checks every demo selection. CI runs tests, byte-for-byte committed report replay and installed-wheel smoke tests on Python 3.11–3.13.
+Tests cover time cutoffs, comparative selection, 53-week periods, quarterly exclusions, ambiguity, exact arithmetic, malformed JSON and evidence tampering. An independent SQLite query checks every demo selection. CI runs tests, byte-for-byte committed report replay and installed-wheel smoke tests on Linux Python 3.11–3.13 and Windows Python 3.12. Text files keep LF endings even with Git's Windows `core.autocrlf=true` setting, so a fresh checkout preserves report hashes. The real symlink test requires Windows Developer Mode or elevated privileges; only that test skips if Windows denies link creation.
 
 ## 中文说明
 
