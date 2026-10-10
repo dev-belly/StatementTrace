@@ -70,41 +70,47 @@ class ReportTests(unittest.TestCase):
 
     def test_tampered_metric_with_updated_hash_is_rejected(self):
         path = self.target / "metrics.csv"
-        path.write_text(path.read_text().replace("0.239712", "9.999999"))
+        path.write_text(path.read_text(encoding="utf-8").replace("0.239712", "9.999999"), encoding="utf-8")
         # Do not depend on a specific rounded value occurring.
-        path.write_text(path.read_text() + "fabricated,row\n")
+        path.write_text(path.read_text(encoding="utf-8") + "fabricated,row\n", encoding="utf-8")
         self.rehash()
         with self.assertRaisesRegex(ContractError, "Semantic replay"):
             verify(self.target)
 
     def test_tampered_source_lineage_with_updated_hash_is_rejected(self):
         path = self.target / "lineage.csv"
-        path.write_text(path.read_text().replace("net_income", "fabricated_income"))
+        path.write_text(path.read_text(encoding="utf-8").replace("net_income", "fabricated_income"), encoding="utf-8")
         self.rehash()
         with self.assertRaisesRegex(ContractError, "Semantic replay"):
             verify(self.target)
 
     def test_modified_html_with_updated_hash_is_rejected(self):
         path = self.target / "index.html"
-        path.write_text(path.read_text() + "<p>Fake conclusion</p>")
+        path.write_text(path.read_text(encoding="utf-8") + "<p>Fake conclusion</p>", encoding="utf-8")
         self.rehash()
         with self.assertRaisesRegex(ContractError, "Semantic replay"):
             verify(self.target)
 
     def test_unhashed_modification_is_rejected(self):
-        (self.target / "analysis.json").write_text("{}")
+        (self.target / "analysis.json").write_text("{}", encoding="utf-8")
         with self.assertRaisesRegex(ContractError, "manifest"):
             verify(self.target)
 
-    def test_extra_member_and_symlink_are_rejected(self):
+    def test_extra_member_is_rejected(self):
         extra = self.target / "extra.txt"
-        extra.write_text("extra")
+        extra.write_text("extra", encoding="utf-8")
         with self.assertRaises(ContractError):
             verify(self.target)
-        extra.unlink()
+
+    def test_symlink_is_rejected(self):
         member = self.target / "metrics.csv"
         member.unlink()
-        member.symlink_to(self.target / "selected_facts.csv")
+        try:
+            member.symlink_to(self.target / "selected_facts.csv")
+        except OSError as exc:
+            if getattr(exc, "winerror", None) == 1314:
+                self.skipTest("Windows symlink creation requires Developer Mode or elevated privileges")
+            raise
         with self.assertRaisesRegex(ContractError, "symlinks"):
             verify(self.target)
 
