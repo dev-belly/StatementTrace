@@ -39,7 +39,13 @@ content. This prevents a carriage return in a label from creating a new record.
 The visible marker avoids relying on apostrophes that some spreadsheet editors
 remove on save/reopen; see [OWASP's CSV injection guidance](https://owasp.org/www-community/attacks/CSV_Injection).
 CSV is a review representation; use the JSON for original labels and replay.
-The standard committed demo is unchanged. Earlier custom reports with affected
+The committed numerical tables and source data are unchanged. Earlier custom reports with affected
 labels must be regenerated before verification with the updated exporter.
 
 Unsupported: custom issuer taxonomies, segmented facts, IFRS models, currency conversion, fractional raw monetary facts, intraday availability and automated restatement reconciliation.
+
+HTML selectors use explicit ASCII JSON identity keys shared with their result
+rows/panels. This preserves distinct repeated-whitespace, CR/LF, NUL and Unicode
+identities through browser preprocessing; visible labels and source JSON retain
+the original text. Saved report HTML and its manifest hash were refreshed without
+changing financial values or source data.

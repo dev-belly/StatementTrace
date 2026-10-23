@@ -3,6 +3,7 @@
 import csv
 import html
 import io
+import json
 from pathlib import Path
 
 from .contracts import ContractError, canonical, digest, read_json
@@ -73,8 +74,9 @@ def render(analysis):
                 f"<small>Fact IDs: {source_ids}</small></td></tr>"
             )
         label, cutoff = esc(panel["period"]["label"]), esc(panel["as_of"])
+        period_key = esc(json.dumps(panel["period"]["label"], ensure_ascii=True), quote=True)
         panels.append(
-            f"<section data-period='{label}' data-cutoff='{cutoff}'>"
+            f"<section data-period='{period_key}' data-cutoff='{cutoff}'>"
             f"<h2>FY {label} · as of {cutoff}</h2><p>"
             f"{esc(panel['period']['start'])} → {esc(panel['period']['end'])} · "
             f"{panel['duration_days']} inclusive days · amounts in USD</p>"
@@ -88,8 +90,12 @@ def render(analysis):
     cutoffs = sorted({p["as_of"] for p in analysis["panels"]})
     periods = list(dict.fromkeys(p["period"]["label"] for p in analysis["panels"]))
 
-    def options(values):
-        return "".join(f"<option value='{esc(v, quote=True)}'>{esc(v)}</option>" for v in values)
+    def options(values, *, identities=False):
+        return "".join(
+            f"<option value='{esc(json.dumps(v, ensure_ascii=True) if identities else v, quote=True)}'>"
+            f"{esc(v)}</option>"
+            for v in values
+        )
 
     return (
         "<!doctype html><html lang='en'><meta charset='utf-8'>"
@@ -114,7 +120,7 @@ def render(analysis):
         "<main><div class='toolbar'><label>As of <select id='cutoff'>"
         + options(cutoffs)
         + "</select></label><label>Fiscal year <select id='period'>"
-        + options(periods)
+        + options(periods, identities=True)
         + "</select></label><p><a href='selected_facts.csv'>Facts CSV</a> · "
         "<a href='metrics.csv'>Metrics CSV</a> · <a href='lineage.csv'>Full lineage</a> · "
         "<a href='decisions.csv'>Selection decisions</a> · "

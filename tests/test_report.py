@@ -1,5 +1,6 @@
 import contextlib
 import io
+import json
 import re
 import tempfile
 import unittest
@@ -142,7 +143,7 @@ class ReportTests(unittest.TestCase):
             period["label"] = label
         parsed = ReportSelectors()
         parsed.feed(build(self.data, self.request)["index.html"].decode())
-        self.assertEqual(parsed.values["period"], labels)
+        self.assertEqual([json.loads(value) for value in parsed.values["period"]], labels)
         self.assertEqual(
             {(cutoff, label) for cutoff in parsed.values["cutoff"] for label in parsed.values["period"]},
             parsed.panels,
@@ -154,8 +155,23 @@ class ReportTests(unittest.TestCase):
             period["label"] = label
         parsed = ReportSelectors()
         parsed.feed(build(self.data, self.request)["index.html"].decode())
-        self.assertEqual(parsed.values["period"], labels)
+        self.assertEqual([json.loads(value) for value in parsed.values["period"]], labels)
         self.assertEqual(len(set(parsed.values["period"])), 2)
+
+    def test_html_preprocessing_cannot_collapse_cr_lf_or_nul_periods(self):
+        for labels in (["FY\r2023", "FY\n2023"], ["FY\x002023", "FY�2023"]):
+            for period, label in zip(self.request["periods"], labels, strict=True):
+                period["label"] = label
+            raw = build(self.data, self.request)["index.html"].decode()
+            parsed = ReportSelectors()
+            parsed.feed(raw.replace("\r\n", "\n").replace("\r", "\n").replace("\x00", "�"))
+            with self.subTest(labels=labels):
+                self.assertEqual([json.loads(value) for value in parsed.values["period"]], labels)
+                self.assertEqual(len(set(parsed.values["period"])), 2)
+                self.assertEqual(
+                    {(cutoff, value) for cutoff in parsed.values["cutoff"] for value in parsed.values["period"]},
+                    parsed.panels,
+                )
 
 
 if __name__ == "__main__":
