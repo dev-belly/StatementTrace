@@ -15,7 +15,6 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-
 SCRIPT = r"""
 const spec = arguments[0];
 const select = document.getElementById(spec.select);
@@ -35,7 +34,8 @@ for (const label of spec.labels) {
         if (!sectors || document.querySelectorAll('#sectors tr').length !== sectors)
             throw new Error('Sector attribution missing or selected another scenario');
     } else {
-        const rows = Array.from(document.querySelectorAll(spec.rows)).filter(r => getComputedStyle(r).display !== 'none');
+        const rows = Array.from(document.querySelectorAll(spec.rows))
+            .filter(r => getComputedStyle(r).display !== 'none');
         if (!rows.length || rows.some(r => JSON.parse(r.dataset[spec.attribute]) !== label))
             throw new Error('Empty or incorrect filtered result: ' + JSON.stringify(label));
     }
