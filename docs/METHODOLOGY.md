@@ -25,4 +25,21 @@ FCF is a defined analytic convention. Growth compares reported periods without w
 
 The verifier enforces the fixed member set, rejects symlinks, checks hashes and regenerates all files, including HTML and source links. It catches output-only corruption with rewritten hashes; it cannot authenticate source data or detect a complete coordinated rewrite. The independent SQL test oracle checks selection on the demo, not arbitrary issuers' accounting policies.
 
+## Spreadsheet exports
+
+Period labels are untrusted text. Formula-shaped labels (including full-width
+variants and prefixes behind ASCII whitespace) and leading control/BOM prefixes
+receive a visible `text: ` marker in all four CSV exports. Labels already starting
+with that marker receive one more marker, keeping distinct labels distinct.
+Original identities remain unchanged in `request.json`, `analysis.json` and HTML.
+USD amounts, negative ratios, exact fractions and decimal displays are unchanged.
+
+CSV records retain LF endings, while embedded CR, LF and CRLF are quoted as cell
+content. This prevents a carriage return in a label from creating a new record.
+The visible marker avoids relying on apostrophes that some spreadsheet editors
+remove on save/reopen; see [OWASP's CSV injection guidance](https://owasp.org/www-community/attacks/CSV_Injection).
+CSV is a review representation; use the JSON for original labels and replay.
+The standard committed demo is unchanged. Earlier custom reports with affected
+labels must be regenerated before verification with the updated exporter.
+
 Unsupported: custom issuer taxonomies, segmented facts, IFRS models, currency conversion, fractional raw monetary facts, intraday availability and automated restatement reconciliation.

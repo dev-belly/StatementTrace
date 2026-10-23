@@ -22,10 +22,29 @@ FILES = {
 
 def csv_bytes(rows, fields):
     stream = io.StringIO(newline="")
-    writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
-    writer.writeheader()
-    writer.writerows(rows)
-    return stream.getvalue().encode("utf-8")
+    # A CRLF writer quotes lone CR characters as well as LF. Normalize only
+    # its final record terminator, preserving embedded CR/CRLF in quoted cells.
+    writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\r\n")
+
+    def record(row):
+        stream.seek(0)
+        stream.truncate(0)
+        writer.writerow({key: csv_label(value) if key == "period" else value for key, value in row.items()})
+        return stream.getvalue()[:-2] + "\n"
+
+    return (record(dict(zip(fields, fields, strict=True))) + "".join(record(row) for row in rows)).encode("utf-8")
+
+
+def csv_label(value):
+    """Display untrusted labels as text; raw identities remain in JSON."""
+    prefix = "text: "
+    if value.startswith((prefix, "\t", "\r", "\n", "\x00", "\ufeff")) or value.lstrip(
+        " \t\r\n\v\f\x00\ufeff"
+    ).startswith(("=", "+", "-", "@", "＝", "＋", "－", "＠")):
+        # A visible, ordinary text prefix avoids relying on a leading quote
+        # that spreadsheet software can remove when the CSV is saved again.
+        return prefix + value
+    return value
 
 
 def render(analysis):
