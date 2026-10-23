@@ -79,6 +79,10 @@ Supply the issuer's actual fiscal calendar. Eleven configured US-GAAP concepts a
 
 Tests cover time cutoffs, comparative selection, 53-week periods, quarterly exclusions, ambiguity, exact arithmetic, malformed JSON and evidence tampering. An independent SQLite query checks every demo selection. CI runs tests, byte-for-byte committed report replay and installed-wheel smoke tests on Linux Python 3.11–3.13 and Windows Python 3.12. Text files keep LF endings even with Git's Windows `core.autocrlf=true` setting, so a fresh checkout preserves report hashes. The real symlink test requires Windows Developer Mode or elevated privileges; only that test skips if Windows denies link creation.
 
+CSV review exports mark formula-shaped period names as text and quote embedded
+carriage returns. Original labels remain in JSON; numeric financial evidence is
+unchanged. See the [spreadsheet export contract](docs/METHODOLOGY.md#spreadsheet-exports).
+
 ## 中文说明
 
 公开财报数据处理与财务指标追溯项目，适合金融数据、财报分析与风控实习展示。重点可以讲 **申报截止日、53 周财年、比较期数据、SQL 对照、缺失值契约和指标血缘**。

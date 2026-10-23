@@ -25,4 +25,33 @@ FCF is a defined analytic convention. Growth compares reported periods without w
 
 The verifier enforces the fixed member set, rejects symlinks, checks hashes and regenerates all files, including HTML and source links. It catches output-only corruption with rewritten hashes; it cannot authenticate source data or detect a complete coordinated rewrite. The independent SQL test oracle checks selection on the demo, not arbitrary issuers' accounting policies.
 
+## Spreadsheet exports
+
+Period labels are untrusted text. Formula-shaped labels (including full-width
+variants and prefixes behind ASCII whitespace) and leading control/BOM prefixes
+receive a visible `text: ` marker in all four CSV exports. Labels already starting
+with that marker receive one more marker, keeping distinct labels distinct.
+Original identities remain unchanged in `request.json`, `analysis.json` and HTML.
+USD amounts, negative ratios, exact fractions and decimal displays are unchanged.
+
+CSV records retain LF endings, while embedded CR, LF and CRLF are quoted as cell
+content. This prevents a carriage return in a label from creating a new record.
+The visible marker avoids relying on apostrophes that some spreadsheet editors
+remove on save/reopen; see [OWASP's CSV injection guidance](https://owasp.org/www-community/attacks/CSV_Injection).
+CSV is a review representation; use the JSON for original labels and replay.
+The committed numerical tables and source data are unchanged. Regenerate earlier reports from their saved JSON inputs before verification
+with the updated exporter and selector renderer.
+
 Unsupported: custom issuer taxonomies, segmented facts, IFRS models, currency conversion, fractional raw monetary facts, intraday availability and automated restatement reconciliation.
+
+HTML selectors use explicit ASCII JSON identity keys shared with their result
+rows/panels. This preserves distinct repeated-whitespace, CR/LF, NUL and Unicode
+identities through browser preprocessing; visible labels and source JSON retain
+the original text. Saved report HTML and its manifest hash were refreshed without
+changing financial values or source data.
+
+The `Chrome report selectors` CI job selects these identities in actual Chrome,
+checking that each choice shows the intended result. It uses the Ubuntu runner's
+Chrome/chromedriver and no extra Python package. Run
+`python scripts/check_browser.py` with matching Chrome and chromedriver installed
+(or set `CHROMEWEBDRIVER` to the driver's directory) to reproduce it.
