@@ -49,3 +49,9 @@ rows/panels. This preserves distinct repeated-whitespace, CR/LF, NUL and Unicode
 identities through browser preprocessing; visible labels and source JSON retain
 the original text. Saved report HTML and its manifest hash were refreshed without
 changing financial values or source data.
+
+The `Chrome report selectors` CI job selects these identities in actual Chrome,
+checking that each choice shows the intended result. It uses the Ubuntu runner's
+Chrome/chromedriver and no extra Python package. Run
+`python scripts/check_browser.py` with matching Chrome and chromedriver installed
+(or set `CHROMEWEBDRIVER` to the driver's directory) to reproduce it.
