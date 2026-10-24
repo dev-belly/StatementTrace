@@ -19,9 +19,9 @@ Monetary inputs are integer USD; booleans, floats and numeric strings fail. Nega
 | Free cash flow | Operating cash flow − capex payments |
 | FCF margin | Free cash flow / revenue |
 | Balance residual | Assets − liabilities − equity |
-| Revenue growth | Revenue / immediately preceding configured period revenue − 1 |
+| Revenue growth | Revenue / immediately preceding, calendar-adjacent configured period revenue − 1 |
 
-FCF is a defined analytic convention. Growth compares reported periods without week normalization; the caller is responsible for specifying appropriate consecutive annual periods. Missing input and zero denominator have distinct statuses. A nonzero balance residual is evidence, not an automatic repair.
+FCF is a defined analytic convention. Growth compares reported periods without week normalization. The caller supplies the issuer's annual fiscal calendar; the engine requires the previous configured period to end exactly one day before the current one starts. It does not infer adjacency from labels or divide a multi-year change into an annual rate. A skipped year or even a one-day gap leaves current-period facts and other metrics available but marks growth `missing_input` for `previous_period_revenue`, without linking the non-adjacent period as an input. A 53-week year followed by a 52-week year remains valid when the dates are adjacent. Missing input and zero denominator have distinct statuses. A nonzero balance residual is evidence, not an automatic repair.
 
 The verifier enforces the fixed member set, rejects symlinks, checks hashes and regenerates all files, including HTML and source links. It catches output-only corruption with rewritten hashes; it cannot authenticate source data or detect a complete coordinated rewrite. The independent SQL test oracle checks selection on the demo, not arbitrary issuers' accounting policies.
 

@@ -52,7 +52,7 @@ Open `http://localhost:8000`, choose a cutoff and fiscal year, inspect the formu
 | Lineage | Formula → named input → full fact ID → concept, dates and accession |
 | Replay | Hash checks and full recomputation of CSV, JSON, decisions, lineage and HTML |
 
-Nine outputs: net margin, operating margin, cash conversion, current ratio, liability ratio, free cash flow, FCF margin, accounting balance residual and reported annual revenue growth. Fractions preserve exact values; decimal display is rounded. Growth is **not week-normalized**.
+Nine outputs: net margin, operating margin, cash conversion, current ratio, liability ratio, free cash flow, FCF margin, accounting balance residual and reported annual revenue growth. Fractions preserve exact values; decimal display is rounded. Growth is **not week-normalized**. Its base must be the immediately preceding configured period with an adjacent calendar: the earlier end must be exactly one day before the current start. A skipped year or calendar gap keeps the current-period metrics and marks growth `missing_input` for `previous_period_revenue`.
 
 ## Demo evidence
 

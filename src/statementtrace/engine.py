@@ -228,8 +228,11 @@ def analyze(data, request):
     facts = normalize(data)
     panels, decisions = [], []
     for cutoff in request["as_of_dates"]:
-        prior_revenue = None
+        prior_revenue, previous_end = None, None
         for period in request["periods"]:
+            # Ordered, non-overlapping requests may omit fiscal years. A previous
+            # listed period is a growth base only when its calendar is adjacent.
+            consecutive = previous_end is not None and (iso_date(period["start"], "start") - previous_end).days == 1
             selected = {}
             for metric in METRICS:
                 fact, reasons = choose(facts, metric, period, cutoff)
@@ -257,10 +260,11 @@ def analyze(data, request):
                         )
                         for key, f in selected.items()
                     },
-                    "metrics": calculate(selected, prior_revenue),
+                    "metrics": calculate(selected, prior_revenue if consecutive else None),
                 }
             )
             prior_revenue = selected["revenue"]
+            previous_end = iso_date(period["end"], "end")
     return {
         "schema_version": 1,
         "entity": data["entityName"],
