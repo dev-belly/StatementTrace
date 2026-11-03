@@ -20,6 +20,66 @@ FILES = {
     "index.html",
 }
 
+VIEW_SCRIPT = r"""
+const cutoff = document.querySelector('#cutoff');
+const period = document.querySelector('#period');
+const panels = Array.from(document.querySelectorAll('section[data-period]'));
+const viewLink = document.querySelector('#view-link');
+const viewStatus = document.querySelector('#view-status');
+const defaultCutoff = cutoff.options[cutoff.options.length - 1].value;
+const defaultPeriod = period.options[period.options.length - 1].value;
+
+function refresh() {
+    panels.forEach(panel => {
+        panel.hidden = panel.dataset.cutoff !== cutoff.value || panel.dataset.period !== period.value;
+    });
+    const params = new URLSearchParams({as_of: cutoff.value, period: JSON.parse(period.value)});
+    const url = new URL(window.location.href);
+    url.hash = params.toString();
+    viewLink.href = url.href;
+    document.querySelector('#share-view').hidden = false;
+}
+
+function restore() {
+    cutoff.value = defaultCutoff;
+    period.value = defaultPeriod;
+    viewStatus.textContent = '';
+    if (window.location.hash) {
+        try {
+            const fragment = window.location.hash.slice(1);
+            // Reject malformed escapes/UTF-8 before URLSearchParams can replace them.
+            decodeURIComponent(fragment.replace(/\+/g, ' '));
+            const params = new URLSearchParams(fragment);
+            const selected = Array.from(period.options).find(
+                option => JSON.parse(option.value) === params.get('period')
+            );
+            if (Array.from(params).length !== 2 || params.getAll('as_of').length !== 1 ||
+                params.getAll('period').length !== 1 || !selected || !panels.some(
+                    panel => panel.dataset.cutoff === params.get('as_of') &&
+                        panel.dataset.period === selected.value
+                )) throw new Error('Unavailable view');
+            cutoff.value = params.get('as_of');
+            period.value = selected.value;
+        } catch {
+            viewStatus.textContent = 'Saved view unavailable; showing the latest configured view.';
+        }
+    }
+    refresh();
+}
+
+function selectView() {
+    viewStatus.textContent = '';
+    refresh();
+    if (window.location.href !== viewLink.href) history.pushState(null, '', viewLink.href);
+}
+
+cutoff.addEventListener('change', selectView);
+period.addEventListener('change', selectView);
+window.addEventListener('popstate', restore);
+window.addEventListener('hashchange', restore);
+restore();
+"""
+
 
 def csv_bytes(rows, fields):
     stream = io.StringIO(newline="")
@@ -109,19 +169,28 @@ def render(analysis):
         "border-radius:12px;margin:20px 0}.scroll{overflow-x:auto}"
         "table{border-collapse:collapse;width:100%;font-size:13px}"
         "th,td{padding:12px;text-align:left;border-bottom:1px solid #e2e8ed;vertical-align:top}"
-        "th{background:#edf5f7}a{color:#0a766e}select{font:inherit;padding:8px;margin:0 20px 0 6px}"
+        "th{background:#edf5f7}a{color:#0a766e}select{font:inherit;padding:8px;min-width:0;max-width:100%}"
+        ".selectors{display:flex;flex-wrap:wrap;gap:12px 20px}"
+        ".selectors label{display:flex;align-items:center;gap:8px;min-width:0;max-width:100%}"
         "code,small{overflow-wrap:anywhere}section[hidden]{display:none}"
         "@media(max-width:640px){h1{font-size:30px}header,main{padding:16px}}"
         "</style><header><p class='eyebrow'>PUBLIC FILING → PERIOD CONTRACT → SOURCE LINEAGE</p>"
         f"<h1>StatementTrace</h1><p>{esc(analysis['entity'])} · CIK {analysis['cik']}</p>"
         "<p>公开财报指标追溯。切换申报截止日，观察当时可用的数据。"
         "Saved financial facts are replayed locally; the demo uses a curated filing excerpt."
-        " Cutoffs use the SEC filed date, with no intraday availability assumption.</p></header>"
-        "<main><div class='toolbar'><label>As of <select id='cutoff'>"
+        " Cutoffs use the SEC filed date, with no intraday availability assumption.</p>"
+        "<p><a href='https://github.com/dev-belly/StatementTrace'>GitHub project</a> · "
+        "<a href='https://github.com/dev-belly/StatementTrace/blob/main/docs/METHODOLOGY.md'>Method</a> · "
+        "<a href='https://github.com/dev-belly'>Author profile</a></p></header>"
+        "<main><div class='toolbar'><div class='selectors'><label>As of <select id='cutoff'>"
         + options(cutoffs)
         + "</select></label><label>Fiscal year <select id='period'>"
         + options(periods, identities=True)
-        + "</select></label><p><a href='selected_facts.csv'>Facts CSV</a> · "
+        + "</select></label></div><p id='share-view' hidden><a id='view-link'>Link to this view</a> · "
+        "The address bar follows your selection. Open or copy this link to share it.</p>"
+        "<p id='view-status' role='status'></p>"
+        "<noscript><p>JavaScript is off; all saved cutoff/year panels are shown below.</p></noscript>"
+        "<p><a href='selected_facts.csv'>Facts CSV</a> · "
         "<a href='metrics.csv'>Metrics CSV</a> · <a href='lineage.csv'>Full lineage</a> · "
         "<a href='decisions.csv'>Selection decisions</a> · "
         "<a href='manifest.json'>SHA-256 manifest</a></p></div>"
@@ -129,14 +198,7 @@ def render(analysis):
         + "<p>Missing is not zero. Ratios are exact rational values; display is rounded. "
         "Replay locally: <code>statementtrace verify examples/demo</code>. "
         "The verifier checks consistency with bundled inputs; hashes do not authenticate SEC data."
-        "</p></main><script>const cutoff=document.querySelector('#cutoff');"
-        "const period=document.querySelector('#period');function refresh(){"
-        "document.querySelectorAll('section').forEach(s=>{s.hidden="
-        "s.dataset.cutoff!==cutoff.value||s.dataset.period!==period.value;});}"
-        "cutoff.value=cutoff.options[cutoff.options.length-1].value;"
-        "period.value=period.options[period.options.length-1].value;"
-        "cutoff.addEventListener('change',refresh);period.addEventListener('change',refresh);"
-        "refresh();</script></html>\n"
+        "</p></main><script>" + VIEW_SCRIPT + "</script></html>\n"
     ).encode("utf-8")
 
 
