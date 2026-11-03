@@ -15,33 +15,57 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-SCRIPT = r"""
-const spec = arguments[0];
-const select = document.getElementById(spec.select);
-if (!select) throw new Error('Missing selector');
-for (const label of spec.labels) {
-    const option = Array.from(select.options).find(o => o.value && JSON.parse(o.value) === label);
-    if (!option) throw new Error('Missing exact identity: ' + JSON.stringify(label));
-    select.value = option.value;
-    select.dispatchEvent(new Event('change', {bubbles:true}));
-    if (spec.chart) {
-        const expected = data.histograms[label].counts;
-        const actual = Array.from(document.querySelectorAll('#histogram rect'), r => Number(r.getAttribute('height')));
-        const peak = Math.max(...expected,1);
-        if (actual.length !== expected.length || actual.some((v,i) => Math.abs(v-200*expected[i]/peak)>1e-10))
-            throw new Error('Histogram selected another scenario');
-        const sectors = data.sector_es.filter(r => r.scenario === label).length;
-        if (!sectors || document.querySelectorAll('#sectors tr').length !== sectors)
-            throw new Error('Sector attribution missing or selected another scenario');
-    } else {
-        const rows = Array.from(document.querySelectorAll(spec.rows))
-            .filter(r => getComputedStyle(r).display !== 'none');
-        if (!rows.length || rows.some(r => JSON.parse(r.dataset[spec.attribute]) !== label))
-            throw new Error('Empty or incorrect filtered result: ' + JSON.stringify(label));
+ASSERT_VIEW = r"""
+function assertView(expected, exactAddress, unavailable) {
+    const selected = Array.from(document.querySelectorAll('section[data-period]')).filter(s => !s.hidden);
+    if (selected.length !== 1 || selected[0].dataset.cutoff !== expected.as_of ||
+        JSON.parse(selected[0].dataset.period) !== expected.period)
+        throw new Error('Incorrect visible cutoff/period');
+    const values = Array.from(selected[0].querySelectorAll('table')[0].querySelectorAll('tbody tr'),
+        row => Array.from(row.querySelectorAll('td')).slice(0,4).map(cell => cell.textContent));
+    if (JSON.stringify(values) !== JSON.stringify(expected.metrics)) throw new Error('Financial metrics differ');
+    const sources = Array.from(selected[0].querySelectorAll('table')[1].querySelectorAll('a'), a => a.href);
+    if (JSON.stringify(sources) !== JSON.stringify(expected.sources)) throw new Error('Source links differ');
+    const link = document.getElementById('view-link');
+    const url = new URL(link.href);
+    const params = new URLSearchParams(url.hash.slice(1));
+    if (params.get('as_of') !== expected.as_of || params.get('period') !== expected.period ||
+        Array.from(params).length !== 2 || url.search !== '?review=1' ||
+        (exactAddress && location.href !== link.href) || document.getElementById('share-view').hidden)
+        throw new Error('View link differs from displayed state');
+    if (Boolean(document.getElementById('view-status').textContent) !== unavailable)
+        throw new Error('Unavailable-view notice differs');
+    if (document.documentElement.scrollWidth > innerWidth + 1) throw new Error('Page overflows viewport');
+    for (const href of ['https://github.com/dev-belly/StatementTrace', 'https://github.com/dev-belly']) {
+        if (!Array.from(document.querySelectorAll('a')).some(a => a.href === href))
+            throw new Error('Missing project or author route');
     }
+    return link.href;
 }
-return spec.labels.length;
 """
+
+SELECT_VIEW = (
+    ASSERT_VIEW
+    + r"""
+const expected = arguments[0];
+const option = Array.from(document.getElementById('period').options).find(
+    o => JSON.parse(o.value) === expected.period
+);
+document.getElementById('period').value = option.value;
+document.getElementById('cutoff').value = expected.as_of;
+document.getElementById(arguments[1]).dispatchEvent(new Event('change', {bubbles:true}));
+return assertView(expected, true, false);
+"""
+)
+
+CHECK_VIEW = ASSERT_VIEW + "return assertView(arguments[0], arguments[1], arguments[2]);"
+WAIT_VIEW = (
+    ASSERT_VIEW
+    + r"""
+try { assertView(arguments[0], arguments[1], arguments[2]); return true; }
+catch { return false; }
+"""
+)
 
 
 def browser_check(cases, root):
@@ -95,11 +119,93 @@ def browser_check(cases, root):
                 }
             },
         )["sessionId"]
-        selections = 0
-        for case in cases:
-            call("POST", f"/session/{session}/url", {"url": (root / case["file"]).as_uri()})
-            selections += call("POST", f"/session/{session}/execute/sync", {"script": SCRIPT, "args": [case]})
-        print(json.dumps({"status": "passed", "browser": "Chrome", "reports": len(cases), "selections": selections}))
+
+        def execute(script, *args):
+            return call("POST", f"/session/{session}/execute/sync", {"script": script, "args": list(args)})
+
+        def navigate(url):
+            call("POST", f"/session/{session}/url", {"url": url})
+
+        def wait_view(view, *, exact=True, unavailable=False):
+            for _ in range(40):
+                if execute(WAIT_VIEW, view, exact, unavailable):
+                    return execute(CHECK_VIEW, view, exact, unavailable)
+                time.sleep(0.05)
+            return execute(CHECK_VIEW, view, exact, unavailable)  # Preserve the actual assertion diagnostic.
+
+        counts = dict(visits=0, selections=0, metric_rows=0, round_trips=0, history_checks=0, invalid_links=0)
+        for width in (1280, 390):
+            call("POST", f"/session/{session}/window/rect", {"width": width, "height": 1000})
+            for case in cases:
+                base = (root / case["file"]).as_uri() + "?review=1"
+                navigate(base)
+                counts["visits"] += 1
+                latest = case["views"][-1]
+                wait_view(latest, exact=False)
+                for index, view in enumerate(case["views"]):
+                    execute(SELECT_VIEW, view, "cutoff" if index % 2 else "period")
+                    counts["selections"] += 1
+                    counts["metric_rows"] += len(view["metrics"])
+                first = case["views"][0]
+                shared = execute(SELECT_VIEW, first, "period")
+                navigate(base)
+                wait_view(latest, exact=False)
+                navigate(shared)
+                wait_view(first)
+                counts["round_trips"] += 1
+                execute(SELECT_VIEW, latest, "cutoff")
+                call("POST", f"/session/{session}/back", {})
+                wait_view(first)
+                call("POST", f"/session/{session}/forward", {})
+                wait_view(latest)
+                counts["history_checks"] += 2
+                for fragment in (
+                    "as_of=1900-01-01&period=2024",
+                    "as_of=2024-11-01&period=unknown",
+                    "as_of=2024-11-01&period=2024&period=2023",
+                    "as_of=2024-11-01&as_of=2024-10-31&period=2024",
+                    "as_of=2024-11-01",
+                    "as_of=2024-11-01&period=2024&unexpected=1",
+                    "as_of=2024-11-01&period=sample%FFone",
+                    "as_of=2024-11-01&period=%E0%A4",
+                ):
+                    navigate(base + "#" + fragment)
+                    wait_view(latest, exact=False, unavailable=True)
+                    counts["invalid_links"] += 1
+                element = call("POST", f"/session/{session}/element", {"using": "css selector", "value": "#view-link"})[
+                    "element-6066-11e4-a52e-4f735466cecf"
+                ]
+                call("POST", f"/session/{session}/element/{element}/click", {})
+                wait_view(latest)
+
+        call(
+            "POST",
+            f"/session/{session}/goog/cdp/execute",
+            {"cmd": "Emulation.setScriptExecutionDisabled", "params": {"value": True}},
+        )
+        try:
+            navigate((root / cases[0]["file"]).as_uri() + "?no-js=1")
+            visible = execute("return document.querySelectorAll('section:not([hidden])').length;")
+            if visible != len(cases[0]["views"]) or not execute("return document.getElementById('share-view').hidden;"):
+                raise AssertionError("No-JavaScript view must retain every saved panel")
+        finally:
+            call(
+                "POST",
+                f"/session/{session}/goog/cdp/execute",
+                {"cmd": "Emulation.setScriptExecutionDisabled", "params": {"value": False}},
+            )
+        print(
+            json.dumps(
+                {
+                    "status": "passed",
+                    "browser": "Chrome",
+                    "reports": len(cases),
+                    "viewports": [1280, 390],
+                    "no_js_panels": visible,
+                    **counts,
+                }
+            )
+        )
     finally:
         if session is not None:
             try:
@@ -113,9 +219,15 @@ def browser_check(cases, root):
 
 def main():
     from statementtrace.cli import demo_inputs
+    from statementtrace.engine import analyze
     from statementtrace.report import build
 
-    pairs = [["sample\rone", "sample\none"], ["sample\x00one", "sample�one"]]
+    pairs = [
+        ["2023", "2024"],
+        ["sample\rone", "sample\none"],
+        ["sample\x00one", "sample�one"],
+        [' 年报 +&%#?/ " 🧾 ', "\tAnnual <2024>\n"],
+    ]
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary).resolve()
         cases = []
@@ -125,15 +237,16 @@ def main():
                 row["label"] = label
             filename = f"report-{index}.html"
             (root / filename).write_bytes(build(data, request)["index.html"])
-            cases.append(
+            views = [
                 {
-                    "file": filename,
-                    "select": "period",
-                    "rows": "section[data-period]",
-                    "attribute": "period",
-                    "labels": labels,
+                    "as_of": panel["as_of"],
+                    "period": panel["period"]["label"],
+                    "metrics": [[m[key] for key in ("metric", "display", "unit", "status")] for m in panel["metrics"]],
+                    "sources": [fact["source_url"] for fact in panel["facts"].values() if fact is not None],
                 }
-            )
+                for panel in analyze(data, request)["panels"]
+            ]
+            cases.append({"file": filename, "views": views})
         browser_check(cases, root)
 
 

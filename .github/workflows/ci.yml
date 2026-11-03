@@ -101,7 +101,7 @@ jobs:
   deploy:
     name: Deploy verified demo
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [test, windows]
+    needs: [test, windows, browser]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -123,7 +123,7 @@ jobs:
         id: deployment
 
   browser:
-    name: Chrome report selectors
+    name: Chrome report views and sharing
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:

@@ -10,6 +10,8 @@ Which numbers were publicly filed by this cutoff, and which records produced thi
 
 **[Try the live financial report](https://dev-belly.github.io/StatementTrace/)** · [中文面试讲解](docs/INTERVIEW.md)
 
+**Try one cutoff change:** [FY2024 before filing](https://dev-belly.github.io/StatementTrace/#as_of=2024-10-31&period=2024) → [after filing](https://dev-belly.github.io/StatementTrace/#as_of=2024-11-01&period=2024). See missing financial inputs become available, then follow the selected facts to the source filing. No installation or account is needed.
+
 ![StatementTrace demo](docs/preview.svg)
 
 ## Quick start
@@ -38,6 +40,24 @@ python -m venv .venv
 ```
 
 Open `http://localhost:8000`, choose a cutoff and fiscal year, inspect the formulas and follow selected facts to SEC filings. The committed report is in [examples/demo](examples/demo); GitHub displays HTML as source, so download or serve it locally.
+
+## Share the exact financial view
+
+Changing either selector updates the address with its cutoff and fiscal year.
+Open or copy **Link to this view** to restore the same saved panel, including
+with the browser's Back and Forward controls. The link identifies the view;
+it does not upload a local report or fetch new SEC data. Public-page links can
+be shared directly; local links require the same report copy.
+
+For a short demonstration, compare the two FY2024 links above. At the October 31
+cutoff, missing inputs remain missing. At the November 1 filed-date cutoff,
+free cash flow is **USD 108,807 million**, from operating cash flow minus capex.
+The source records are the same manually curated filing excerpt in both views.
+This uses filed dates, without an intraday availability or investment claim.
+
+Unknown, duplicate or malformed view parameters show a notice and the latest
+configured panel. With JavaScript disabled, all six demo panels remain readable.
+The report links to its method, GitHub project and author for further review.
 
 ## Contracts
 
@@ -77,7 +97,7 @@ statementtrace verify examples/demo
 
 Supply the issuer's actual fiscal calendar. Eleven configured US-GAAP concepts and integral USD raw values are supported; this is not a universal XBRL parser. Save external data separately following the [SEC API documentation](https://www.sec.gov/search-filings/edgar-application-programming-interfaces). The demo and verifier need no network access or credentials.
 
-Tests cover time cutoffs, comparative selection, 53-week periods, quarterly exclusions, ambiguity, exact arithmetic, malformed JSON and evidence tampering. An independent SQLite query checks every demo selection. CI runs tests, byte-for-byte committed report replay and installed-wheel smoke tests on Linux Python 3.11–3.13 and Windows Python 3.12. Text files keep LF endings even with Git's Windows `core.autocrlf=true` setting, so a fresh checkout preserves report hashes. The real symlink test requires Windows Developer Mode or elevated privileges; only that test skips if Windows denies link creation.
+Tests cover time cutoffs, comparative selection, 53-week periods, quarterly exclusions, ambiguity, exact arithmetic, malformed JSON and evidence tampering. An independent SQLite query checks every demo selection. Real Chrome checks both report selectors, shared-link round trips, history restoration, malformed links and exact special-character period identities at desktop and narrow widths, plus the no-JavaScript fallback. CI runs tests, byte-for-byte committed report replay and installed-wheel smoke tests on Linux Python 3.11–3.13 and Windows Python 3.12. Text files keep LF endings even with Git's Windows `core.autocrlf=true` setting, so a fresh checkout preserves report hashes. The real symlink test requires Windows Developer Mode or elevated privileges; only that test skips if Windows denies link creation.
 
 CSV review exports mark formula-shaped period names as text and quote embedded
 carriage returns. Original labels remain in JSON; numeric financial evidence is

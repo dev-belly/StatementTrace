@@ -50,8 +50,33 @@ identities through browser preprocessing; visible labels and source JSON retain
 the original text. Saved report HTML and its manifest hash were refreshed without
 changing financial values or source data.
 
-The `Chrome report selectors` CI job selects these identities in actual Chrome,
+The `Chrome report views and sharing` CI job selects these identities in actual Chrome,
 checking that each choice shows the intended result. It uses the Ubuntu runner's
 Chrome/chromedriver and no extra Python package. Run
 `python scripts/check_browser.py` with matching Chrome and chromedriver installed
 (or set `CHROMEWEBDRIVER` to the driver's directory) to reproduce it.
+
+## Shareable cutoff/year views
+
+The URL fragment stores exactly one `as_of` and one `period` parameter. Period
+labels round-trip as their original text, including whitespace, CR/LF, NUL and
+Unicode, then map back to the existing ASCII JSON selector identities. Only
+configured cutoff/period pairs are accepted; unknown, duplicate, extra or
+malformed parameters show a notice and the latest configured panel. Invalid
+UTF-8 escapes are rejected before URL decoding can substitute another label.
+
+Selector changes update browser history and the view link. Opening a link,
+changing the fragment, Back and Forward restore the pair before rendering.
+There is no clipboard write, network data request, analytics or model calculation.
+Without JavaScript, all saved panels remain visible and the view-link control
+stays hidden. A local link identifies a report copy; it does not publish its data.
+
+Real Chrome compares every selected panel's metric rows and filing links with
+the saved-input analysis at 1,280px and 390px, including unusual labels, actual
+link navigation, history, invalid links and the no-JavaScript fallback. The
+committed report refresh changes HTML and its manifest hash only; source,
+request, analysis and all four CSV exports are byte-identical. Earlier HTML
+reports should be regenerated into a new directory from their saved facts and
+request before verification with this renderer.
+Pages deployment also waits for this browser job, alongside the Linux/Windows
+test and installed-wheel checks.
