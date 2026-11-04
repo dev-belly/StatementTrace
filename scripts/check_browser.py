@@ -4,6 +4,8 @@ Requires Google Chrome and a matching chromedriver on PATH, or the
 CHROMEWEBDRIVER directory supplied by GitHub's Ubuntu runner image.
 """
 
+import csv
+import io
 import json
 import os
 import shutil
@@ -26,6 +28,10 @@ function assertView(expected, exactAddress, unavailable) {
     if (JSON.stringify(values) !== JSON.stringify(expected.metrics)) throw new Error('Financial metrics differ');
     const sources = Array.from(selected[0].querySelectorAll('table')[1].querySelectorAll('a'), a => a.href);
     if (JSON.stringify(sources) !== JSON.stringify(expected.sources)) throw new Error('Source links differ');
+    const download = selected[0].querySelector('.view-csv');
+    if (!download || download.download !== 'statementtrace-metrics-' + expected.as_of + '.csv' ||
+        !download.href.startsWith('data:text/csv;charset=utf-8;base64,'))
+        throw new Error('Missing current-view CSV download');
     const link = document.getElementById('view-link');
     const url = new URL(link.href);
     const params = new URLSearchParams(url.hash.slice(1));
@@ -94,6 +100,8 @@ def browser_check(cases, root):
         except urllib.error.HTTPError as error:
             raise RuntimeError(error.read().decode()) from error
 
+    downloads = root / "downloads"
+    downloads.mkdir()
     session = None
     process = subprocess.Popen([driver, f"--port={port}"], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     try:
@@ -114,7 +122,13 @@ def browser_check(cases, root):
                 "capabilities": {
                     "alwaysMatch": {
                         "browserName": "chrome",
-                        "goog:chromeOptions": {"args": ["--headless=new", "--no-sandbox", "--disable-dev-shm-usage"]},
+                        "goog:chromeOptions": {
+                            "args": ["--headless=new", "--no-sandbox", "--disable-dev-shm-usage"],
+                            "prefs": {
+                                "download.default_directory": str(downloads),
+                                "download.prompt_for_download": False,
+                            },
+                        },
                     }
                 }
             },
@@ -133,12 +147,47 @@ def browser_check(cases, root):
                 time.sleep(0.05)
             return execute(CHECK_VIEW, view, exact, unavailable)  # Preserve the actual assertion diagnostic.
 
-        counts = dict(visits=0, selections=0, metric_rows=0, round_trips=0, history_checks=0, invalid_links=0)
+        def download_view(view, selector="section:not([hidden]) .view-csv"):
+            path = downloads / f"statementtrace-metrics-{view['as_of']}.csv"
+            path.unlink(missing_ok=True)
+            element = call("POST", f"/session/{session}/element", {"using": "css selector", "value": selector})[
+                "element-6066-11e4-a52e-4f735466cecf"
+            ]
+            call("POST", f"/session/{session}/element/{element}/click", {})
+            for _ in range(100):
+                if path.is_file():
+                    break
+                time.sleep(0.05)
+            else:
+                raise AssertionError("Chrome did not save the view CSV")
+            raw = path.read_bytes()
+            rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8"), newline=""), strict=True))
+            if rows != view["csv_rows"]:
+                raise AssertionError("Downloaded CSV differs from the selected full-export slice")
+            counts["downloads"] += 1
+            counts["downloaded_metric_rows"] += len(rows)
+
+        counts = dict(
+            visits=0,
+            selections=0,
+            metric_rows=0,
+            round_trips=0,
+            history_checks=0,
+            invalid_links=0,
+            downloads=0,
+            downloaded_metric_rows=0,
+        )
+        viewport_widths = []
         for width in (1280, 390):
             call("POST", f"/session/{session}/window/rect", {"width": width, "height": 1000})
-            for case in cases:
+            for case_index, case in enumerate(cases):
                 base = (root / case["file"]).as_uri() + "?review=1"
                 navigate(base)
+                actual_width = execute("return window.innerWidth;")
+                if actual_width != width:
+                    raise AssertionError(f"Requested width {width}, observed {actual_width}")
+                if case_index == 0:
+                    viewport_widths.append(actual_width)
                 counts["visits"] += 1
                 latest = case["views"][-1]
                 wait_view(latest, exact=False)
@@ -146,6 +195,12 @@ def browser_check(cases, root):
                     execute(SELECT_VIEW, view, "cutoff" if index % 2 else "period")
                     counts["selections"] += 1
                     counts["metric_rows"] += len(view["metrics"])
+                download_view(latest)
+                before = next(
+                    v for v in case["views"] if v["as_of"] == "2024-10-31" and v["period"] == latest["period"]
+                )
+                execute(SELECT_VIEW, before, "cutoff")
+                download_view(before)
                 first = case["views"][0]
                 shared = execute(SELECT_VIEW, first, "period")
                 navigate(base)
@@ -177,6 +232,8 @@ def browser_check(cases, root):
                 ]
                 call("POST", f"/session/{session}/element/{element}/click", {})
                 wait_view(latest)
+                if case_index == 0:
+                    download_view(latest)
 
         call(
             "POST",
@@ -188,6 +245,7 @@ def browser_check(cases, root):
             visible = execute("return document.querySelectorAll('section:not([hidden])').length;")
             if visible != len(cases[0]["views"]) or not execute("return document.getElementById('share-view').hidden;"):
                 raise AssertionError("No-JavaScript view must retain every saved panel")
+            download_view(cases[0]["views"][0], "section .view-csv")
         finally:
             call(
                 "POST",
@@ -200,7 +258,7 @@ def browser_check(cases, root):
                     "status": "passed",
                     "browser": "Chrome",
                     "reports": len(cases),
-                    "viewports": [1280, 390],
+                    "viewports": viewport_widths,
                     "no_js_panels": visible,
                     **counts,
                 }
@@ -220,13 +278,14 @@ def browser_check(cases, root):
 def main():
     from statementtrace.cli import demo_inputs
     from statementtrace.engine import analyze
-    from statementtrace.report import build
+    from statementtrace.report import build, csv_label
 
     pairs = [
         ["2023", "2024"],
         ["sample\rone", "sample\none"],
         ["sample\x00one", "sample�one"],
         [' 年报 +&%#?/ " 🧾 ', "\tAnnual <2024>\n"],
+        ["=1+1", "text: =1+1"],
     ]
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary).resolve()
@@ -236,13 +295,22 @@ def main():
             for row, label in zip(request["periods"], labels, strict=True):
                 row["label"] = label
             filename = f"report-{index}.html"
-            (root / filename).write_bytes(build(data, request)["index.html"])
+            outputs = build(data, request)
+            (root / filename).write_bytes(outputs["index.html"])
+            all_metrics = list(
+                csv.DictReader(io.StringIO(outputs["metrics.csv"].decode("utf-8"), newline=""), strict=True)
+            )
             views = [
                 {
                     "as_of": panel["as_of"],
                     "period": panel["period"]["label"],
                     "metrics": [[m[key] for key in ("metric", "display", "unit", "status")] for m in panel["metrics"]],
                     "sources": [fact["source_url"] for fact in panel["facts"].values() if fact is not None],
+                    "csv_rows": [
+                        row
+                        for row in all_metrics
+                        if row["as_of"] == panel["as_of"] and row["period"] == csv_label(panel["period"]["label"])
+                    ],
                 }
                 for panel in analyze(data, request)["panels"]
             ]

@@ -80,3 +80,28 @@ reports should be regenerated into a new directory from their saved facts and
 request before verification with this renderer.
 Pages deployment also waits for this browser job, alongside the Linux/Windows
 test and installed-wheel checks.
+
+## Current-panel metric downloads
+
+Each saved panel embeds a UTF-8 CSV data URL with exactly its metric rows and
+the same nine columns as the full `metrics.csv`. Both use the same CSV serializer
+and text-label contract. Full fractions, negative numbers, formulas, statuses
+and empty missing values remain unchanged; the browser does not scrape displayed
+numbers or recalculate financial values. Filenames contain the validated cutoff
+date; original period identities stay in the rows rather than the filename.
+
+The native download anchor belongs to its panel, so link/history restoration
+and invalid-link fallback expose the corresponding download. Without JavaScript,
+all panels retain their own links. CSV importers may infer cell types; select
+UTF-8 and import `as_of`, `period` and `exact` as text when using Excel.
+This excerpt alone is not a complete replay bundle: source facts, lineage and
+verification remain available from the report's full nine-file inventory.
+
+Unit checks compare every panel's decoded download with its full-export slice,
+including formula-shaped labels, controls/Unicode, quoted newlines, negative
+values and hand-checked before/after-filing results. Real Chrome saves actual
+files, parses their rows independently and compares every column with the full
+export, including after view changes/fallback and without JavaScript. Browser
+checks assert the actual `innerWidth` at desktop/narrow sizes. Only committed
+HTML and its manifest hash are refreshed; seven financial/input files retain
+their original bytes.
