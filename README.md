@@ -59,6 +59,25 @@ Unknown, duplicate or malformed view parameters show a notice and the latest
 configured panel. With JavaScript disabled, all six demo panels remain readable.
 The report links to its method, GitHub project and author for further review.
 
+## Download one view for review
+
+Each panel has **Download these metrics · CSV**. It saves only that cutoff/year's
+nine metric rows, including the formula, unit, status, exact fraction, rounded
+display and missing-input names. Switching views or reopening a shared link
+selects the matching panel's download. **All metrics CSV** still contains all
+54 demo rows. Every panel's download also works with JavaScript disabled.
+
+For Excel, use **Data → From Text/CSV**, select UTF-8, and keep the `as_of`,
+`period` and `exact` columns as text to preserve dates, identities and fractions.
+The `display` column is rounded; `exact` retains the saved rational value.
+The CSV uses the same text markers for formula-shaped labels as the full export.
+
+Try the before/after-filing links above, downloading each view. FY2024 before
+filing has nine `missing_input` rows with empty values. After filing,
+`free_cash_flow` retains `108807000000/1`, unit `USD`, status `ok` and the
+`operating_cash_flow - capex` formula. This is a filtered review export;
+full source/lineage review and semantic verification use the complete report.
+
 ## Contracts
 
 | Concern | Behavior |

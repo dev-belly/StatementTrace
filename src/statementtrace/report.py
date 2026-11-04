@@ -1,5 +1,6 @@
 """Self-contained HTML, CSV, and semantic replay of a deterministic report."""
 
+import base64
 import csv
 import html
 import io
@@ -19,6 +20,8 @@ FILES = {
     "decisions.csv",
     "index.html",
 }
+
+METRIC_FIELDS = ("as_of", "period", "metric", "formula", "unit", "status", "exact", "display", "missing")
 
 VIEW_SCRIPT = r"""
 const cutoff = document.querySelector('#cutoff');
@@ -108,6 +111,18 @@ def csv_label(value):
     return value
 
 
+def metric_rows(panel):
+    return [
+        {
+            "as_of": panel["as_of"],
+            "period": panel["period"]["label"],
+            **{key: metric[key] for key in ("metric", "formula", "unit", "status", "exact", "display")},
+            "missing": ";".join(metric["missing"]),
+        }
+        for metric in panel["metrics"]
+    ]
+
+
 def render(analysis):
     esc = html.escape
     panels = []
@@ -135,12 +150,17 @@ def render(analysis):
             )
         label, cutoff = esc(panel["period"]["label"]), esc(panel["as_of"])
         period_key = esc(json.dumps(panel["period"]["label"], ensure_ascii=True), quote=True)
+        metric_csv = base64.b64encode(csv_bytes(metric_rows(panel), METRIC_FIELDS)).decode("ascii")
         panels.append(
             f"<section data-period='{period_key}' data-cutoff='{cutoff}'>"
             f"<h2>FY {label} · as of {cutoff}</h2><p>"
             f"{esc(panel['period']['start'])} → {esc(panel['period']['end'])} · "
             f"{panel['duration_days']} inclusive days · amounts in USD</p>"
-            "<h3>Financial metrics / 财务指标</h3><div class='scroll'><table>"
+            "<h3>Financial metrics / 财务指标</h3>"
+            f"<p><a class='view-csv' href='data:text/csv;charset=utf-8;base64,{metric_csv}' "
+            f"download='statementtrace-metrics-{cutoff}.csv'>Download these metrics · CSV</a>"
+            " · Includes this cutoff/year, formulas, exact values and missing-input statuses.</p>"
+            "<div class='scroll'><table>"
             "<thead><tr><th>Metric</th><th>Value</th><th>Unit</th><th>Status</th>"
             "<th>Formula and lineage</th></tr></thead><tbody>" + "".join(metrics) + "</tbody></table></div>"
             "<h3>Selected facts / 原始数据</h3><div class='scroll'><table>"
@@ -191,7 +211,7 @@ def render(analysis):
         "<p id='view-status' role='status'></p>"
         "<noscript><p>JavaScript is off; all saved cutoff/year panels are shown below.</p></noscript>"
         "<p><a href='selected_facts.csv'>Facts CSV</a> · "
-        "<a href='metrics.csv'>Metrics CSV</a> · <a href='lineage.csv'>Full lineage</a> · "
+        "<a href='metrics.csv'>All metrics CSV</a> · <a href='lineage.csv'>Full lineage</a> · "
         "<a href='decisions.csv'>Selection decisions</a> · "
         "<a href='manifest.json'>SHA-256 manifest</a></p></div>"
         + "".join(panels)
@@ -225,14 +245,8 @@ def build(data, request):
                     "source_url": fact["source_url"] if fact else "",
                 }
             )
+        metrics.extend(metric_rows(panel))
         for metric in panel["metrics"]:
-            metrics.append(
-                {
-                    **base,
-                    **{key: metric[key] for key in ("metric", "formula", "unit", "status", "exact", "display")},
-                    "missing": ";".join(metric["missing"]),
-                }
-            )
             lineage.extend({**base, "metric": metric["metric"], **item} for item in metric["inputs"])
     files = {
         "facts.json": canonical(data),
