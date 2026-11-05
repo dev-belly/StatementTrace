@@ -5,6 +5,7 @@ import csv
 import html
 import io
 import json
+import re
 from pathlib import Path
 
 from .contracts import ContractError, canonical, digest, read_json
@@ -22,6 +23,20 @@ FILES = {
 }
 
 METRIC_FIELDS = ("as_of", "period", "metric", "formula", "unit", "status", "exact", "display", "missing")
+FACT_FIELDS = (
+    "as_of",
+    "period",
+    "metric",
+    "status",
+    "value_usd",
+    "start",
+    "end",
+    "filed",
+    "tag",
+    "accession",
+    "fact_id",
+    "source_url",
+)
 
 VIEW_SCRIPT = r"""
 const cutoff = document.querySelector('#cutoff');
@@ -123,6 +138,37 @@ def metric_rows(panel):
     ]
 
 
+def selected_fact_rows(panel):
+    rows = []
+    for name in METRICS:
+        fact = panel["facts"][name]
+        record = fact["record"] if fact else {}
+        rows.append(
+            {
+                "as_of": panel["as_of"],
+                "period": panel["period"]["label"],
+                "metric": name,
+                "status": "ok" if fact else "missing",
+                "value_usd": record.get("val", ""),
+                "start": record.get("start", ""),
+                "end": record.get("end", ""),
+                "filed": record.get("filed", ""),
+                "tag": fact["tag"] if fact else "",
+                "accession": record.get("accn", ""),
+                "fact_id": fact["fact_id"] if fact else "",
+                "source_url": fact["source_url"] if fact else "",
+            }
+        )
+    return rows
+
+
+def view_csv_filename(panel, kind):
+    """Keep filenames readable, path-safe and distinct for exact period identities."""
+    slug = re.sub(r"[^A-Za-z0-9]+", "-", panel["period"]["label"]).strip("-")[:32] or "period"
+    identity = digest(canonical(panel["period"]))[:16]
+    return f"statementtrace-{kind}-{panel['as_of']}-{slug}-{identity}.csv"
+
+
 def render(analysis):
     esc = html.escape
     panels = []
@@ -151,6 +197,7 @@ def render(analysis):
         label, cutoff = esc(panel["period"]["label"]), esc(panel["as_of"])
         period_key = esc(json.dumps(panel["period"]["label"], ensure_ascii=True), quote=True)
         metric_csv = base64.b64encode(csv_bytes(metric_rows(panel), METRIC_FIELDS)).decode("ascii")
+        fact_csv = base64.b64encode(csv_bytes(selected_fact_rows(panel), FACT_FIELDS)).decode("ascii")
         panels.append(
             f"<section data-period='{period_key}' data-cutoff='{cutoff}'>"
             f"<h2>FY {label} · as of {cutoff}</h2><p>"
@@ -158,12 +205,17 @@ def render(analysis):
             f"{panel['duration_days']} inclusive days · amounts in USD</p>"
             "<h3>Financial metrics / 财务指标</h3>"
             f"<p><a class='view-csv' href='data:text/csv;charset=utf-8;base64,{metric_csv}' "
-            f"download='statementtrace-metrics-{cutoff}.csv'>Download these metrics · CSV</a>"
+            f"download='{view_csv_filename(panel, 'metrics')}'>Download these metrics · CSV</a>"
             " · Includes this cutoff/year, formulas, exact values and missing-input statuses.</p>"
             "<div class='scroll'><table>"
             "<thead><tr><th>Metric</th><th>Value</th><th>Unit</th><th>Status</th>"
             "<th>Formula and lineage</th></tr></thead><tbody>" + "".join(metrics) + "</tbody></table></div>"
-            "<h3>Selected facts / 原始数据</h3><div class='scroll'><table>"
+            "<h3>Selected facts / 原始数据</h3>"
+            f"<p><a class='view-facts-csv' href='data:text/csv;charset=utf-8;base64,{fact_csv}' "
+            f"download='{view_csv_filename(panel, 'facts')}'>Download selected facts · CSV</a>"
+            " · This panel's selected facts, including missing rows and full source metadata. "
+            "For the growth metric's prior-period input, use <a href='lineage.csv'>Full lineage</a> "
+            "with the complete report.</p><div class='scroll'><table>"
             "<thead><tr><th>Fact</th><th>USD</th><th>Filed</th><th>Concept</th>"
             "<th>SEC filing</th></tr></thead><tbody>" + "".join(facts) + "</tbody></table></div></section>"
         )
@@ -227,24 +279,7 @@ def build(data, request):
     selected, metrics, lineage = [], [], []
     for panel in analysis["panels"]:
         base = {"as_of": panel["as_of"], "period": panel["period"]["label"]}
-        for name in METRICS:
-            fact = panel["facts"][name]
-            row = fact["record"] if fact else {}
-            selected.append(
-                {
-                    **base,
-                    "metric": name,
-                    "status": "ok" if fact else "missing",
-                    "value_usd": row.get("val", ""),
-                    "start": row.get("start", ""),
-                    "end": row.get("end", ""),
-                    "filed": row.get("filed", ""),
-                    "tag": fact["tag"] if fact else "",
-                    "accession": row.get("accn", ""),
-                    "fact_id": fact["fact_id"] if fact else "",
-                    "source_url": fact["source_url"] if fact else "",
-                }
-            )
+        selected.extend(selected_fact_rows(panel))
         metrics.extend(metric_rows(panel))
         for metric in panel["metrics"]:
             lineage.extend({**base, "metric": metric["metric"], **item} for item in metric["inputs"])
@@ -253,7 +288,7 @@ def build(data, request):
         "request.json": canonical(request),
         "analysis.json": canonical(analysis),
         "index.html": render(analysis),
-        "selected_facts.csv": csv_bytes(selected, list(selected[0])),
+        "selected_facts.csv": csv_bytes(selected, FACT_FIELDS),
         "metrics.csv": csv_bytes(metrics, list(metrics[0])),
         "lineage.csv": csv_bytes(lineage, ["as_of", "period", "metric", "role", "fact_id"]),
         "decisions.csv": csv_bytes(analysis["decisions"], ["as_of", "period", "metric", "fact_id", "reason"]),

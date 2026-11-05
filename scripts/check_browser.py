@@ -28,10 +28,12 @@ function assertView(expected, exactAddress, unavailable) {
     if (JSON.stringify(values) !== JSON.stringify(expected.metrics)) throw new Error('Financial metrics differ');
     const sources = Array.from(selected[0].querySelectorAll('table')[1].querySelectorAll('a'), a => a.href);
     if (JSON.stringify(sources) !== JSON.stringify(expected.sources)) throw new Error('Source links differ');
-    const download = selected[0].querySelector('.view-csv');
-    if (!download || download.download !== 'statementtrace-metrics-' + expected.as_of + '.csv' ||
-        !download.href.startsWith('data:text/csv;charset=utf-8;base64,'))
-        throw new Error('Missing current-view CSV download');
+    for (const [kind, selector] of [['metrics', '.view-csv'], ['facts', '.view-facts-csv']]) {
+        const download = selected[0].querySelector(selector);
+        if (!download || download.download !== expected.csv_filenames[kind] ||
+            !download.href.startsWith('data:text/csv;charset=utf-8;base64,'))
+            throw new Error('Missing current-view ' + kind + ' CSV download');
+    }
     const link = document.getElementById('view-link');
     const url = new URL(link.href);
     const params = new URLSearchParams(url.hash.slice(1));
@@ -147,9 +149,10 @@ def browser_check(cases, root):
                 time.sleep(0.05)
             return execute(CHECK_VIEW, view, exact, unavailable)  # Preserve the actual assertion diagnostic.
 
-        def download_view(view, selector="section:not([hidden]) .view-csv"):
-            path = downloads / f"statementtrace-metrics-{view['as_of']}.csv"
+        def download_view(view, kind, *, scope="section:not([hidden])"):
+            path = downloads / view["csv_filenames"][kind]
             path.unlink(missing_ok=True)
+            selector = scope + (" .view-csv" if kind == "metrics" else " .view-facts-csv")
             element = call("POST", f"/session/{session}/element", {"using": "css selector", "value": selector})[
                 "element-6066-11e4-a52e-4f735466cecf"
             ]
@@ -162,10 +165,11 @@ def browser_check(cases, root):
                 raise AssertionError("Chrome did not save the view CSV")
             raw = path.read_bytes()
             rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8"), newline=""), strict=True))
-            if rows != view["csv_rows"]:
+            if rows != view["csv_rows" if kind == "metrics" else "fact_csv_rows"]:
                 raise AssertionError("Downloaded CSV differs from the selected full-export slice")
             counts["downloads"] += 1
-            counts["downloaded_metric_rows"] += len(rows)
+            counts["downloaded_metric_rows" if kind == "metrics" else "downloaded_fact_rows"] += len(rows)
+            return path, raw
 
         counts = dict(
             visits=0,
@@ -176,6 +180,8 @@ def browser_check(cases, root):
             invalid_links=0,
             downloads=0,
             downloaded_metric_rows=0,
+            downloaded_fact_rows=0,
+            distinct_period_downloads=0,
         )
         viewport_widths = []
         for width in (1280, 390):
@@ -195,12 +201,29 @@ def browser_check(cases, root):
                     execute(SELECT_VIEW, view, "cutoff" if index % 2 else "period")
                     counts["selections"] += 1
                     counts["metric_rows"] += len(view["metrics"])
-                download_view(latest)
+                for kind in ("metrics", "facts"):
+                    download_view(latest, kind)
                 before = next(
                     v for v in case["views"] if v["as_of"] == "2024-10-31" and v["period"] == latest["period"]
                 )
                 execute(SELECT_VIEW, before, "cutoff")
-                download_view(before)
+                for kind in ("metrics", "facts"):
+                    download_view(before, kind)
+                # Keep both years' files at one cutoff, rather than deleting a
+                # colliding filename and allowing Chrome to add an unseen suffix.
+                other_period = next(
+                    view
+                    for view in case["views"]
+                    if view["as_of"] == latest["as_of"] and view["period"] != latest["period"]
+                )
+                for kind in ("metrics", "facts"):
+                    execute(SELECT_VIEW, latest, "period")
+                    first_path, first_raw = download_view(latest, kind)
+                    execute(SELECT_VIEW, other_period, "period")
+                    second_path, _ = download_view(other_period, kind)
+                    if first_path == second_path or first_path.read_bytes() != first_raw:
+                        raise AssertionError("Same-cutoff period downloads must remain distinct and unchanged")
+                    counts["distinct_period_downloads"] += 1
                 first = case["views"][0]
                 shared = execute(SELECT_VIEW, first, "period")
                 navigate(base)
@@ -233,7 +256,8 @@ def browser_check(cases, root):
                 call("POST", f"/session/{session}/element/{element}/click", {})
                 wait_view(latest)
                 if case_index == 0:
-                    download_view(latest)
+                    for kind in ("metrics", "facts"):
+                        download_view(latest, kind)
 
         call(
             "POST",
@@ -245,7 +269,8 @@ def browser_check(cases, root):
             visible = execute("return document.querySelectorAll('section:not([hidden])').length;")
             if visible != len(cases[0]["views"]) or not execute("return document.getElementById('share-view').hidden;"):
                 raise AssertionError("No-JavaScript view must retain every saved panel")
-            download_view(cases[0]["views"][0], "section .view-csv")
+            for kind in ("metrics", "facts"):
+                download_view(cases[0]["views"][0], kind, scope="section")
         finally:
             call(
                 "POST",
@@ -278,7 +303,7 @@ def browser_check(cases, root):
 def main():
     from statementtrace.cli import demo_inputs
     from statementtrace.engine import analyze
-    from statementtrace.report import build, csv_label
+    from statementtrace.report import build, csv_label, view_csv_filename
 
     pairs = [
         ["2023", "2024"],
@@ -300,15 +325,24 @@ def main():
             all_metrics = list(
                 csv.DictReader(io.StringIO(outputs["metrics.csv"].decode("utf-8"), newline=""), strict=True)
             )
+            all_facts = list(
+                csv.DictReader(io.StringIO(outputs["selected_facts.csv"].decode("utf-8"), newline=""), strict=True)
+            )
             views = [
                 {
                     "as_of": panel["as_of"],
                     "period": panel["period"]["label"],
                     "metrics": [[m[key] for key in ("metric", "display", "unit", "status")] for m in panel["metrics"]],
                     "sources": [fact["source_url"] for fact in panel["facts"].values() if fact is not None],
+                    "csv_filenames": {kind: view_csv_filename(panel, kind) for kind in ("metrics", "facts")},
                     "csv_rows": [
                         row
                         for row in all_metrics
+                        if row["as_of"] == panel["as_of"] and row["period"] == csv_label(panel["period"]["label"])
+                    ],
+                    "fact_csv_rows": [
+                        row
+                        for row in all_facts
                         if row["as_of"] == panel["as_of"] and row["period"] == csv_label(panel["period"]["label"])
                     ],
                 }

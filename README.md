@@ -67,15 +67,31 @@ display and missing-input names. Switching views or reopening a shared link
 selects the matching panel's download. **All metrics CSV** still contains all
 54 demo rows. Every panel's download also works with JavaScript disabled.
 
+**Download selected facts · CSV** saves that panel's eleven selected-fact rows,
+including explicit missing rows, integer USD values, exact period dates, filed
+date, concept, accession, full fact ID and SEC source URL. Its rows and column
+order match the same cutoff/year slice of **Facts CSV**. This is the panel's
+selected facts, not every metric input: annual revenue growth can also use
+prior-period revenue. Follow **Full lineage** with the complete report for that
+input. Both downloads work offline and with JavaScript disabled.
+
+Both filenames contain the cutoff and a safe period identifier, so downloads
+for FY2023 and FY2024 at the same cutoff remain distinguishable. Special labels
+retain their exact identity in the CSV, while the filename uses a short ASCII
+label and a deterministic period digest.
+
 For Excel, use **Data → From Text/CSV**, select UTF-8, and keep the `as_of`,
-`period` and `exact` columns as text to preserve dates, identities and fractions.
+`period`, `exact`, `value_usd`, `accession` and `fact_id` columns as text
+when present to preserve dates, identities, exact amounts and fractions.
 The `display` column is rounded; `exact` retains the saved rational value.
 The CSV uses the same text markers for formula-shaped labels as the full export.
 
 Try the before/after-filing links above, downloading each view. FY2024 before
 filing has nine `missing_input` rows with empty values. After filing,
 `free_cash_flow` retains `108807000000/1`, unit `USD`, status `ok` and the
-`operating_cash_flow - capex` formula. This is a filtered review export;
+`operating_cash_flow - capex` formula. The selected-facts download keeps all
+eleven `missing` rows before filing, then carries the available records and
+their original source metadata after filing. These are filtered review exports;
 full source/lineage review and semantic verification use the complete report.
 
 ## Contracts
@@ -102,6 +118,12 @@ Nine outputs: net margin, operating margin, cash conversion, current ratio, liab
 
 There are six cutoff/period panels and nine metrics per panel. Missing panels remain visibly missing. `verify` rejects output tampering even when the corresponding hash is updated; it does not authenticate source inputs or detect a coordinated rewrite of all inputs and outputs.
 
+`verify` also rebuilds HTML byte for byte using the installed renderer. Verify
+an older report with the source revision that generated it. After this HTML
+update, rebuild a new report from the saved facts and request into a new
+directory; do not replace evidence you need to retain. An HTML mismatch between
+renderer revisions alone does not establish that the old report was tampered with.
+
 ## Saved-input analysis and validation
 
 ```bash
@@ -116,7 +138,7 @@ statementtrace verify examples/demo
 
 Supply the issuer's actual fiscal calendar. Eleven configured US-GAAP concepts and integral USD raw values are supported; this is not a universal XBRL parser. Save external data separately following the [SEC API documentation](https://www.sec.gov/search-filings/edgar-application-programming-interfaces). The demo and verifier need no network access or credentials.
 
-Tests cover time cutoffs, comparative selection, 53-week periods, quarterly exclusions, ambiguity, exact arithmetic, malformed JSON and evidence tampering. An independent SQLite query checks every demo selection. Real Chrome checks both report selectors, shared-link round trips, history restoration, malformed links and exact special-character period identities at desktop and narrow widths, plus the no-JavaScript fallback. CI runs tests, byte-for-byte committed report replay and installed-wheel smoke tests on Linux Python 3.11–3.13 and Windows Python 3.12. Text files keep LF endings even with Git's Windows `core.autocrlf=true` setting, so a fresh checkout preserves report hashes. The real symlink test requires Windows Developer Mode or elevated privileges; only that test skips if Windows denies link creation.
+Tests cover time cutoffs, comparative selection, 53-week periods, quarterly exclusions, ambiguity, exact arithmetic, malformed JSON and evidence tampering. An independent SQLite query checks every demo selection. Real Chrome checks both report selectors, shared-link round trips, history restoration, malformed links and exact special-character period identities at desktop and narrow widths, plus the no-JavaScript fallback. Both panel CSV downloads are compared with full-export slices, and two periods' files must coexist at one cutoff. CI runs tests, byte-for-byte committed report replay and installed-wheel smoke tests on Linux Python 3.11–3.13 and Windows Python 3.12. Text files keep LF endings even with Git's Windows `core.autocrlf=true` setting, so a fresh checkout preserves report hashes. The real symlink test requires Windows Developer Mode or elevated privileges; only that test skips if Windows denies link creation.
 
 CSV review exports mark formula-shaped period names as text and quote embedded
 carriage returns. Original labels remain in JSON; numeric financial evidence is
