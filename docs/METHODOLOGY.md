@@ -81,27 +81,43 @@ request before verification with this renderer.
 Pages deployment also waits for this browser job, alongside the Linux/Windows
 test and installed-wheel checks.
 
-## Current-panel metric downloads
+## Current-panel CSV downloads
 
 Each saved panel embeds a UTF-8 CSV data URL with exactly its metric rows and
 the same nine columns as the full `metrics.csv`. Both use the same CSV serializer
 and text-label contract. Full fractions, negative numbers, formulas, statuses
 and empty missing values remain unchanged; the browser does not scrape displayed
-numbers or recalculate financial values. Filenames contain the validated cutoff
-date; original period identities stay in the rows rather than the filename.
+numbers or recalculate financial values.
+
+The selected-facts download has the same twelve columns and row order as the
+matching `selected_facts.csv` slice, constructed by the same row helper. Every
+configured base fact remains present, including eleven explicit missing rows
+for an unavailable demo period. Available facts retain integer USD amounts,
+period dates, filing date, concept, accession, full fact ID and source URL.
+This is the current panel's selected facts, not a complete set of metric inputs:
+the growth metric's `previous_period_revenue` can refer to the earlier period.
+Use `lineage.csv` and the complete report to follow that input.
+
+Both filenames contain the validated cutoff, up to 32 ASCII label characters
+and a 16-hex-digit SHA-256 prefix of the canonical period (label, start and end).
+The fixed prefix and restricted character set prevent path or extension
+injection; the digest distinguishes labels whose readable parts normalize or
+truncate alike. Exact period identities remain in the CSV rows.
 
 The native download anchor belongs to its panel, so link/history restoration
 and invalid-link fallback expose the corresponding download. Without JavaScript,
-all panels retain their own links. CSV importers may infer cell types; select
-UTF-8 and import `as_of`, `period` and `exact` as text when using Excel.
+all panels retain both links. CSV importers may infer cell types; select UTF-8
+and import `as_of`, `period`, `exact`, `value_usd`, `accession` and `fact_id`
+as text when present.
 This excerpt alone is not a complete replay bundle: source facts, lineage and
 verification remain available from the report's full nine-file inventory.
 
-Unit checks compare every panel's decoded download with its full-export slice,
+Unit checks compare both of every panel's decoded downloads with their full-export slices,
 including formula-shaped labels, controls/Unicode, quoted newlines, negative
 values and hand-checked before/after-filing results. Real Chrome saves actual
 files, parses their rows independently and compares every column with the full
-export, including after view changes/fallback and without JavaScript. Browser
+exports, including after view changes/fallback and without JavaScript. Files
+for two periods at one cutoff must coexist without changing the first file. Browser
 checks assert the actual `innerWidth` at desktop/narrow sizes. Only committed
 HTML and its manifest hash are refreshed; seven financial/input files retain
 their original bytes.
