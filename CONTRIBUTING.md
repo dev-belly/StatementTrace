@@ -7,6 +7,7 @@ python -m unittest discover -s tests -v
 ruff check src tests scripts
 ruff format --check src tests scripts
 python scripts/check_demo.py
+python scripts/check_cashflow.py
 python scripts/generate_preview.py --check
 ```
 

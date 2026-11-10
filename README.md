@@ -4,7 +4,38 @@
 ![Python](https://img.shields.io/badge/python-3.11%2B-3776AB)
 ![Runtime](https://img.shields.io/badge/runtime-standard_library-128a82)
 
-**Public financial statements with exact fiscal periods, filing-date cutoffs and traceable financial metrics.**
+**From public filings to an inspectable financial research conclusion.**
+
+**Profit grows. Does cash follow?** The new historical study compares Apple,
+Microsoft and Alphabet across FY2023–FY2024 using 24 curated filing facts.
+Alphabet's net income grew **35.67%**, while free cash flow grew **4.70%**;
+the cash-flow bridge explains the difference in operating cash flow and cash capex.
+
+[Read the research report](https://dev-belly.github.io/StatementTrace/cashflow/) ·
+[中文研究简报](docs/CASHFLOW_STUDY.zh-CN.md) ·
+[24 source facts](examples/cashflow/source_facts.csv) ·
+[Python implementation](src/statementtrace/cashflow.py) ·
+[SQL comparison](src/statementtrace/data/cashflow_compare.sql)
+
+Historical filed-date cutoff: **2025-02-05**. The issuers' fiscal windows differ;
+Apple's FY2023 has 53 weeks. Compare each issuer with its own prior year.
+FCF here means CFO minus cash capex, excluding acquisitions and noncash additions.
+
+```bash
+python -m pip install -e .
+statementtrace compare --out output/cashflow
+statementtrace verify-comparison output/cashflow
+python -m http.server 8000 --directory output/cashflow
+```
+
+Open `http://localhost:8000`. The self-contained report includes all six
+issuer-years, signed cash-flow contributions, downloadable CSV, exact ratios,
+the frozen source packet and the SQLite query. It works without JavaScript or
+network access after installation. Add `--as-of 2025-02-04` to `compare` and use
+a new output directory to see Alphabet become unavailable under the packet's
+filed-date rule. The packet does not contain its earlier filings.
+
+## Filing-date analysis underneath the study
 
 Which numbers were publicly filed by this cutoff, and which records produced this ratio? StatementTrace answers with a reproducible report from SEC CompanyFacts-shaped JSON. The offline demo uses **33 manually curated records from Apple's 2023/2024 Form 10-K tables**; it is not an unmodified API download.
 

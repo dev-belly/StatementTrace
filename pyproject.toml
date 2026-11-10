@@ -22,7 +22,7 @@ dev = ["ruff==0.11.13"]
 where = ["src"]
 
 [tool.setuptools.package-data]
-statementtrace = ["data/*.json"]
+statementtrace = ["data/*.json", "data/*.sql", "data/*.html"]
 
 [tool.ruff]
 line-length = 120

@@ -33,7 +33,9 @@ jobs:
       - name: Replay committed evidence
         run: |
           python scripts/check_demo.py
+          python scripts/check_cashflow.py
           statementtrace verify examples/demo
+          statementtrace verify-comparison examples/cashflow
           python scripts/generate_preview.py --check
       - name: Installed wheel outside checkout
         run: |
@@ -43,6 +45,8 @@ jobs:
           cd /tmp
           /tmp/statementtrace-wheel/bin/statementtrace demo --out /tmp/wheel-demo
           /tmp/statementtrace-wheel/bin/statementtrace verify /tmp/wheel-demo
+          /tmp/statementtrace-wheel/bin/statementtrace compare --out /tmp/wheel-cashflow
+          /tmp/statementtrace-wheel/bin/statementtrace verify-comparison /tmp/wheel-cashflow
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: demo-python-${{ matrix.python }}
@@ -76,7 +80,11 @@ jobs:
         run: |
           python scripts/check_demo.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python scripts/check_cashflow.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           statementtrace verify examples/demo
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          statementtrace verify-comparison examples/cashflow
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python scripts/generate_preview.py --check
       - name: Installed wheel outside checkout
@@ -97,6 +105,11 @@ jobs:
           & $wheelPython -m statementtrace demo --out $demoPath
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           & $wheelPython -m statementtrace verify $demoPath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $cashflowPath = Join-Path $env:RUNNER_TEMP 'statementtrace-wheel-cashflow'
+          & $wheelPython -m statementtrace compare --out $cashflowPath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & $wheelPython -m statementtrace verify-comparison $cashflowPath
 
   deploy:
     name: Deploy verified demo
@@ -116,9 +129,15 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Stage filing demo and cash-flow research
+        run: |
+          mkdir _site
+          cp -R examples/demo/. _site/
+          mkdir _site/cashflow
+          cp -R examples/cashflow/. _site/cashflow/
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: examples/demo
+          path: _site
       - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
         id: deployment
 
@@ -133,4 +152,11 @@ jobs:
           python-version: "3.12"
       - run: python -m pip install -e .
       - name: Select exact identities in real Chrome
+        env:
+          CASHFLOW_SCREENSHOT_DIR: browser-artifacts
         run: python scripts/check_browser.py
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: cashflow-browser-preview
+          path: browser-artifacts

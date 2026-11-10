@@ -4,6 +4,7 @@ Requires Google Chrome and a matching chromedriver on PATH, or the
 CHROMEWEBDRIVER directory supplied by GitHub's Ubuntu runner image.
 """
 
+import base64
 import csv
 import io
 import json
@@ -259,6 +260,54 @@ def browser_check(cases, root):
                     for kind in ("metrics", "facts"):
                         download_view(latest, kind)
 
+        for width in (1280, 390):
+            call("POST", f"/session/{session}/window/rect", {"width": width, "height": 1000})
+            navigate((root / "cashflow" / "index.html").as_uri())
+            overview = execute(
+                "return Array.from(document.querySelector('table').querySelectorAll('tbody tr'), "
+                "r => Array.from(r.cells, c => c.textContent));"
+            )
+            if overview != [
+                ["AAPL", "-3.36%", "9.26%", "27.83%", "7.99%"],
+                ["GOOGL", "35.67%", "4.70%", "20.79%", "41.93%"],
+                ["MSFT", "21.80%", "24.54%", "30.22%", "37.52%"],
+            ]:
+                raise AssertionError("Cash-flow research summary differs from filed-table expectations")
+            if not execute(
+                "return document.querySelectorAll('article').length === 3 && "
+                "document.querySelectorAll('table tbody tr').length === 9 && "
+                "document.documentElement.scrollWidth <= innerWidth + 1 && "
+                "document.querySelectorAll('script').length === 0;"
+            ):
+                raise AssertionError("Cash-flow comparison layout or static content differs")
+            screenshot_dir = os.environ.get("CASHFLOW_SCREENSHOT_DIR")
+            if screenshot_dir:
+                screenshot = call("GET", f"/session/{session}/screenshot")
+                destination = Path(screenshot_dir)
+                destination.mkdir(parents=True, exist_ok=True)
+                (destination / f"cashflow-{width}.png").write_bytes(base64.b64decode(screenshot))
+            for filename in ("comparison.csv", "source_facts.csv", "comparison.sql", "case.json", "analysis.json"):
+                destination = downloads / filename
+                destination.unlink(missing_ok=True)
+                expected = (root / "cashflow" / filename).read_bytes()
+                element = call(
+                    "POST",
+                    f"/session/{session}/element",
+                    {"using": "css selector", "value": f"a[download='{filename}']"},
+                )["element-6066-11e4-a52e-4f735466cecf"]
+                call("POST", f"/session/{session}/element/{element}/click", {})
+                for _ in range(100):
+                    if destination.is_file() and destination.read_bytes() == expected:
+                        break
+                    time.sleep(0.05)
+                else:
+                    actual_size = destination.stat().st_size if destination.is_file() else None
+                    saved = [(p.name, p.stat().st_size) for p in downloads.iterdir()]
+                    raise AssertionError(
+                        f"Cash-flow download differs: {filename}; expected {len(expected)} bytes, "
+                        f"observed {actual_size}; files: {saved}"
+                    )
+
         call(
             "POST",
             f"/session/{session}/goog/cdp/execute",
@@ -285,6 +334,8 @@ def browser_check(cases, root):
                     "reports": len(cases),
                     "viewports": viewport_widths,
                     "no_js_panels": visible,
+                    "cashflow_viewports": [1280, 390],
+                    "cashflow_downloads": 10,
                     **counts,
                 }
             )
@@ -301,6 +352,7 @@ def browser_check(cases, root):
 
 
 def main():
+    from statementtrace.cashflow import demo_case, write_comparison
     from statementtrace.cli import demo_inputs
     from statementtrace.engine import analyze
     from statementtrace.report import build, csv_label, view_csv_filename
@@ -314,6 +366,7 @@ def main():
     ]
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary).resolve()
+        write_comparison(demo_case(), root / "cashflow")
         cases = []
         for index, labels in enumerate(pairs):
             data, request = demo_inputs()
