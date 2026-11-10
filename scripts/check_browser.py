@@ -291,7 +291,9 @@ def browser_check(cases, root):
                 destination.unlink(missing_ok=True)
                 expected = (root / "cashflow" / filename).read_bytes()
                 element = call(
-                    "POST", f"/session/{session}/element", {"using": "css selector", "value": f"a[href='{filename}']"}
+                    "POST",
+                    f"/session/{session}/element",
+                    {"using": "css selector", "value": f"a[download='{filename}']"},
                 )["element-6066-11e4-a52e-4f735466cecf"]
                 call("POST", f"/session/{session}/element/{element}/click", {})
                 for _ in range(100):

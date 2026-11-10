@@ -1,8 +1,10 @@
 """Financial expectations, source boundaries and the installed command surface."""
 
+import base64
 import copy
 import csv
 import io
+import re
 import tempfile
 import unittest
 from fractions import Fraction
@@ -127,6 +129,10 @@ class CashflowStudyTests(unittest.TestCase):
         for name in packet:
             if name != "index.html":
                 self.assertIn(name, html)
+        embedded = re.findall(r'href="data:[^"]+;base64,([A-Za-z0-9+/=]+)" download="([^"]+)"', html)
+        self.assertEqual(len(embedded), 5)
+        for encoded, filename in embedded:
+            self.assertEqual(base64.b64decode(encoded), packet[filename])
         self.assertNotIn("<script", html)
 
     def test_command_and_no_overwrite(self):

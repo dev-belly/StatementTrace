@@ -1,5 +1,6 @@
 """A small, source-linked cross-issuer cash-flow research packet."""
 
+import base64
 import csv
 import html
 import io
@@ -160,7 +161,7 @@ def serial_row(row):
     return {key: exact(value) if isinstance(value, Fraction) else value for key, value in row.items()}
 
 
-def render(result):
+def render(result, downloads):
     e = html.escape
 
     def amount(value):
@@ -251,6 +252,13 @@ def render(result):
     }
     for token, value in replacements.items():
         template = template.replace(token, value)
+    for name, raw in downloads.items():
+        mime = "application/json" if name.endswith(".json") else "text/csv" if name.endswith(".csv") else "text/plain"
+        encoded = base64.b64encode(raw).decode("ascii")
+        template = template.replace(
+            f'href="{name}" download',
+            f'href="data:{mime};charset=utf-8;base64,{encoded}" download="{name}"',
+        )
     return template.encode("utf-8")
 
 
@@ -259,7 +267,7 @@ def build(case, as_of=None):
     checks = sql_crosscheck(result)
     serialized = [serial_row(row) for row in result["rows"]]
     fields = ("symbol", "entity", "period", "start", "end", "days", "as_of", "status", *AMOUNTS, *RATIOS, *BRIDGE)
-    return {
+    packet = {
         "case.json": canonical(case),
         "analysis.json": canonical(
             {"schema_version": 1, "as_of": result["as_of"], "sql_crosscheck": checks, "rows": serialized}
@@ -267,8 +275,9 @@ def build(case, as_of=None):
         "comparison.csv": csv_bytes(serialized, fields),
         "source_facts.csv": csv_bytes(result["sources"], tuple(result["sources"][0])),
         "comparison.sql": files("statementtrace").joinpath("data/cashflow_compare.sql").read_bytes(),
-        "index.html": render(result),
     }
+    packet["index.html"] = render(result, packet)
+    return packet
 
 
 def write_comparison(case, out, as_of=None):
