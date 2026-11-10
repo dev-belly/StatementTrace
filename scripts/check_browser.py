@@ -280,25 +280,31 @@ def browser_check(cases, root):
                 "document.querySelectorAll('script').length === 0;"
             ):
                 raise AssertionError("Cash-flow comparison layout or static content differs")
-            for filename in ("comparison.csv", "source_facts.csv", "comparison.sql", "case.json", "analysis.json"):
-                destination = downloads / filename
-                destination.unlink(missing_ok=True)
-                element = call(
-                    "POST", f"/session/{session}/element", {"using": "css selector", "value": f"a[href='{filename}']"}
-                )["element-6066-11e4-a52e-4f735466cecf"]
-                call("POST", f"/session/{session}/element/{element}/click", {})
-                for _ in range(100):
-                    if destination.is_file():
-                        break
-                    time.sleep(0.05)
-                if not destination.is_file() or destination.read_bytes() != (root / "cashflow" / filename).read_bytes():
-                    raise AssertionError(f"Cash-flow download differs: {filename}")
             screenshot_dir = os.environ.get("CASHFLOW_SCREENSHOT_DIR")
             if screenshot_dir:
                 screenshot = call("GET", f"/session/{session}/screenshot")
                 destination = Path(screenshot_dir)
                 destination.mkdir(parents=True, exist_ok=True)
                 (destination / f"cashflow-{width}.png").write_bytes(base64.b64decode(screenshot))
+            for filename in ("comparison.csv", "source_facts.csv", "comparison.sql", "case.json", "analysis.json"):
+                destination = downloads / filename
+                destination.unlink(missing_ok=True)
+                expected = (root / "cashflow" / filename).read_bytes()
+                element = call(
+                    "POST", f"/session/{session}/element", {"using": "css selector", "value": f"a[href='{filename}']"}
+                )["element-6066-11e4-a52e-4f735466cecf"]
+                call("POST", f"/session/{session}/element/{element}/click", {})
+                for _ in range(100):
+                    if destination.is_file() and destination.read_bytes() == expected:
+                        break
+                    time.sleep(0.05)
+                else:
+                    actual_size = destination.stat().st_size if destination.is_file() else None
+                    saved = [(p.name, p.stat().st_size) for p in downloads.iterdir()]
+                    raise AssertionError(
+                        f"Cash-flow download differs: {filename}; expected {len(expected)} bytes, "
+                        f"observed {actual_size}; files: {saved}"
+                    )
 
         call(
             "POST",
