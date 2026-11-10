@@ -1,0 +1,449 @@
+{
+  "as_of": "2025-02-05",
+  "basis": "Manually curated FY2023/FY2024 comparative figures from three FY2024 Form 10-K filings; not an unmodified API response. Raw USD-million amounts scaled to integral USD. Cash capex is a positive outflow magnitude.",
+  "companies": [
+    {
+      "facts": {
+        "_statementtrace": {
+          "comparatives": "Both years are taken from this one FY2024 filing, not reconstructed from historical API vintages.",
+          "kind": "manually_curated_public_filing_excerpt",
+          "scale": 1000000,
+          "source_tables": [
+            "Income statement: FY2023/FY2024 comparative columns",
+            "Cash flow statement: FY2023/FY2024 comparative columns"
+          ],
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+          "stored_unit": "USD",
+          "table_unit": "USD millions"
+        },
+        "cik": 320193,
+        "entityName": "Apple Inc.",
+        "facts": {
+          "us-gaap": {
+            "NetCashProvidedByUsedInOperatingActivities": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0000320193-24-000123",
+                    "end": "2023-09-30",
+                    "filed": "2024-11-01",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2022-09-25",
+                    "val": 110543000000
+                  },
+                  {
+                    "accn": "0000320193-24-000123",
+                    "end": "2024-09-28",
+                    "filed": "2024-11-01",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2023-10-01",
+                    "val": 118254000000
+                  }
+                ]
+              }
+            },
+            "NetIncomeLoss": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0000320193-24-000123",
+                    "end": "2023-09-30",
+                    "filed": "2024-11-01",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2022-09-25",
+                    "val": 96995000000
+                  },
+                  {
+                    "accn": "0000320193-24-000123",
+                    "end": "2024-09-28",
+                    "filed": "2024-11-01",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2023-10-01",
+                    "val": 93736000000
+                  }
+                ]
+              }
+            },
+            "PaymentsToAcquirePropertyPlantAndEquipment": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0000320193-24-000123",
+                    "end": "2023-09-30",
+                    "filed": "2024-11-01",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2022-09-25",
+                    "val": 10959000000
+                  },
+                  {
+                    "accn": "0000320193-24-000123",
+                    "end": "2024-09-28",
+                    "filed": "2024-11-01",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2023-10-01",
+                    "val": 9447000000
+                  }
+                ]
+              }
+            },
+            "RevenueFromContractWithCustomerExcludingAssessedTax": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0000320193-24-000123",
+                    "end": "2023-09-30",
+                    "filed": "2024-11-01",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2022-09-25",
+                    "val": 383285000000
+                  },
+                  {
+                    "accn": "0000320193-24-000123",
+                    "end": "2024-09-28",
+                    "filed": "2024-11-01",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2023-10-01",
+                    "val": 391035000000
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "periods": [
+        {
+          "end": "2023-09-30",
+          "label": "2023",
+          "start": "2022-09-25"
+        },
+        {
+          "end": "2024-09-28",
+          "label": "2024",
+          "start": "2023-10-01"
+        }
+      ],
+      "symbol": "AAPL"
+    },
+    {
+      "facts": {
+        "_statementtrace": {
+          "comparatives": "Both years are taken from this one FY2024 filing, not reconstructed from historical API vintages.",
+          "kind": "manually_curated_public_filing_excerpt",
+          "scale": 1000000,
+          "source_tables": [
+            "Income statement: FY2023/FY2024 comparative columns",
+            "Cash flow statement: FY2023/FY2024 comparative columns"
+          ],
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+          "stored_unit": "USD",
+          "table_unit": "USD millions"
+        },
+        "cik": 789019,
+        "entityName": "Microsoft Corporation",
+        "facts": {
+          "us-gaap": {
+            "NetCashProvidedByUsedInOperatingActivities": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0000950170-24-087843",
+                    "end": "2023-06-30",
+                    "filed": "2024-07-30",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2022-07-01",
+                    "val": 87582000000
+                  },
+                  {
+                    "accn": "0000950170-24-087843",
+                    "end": "2024-06-30",
+                    "filed": "2024-07-30",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2023-07-01",
+                    "val": 118548000000
+                  }
+                ]
+              }
+            },
+            "NetIncomeLoss": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0000950170-24-087843",
+                    "end": "2023-06-30",
+                    "filed": "2024-07-30",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2022-07-01",
+                    "val": 72361000000
+                  },
+                  {
+                    "accn": "0000950170-24-087843",
+                    "end": "2024-06-30",
+                    "filed": "2024-07-30",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2023-07-01",
+                    "val": 88136000000
+                  }
+                ]
+              }
+            },
+            "PaymentsToAcquirePropertyPlantAndEquipment": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0000950170-24-087843",
+                    "end": "2023-06-30",
+                    "filed": "2024-07-30",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2022-07-01",
+                    "val": 28107000000
+                  },
+                  {
+                    "accn": "0000950170-24-087843",
+                    "end": "2024-06-30",
+                    "filed": "2024-07-30",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2023-07-01",
+                    "val": 44477000000
+                  }
+                ]
+              }
+            },
+            "RevenueFromContractWithCustomerExcludingAssessedTax": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0000950170-24-087843",
+                    "end": "2023-06-30",
+                    "filed": "2024-07-30",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2022-07-01",
+                    "val": 211915000000
+                  },
+                  {
+                    "accn": "0000950170-24-087843",
+                    "end": "2024-06-30",
+                    "filed": "2024-07-30",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2023-07-01",
+                    "val": 245122000000
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "periods": [
+        {
+          "end": "2023-06-30",
+          "label": "2023",
+          "start": "2022-07-01"
+        },
+        {
+          "end": "2024-06-30",
+          "label": "2024",
+          "start": "2023-07-01"
+        }
+      ],
+      "symbol": "MSFT"
+    },
+    {
+      "facts": {
+        "_statementtrace": {
+          "comparatives": "Both years are taken from this one FY2024 filing, not reconstructed from historical API vintages.",
+          "kind": "manually_curated_public_filing_excerpt",
+          "scale": 1000000,
+          "source_tables": [
+            "Income statement: FY2023/FY2024 comparative columns",
+            "Cash flow statement: FY2023/FY2024 comparative columns"
+          ],
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000014/goog-20241231.htm",
+          "stored_unit": "USD",
+          "table_unit": "USD millions"
+        },
+        "cik": 1652044,
+        "entityName": "Alphabet Inc.",
+        "facts": {
+          "us-gaap": {
+            "NetCashProvidedByUsedInOperatingActivities": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0001652044-25-000014",
+                    "end": "2023-12-31",
+                    "filed": "2025-02-05",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2023-01-01",
+                    "val": 101746000000
+                  },
+                  {
+                    "accn": "0001652044-25-000014",
+                    "end": "2024-12-31",
+                    "filed": "2025-02-05",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2024-01-01",
+                    "val": 125299000000
+                  }
+                ]
+              }
+            },
+            "NetIncomeLoss": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0001652044-25-000014",
+                    "end": "2023-12-31",
+                    "filed": "2025-02-05",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2023-01-01",
+                    "val": 73795000000
+                  },
+                  {
+                    "accn": "0001652044-25-000014",
+                    "end": "2024-12-31",
+                    "filed": "2025-02-05",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2024-01-01",
+                    "val": 100118000000
+                  }
+                ]
+              }
+            },
+            "PaymentsToAcquirePropertyPlantAndEquipment": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0001652044-25-000014",
+                    "end": "2023-12-31",
+                    "filed": "2025-02-05",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2023-01-01",
+                    "val": 32251000000
+                  },
+                  {
+                    "accn": "0001652044-25-000014",
+                    "end": "2024-12-31",
+                    "filed": "2025-02-05",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "cash_flows",
+                    "start": "2024-01-01",
+                    "val": 52535000000
+                  }
+                ]
+              }
+            },
+            "RevenueFromContractWithCustomerExcludingAssessedTax": {
+              "units": {
+                "USD": [
+                  {
+                    "accn": "0001652044-25-000014",
+                    "end": "2023-12-31",
+                    "filed": "2025-02-05",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2023-01-01",
+                    "val": 307394000000
+                  },
+                  {
+                    "accn": "0001652044-25-000014",
+                    "end": "2024-12-31",
+                    "filed": "2025-02-05",
+                    "form": "10-K",
+                    "fp": "FY",
+                    "fy": 2024,
+                    "source_section": "income_statement",
+                    "start": "2024-01-01",
+                    "val": 350018000000
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "periods": [
+        {
+          "end": "2023-12-31",
+          "label": "2023",
+          "start": "2023-01-01"
+        },
+        {
+          "end": "2024-12-31",
+          "label": "2024",
+          "start": "2024-01-01"
+        }
+      ],
+      "symbol": "GOOGL"
+    }
+  ],
+  "reviewed_on": "2026-11-10",
+  "schema_version": 1
+}

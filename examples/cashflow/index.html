@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Profit ≠ cash · StatementTrace research</title>
+<style>
+:root{color-scheme:light;--ink:#182421;--paper:#f4f3ed;--green:#185b45;--line:#d4d9d0}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,sans-serif}
+main{max-width:1120px;margin:auto;padding:44px 28px 70px}
+nav{display:flex;justify-content:space-between;gap:20px;font-size:14px}
+a{color:var(--green);text-underline-offset:4px}
+header{padding:72px 0 32px;border-bottom:1px solid var(--line)}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font:12px/1.6 ui-monospace,monospace;color:var(--green)}
+h1{font-size:clamp(48px,9vw,100px);line-height:1.02;letter-spacing:-.065em;margin:18px 0 24px}
+h2{font-size:29px;line-height:1.25;margin-top:48px}
+h3{font-size:27px;margin:12px 0 28px;letter-spacing:-.035em}
+h3 small{font-size:14px;letter-spacing:0;font-weight:400}
+.lead{max-width:760px;font-size:21px}
+.muted{color:#57635b;font-size:14px}
+.notice{padding:16px 20px;background:#e6eade;border-left:3px solid var(--green);font-size:15px}
+.table-wrap{overflow-x:auto;margin:20px 0 32px}
+table{border-collapse:collapse;width:100%;white-space:nowrap;font-variant-numeric:tabular-nums;font-size:14px}
+th,td{padding:14px 14px;text-align:right;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:#e6eade}
+th:first-child,td:first-child{text-align:left}
+article{padding:26px 0;border-top:1px solid var(--line)}
+.bar-row{display:grid;grid-template-columns:225px 1fr 90px;gap:16px;align-items:center;margin:12px 0;font-size:14px}
+.track{background:#e0e4db;height:22px}
+.bar{height:22px;background:var(--green)}
+.bar.negative{background:#b9693e}
+.bar-row b{text-align:right;font-variant-numeric:tabular-nums}
+.downloads{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+.downloads a{border:1px solid var(--green);padding:8px 14px;text-decoration:none;font-size:14px}
+footer{border-top:1px solid var(--line);margin-top:50px;padding-top:20px}
+@media(max-width:600px){main{padding:24px 18px 40px}
+header{padding-top:44px}
+.bar-row{grid-template-columns:1fr 65px;gap:6px}
+.bar-row span{grid-column:1/-1}
+h2{font-size:25px}
+}
+
+</style></head>
+<body>
+<main><nav><a href="https://github.com/dev-belly/StatementTrace">StatementTrace / research</a><a href="https://github.com/dev-belly">dev-belly</a></nav>
+<header><div class="eyebrow">Historical filing study / FY2023–FY2024 / as of 2025-02-05</div><h1>Profit ≠ cash.</h1><p class="lead">When earnings grow, how much cash remains after capital spending? A source-linked comparison of Apple, Microsoft and Alphabet.</p><p class="muted">Research question → 24 curated filing facts → Python + SQL → six issuer-years → an exact cash-flow bridge.</p></header>
+<p class="notice">Historical case, not a current market screen. Fiscal windows end in June, September and December; Apple's FY2023 has 53 weeks. Compare each issuer with its own prior year. Cross-issuer levels are not calendar-aligned.</p>
+<h2>01 / Read the outcome</h2><p>Profit growth and free-cash-flow growth answer different questions. These reported annual changes are not week-normalized.</p><div class='table-wrap'><table><thead><tr><th scope='col'>FY2024</th><th scope='col'>Profit growth</th><th scope='col'>FCF growth</th><th scope='col'>FCF margin</th><th scope='col'>Cash capex / CFO</th></tr></thead><tbody><tr><td>AAPL</td><td>-3.36%</td><td>9.26%</td><td>27.83%</td><td>7.99%</td></tr><tr><td>GOOGL</td><td>35.67%</td><td>4.70%</td><td>20.79%</td><td>41.93%</td></tr><tr><td>MSFT</td><td>21.80%</td><td>24.54%</td><td>30.22%</td><td>37.52%</td></tr></tbody></table></div>
+<h2>02 / Explain the change</h2><p>All bridge amounts are USD billions. Green adds to the FCF change; rust subtracts. The bars show signed contributions, not a time series.</p><article><div class='eyebrow'>AAPL · FY2023 → FY2024</div><h3>99.584 → 108.807<small> USD bn FCF</small></h3><div class='bar-row'><span>Operating cash-flow change</span><div class='track'><div class='bar' style='width:83.606%'></div></div><b>7.711</b></div><div class='bar-row'><span>Cash-capex effect</span><div class='track'><div class='bar' style='width:16.394%'></div></div><b>1.512</b></div><div class='bar-row'><span>Free cash-flow change</span><div class='track'><div class='bar' style='width:100.000%'></div></div><b>9.223</b></div><p class='muted'>ΔFCF = ΔCFO − Δcash capex. Reconciliation residual: 0.000.</p></article><article><div class='eyebrow'>GOOGL · FY2023 → FY2024</div><h3>69.495 → 72.764<small> USD bn FCF</small></h3><div class='bar-row'><span>Operating cash-flow change</span><div class='track'><div class='bar' style='width:100.000%'></div></div><b>23.553</b></div><div class='bar-row'><span>Cash-capex effect</span><div class='track'><div class='bar negative' style='width:86.121%'></div></div><b>-20.284</b></div><div class='bar-row'><span>Free cash-flow change</span><div class='track'><div class='bar' style='width:13.879%'></div></div><b>3.269</b></div><p class='muted'>ΔFCF = ΔCFO − Δcash capex. Reconciliation residual: 0.000.</p></article><article><div class='eyebrow'>MSFT · FY2023 → FY2024</div><h3>59.475 → 74.071<small> USD bn FCF</small></h3><div class='bar-row'><span>Operating cash-flow change</span><div class='track'><div class='bar' style='width:100.000%'></div></div><b>30.966</b></div><div class='bar-row'><span>Cash-capex effect</span><div class='track'><div class='bar negative' style='width:52.864%'></div></div><b>-16.370</b></div><div class='bar-row'><span>Free cash-flow change</span><div class='track'><div class='bar' style='width:47.136%'></div></div><b>14.596</b></div><p class='muted'>ΔFCF = ΔCFO − Δcash capex. Reconciliation residual: 0.000.</p></article>
+<h2>03 / Check the underlying amounts</h2><p class="muted">USD billions. FCF = operating cash flow − cash payments for property, plant and equipment; capex is stored as a positive outflow.</p><div class='table-wrap'><table><thead><tr><th scope='col'>Issuer / FY</th><th scope='col'>Fiscal window</th><th scope='col'>Days</th><th scope='col'>Revenue</th><th scope='col'>Net income</th><th scope='col'>CFO</th><th scope='col'>Cash capex</th><th scope='col'>FCF</th></tr></thead><tbody><tr><td>AAPL / 2023</td><td>2022-09-25 → 2023-09-30</td><td>371</td><td>383.285</td><td>96.995</td><td>110.543</td><td>10.959</td><td>99.584</td></tr><tr><td>AAPL / 2024</td><td>2023-10-01 → 2024-09-28</td><td>364</td><td>391.035</td><td>93.736</td><td>118.254</td><td>9.447</td><td>108.807</td></tr><tr><td>GOOGL / 2023</td><td>2023-01-01 → 2023-12-31</td><td>365</td><td>307.394</td><td>73.795</td><td>101.746</td><td>32.251</td><td>69.495</td></tr><tr><td>GOOGL / 2024</td><td>2024-01-01 → 2024-12-31</td><td>366</td><td>350.018</td><td>100.118</td><td>125.299</td><td>52.535</td><td>72.764</td></tr><tr><td>MSFT / 2023</td><td>2022-07-01 → 2023-06-30</td><td>365</td><td>211.915</td><td>72.361</td><td>87.582</td><td>28.107</td><td>59.475</td></tr><tr><td>MSFT / 2024</td><td>2023-07-01 → 2024-06-30</td><td>366</td><td>245.122</td><td>88.136</td><td>118.548</td><td>44.477</td><td>74.071</td></tr></tbody></table></div>
+<h2>04 / Inspect and reproduce</h2><div class="downloads"><a href="comparison.csv" download>Comparison CSV</a><a href="source_facts.csv" download>24 source slots · CSV</a><a href="comparison.sql" download>SQLite query</a><a href="case.json" download>Frozen source packet</a><a href="analysis.json" download>Exact results · JSON</a></div><ul><li><a href='https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/0000320193-24-000123-index.htm'>AAPL · SEC filing 2024-11-01</a></li><li><a href='https://www.sec.gov/Archives/edgar/data/1652044/000165204425000014/0001652044-25-000014-index.htm'>GOOGL · SEC filing 2025-02-05</a></li><li><a href='https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/0000950170-24-087843-index.htm'>MSFT · SEC filing 2024-07-30</a></li></ul>
+<p class="muted">The packet is manually curated from filed tables, not a raw CompanyFacts API download. Python selects facts using the existing filed-date and exact-period rules. SQLite independently checks the arithmetic on the selected source rows. This does not independently authenticate the transcription.</p>
+<p class="muted">This FCF definition excludes acquisitions and noncash additions such as finance leases. CFO includes noncash adjustments and working-capital/tax timing. A high CFO-to-profit ratio alone does not establish earnings quality, owner earnings or investment value.</p>
+<footer><a href="https://github.com/dev-belly/StatementTrace/blob/main/docs/CASHFLOW_STUDY.zh-CN.md">中文研究简报 · interpretation and next questions</a><p class="muted">Build offline: <code>statementtrace compare --out output/cashflow</code>. Change the filing cutoff with <code>--as-of YYYY-MM-DD</code>.</p></footer></main></body></html>

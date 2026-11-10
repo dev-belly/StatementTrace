@@ -6,6 +6,7 @@ import sys
 from importlib.resources import files
 from pathlib import Path
 
+from .cashflow import demo_case, verify_comparison, write_comparison
 from .contracts import ContractError, read_json
 from .report import verify, write_report
 
@@ -29,9 +30,18 @@ def main(argv=None):
     run.add_argument("--out", required=True)
     check = commands.add_parser("verify", help="Recompute all outputs, including HTML and lineage")
     check.add_argument("directory")
+    comparison = commands.add_parser("compare", help="Build the historical three-issuer cash-flow study")
+    comparison.add_argument("--out", required=True)
+    comparison.add_argument("--as-of", help="Override the default 2025-02-05 filed-date cutoff")
+    comparison_check = commands.add_parser("verify-comparison", help="Recompute a saved cash-flow comparison")
+    comparison_check.add_argument("directory")
     args = parser.parse_args(argv)
     try:
-        if args.command == "verify":
+        if args.command == "compare":
+            result = write_comparison(demo_case(), args.out, args.as_of)
+        elif args.command == "verify-comparison":
+            result = verify_comparison(args.directory)
+        elif args.command == "verify":
             result = verify(args.directory)
         else:
             if args.command == "demo":
