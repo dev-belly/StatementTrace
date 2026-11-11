@@ -90,7 +90,7 @@ def browser_check(cases, root):
         port = available.getsockname()[1]
     address = f"http://127.0.0.1:{port}"
 
-    def call(method, endpoint, payload=None):
+    def call(method, endpoint, payload=None, *, timeout=15):
         request = urllib.request.Request(
             address + endpoint,
             data=json.dumps(payload).encode() if payload is not None else None,
@@ -98,7 +98,7 @@ def browser_check(cases, root):
             method=method,
         )
         try:
-            with urllib.request.urlopen(request, timeout=15) as response:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
                 return json.load(response)["value"]
         except urllib.error.HTTPError as error:
             raise RuntimeError(error.read().decode()) from error
@@ -106,7 +106,12 @@ def browser_check(cases, root):
     downloads = root / "downloads"
     downloads.mkdir()
     session = None
-    process = subprocess.Popen([driver, f"--port={port}"], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+    driver_args = [driver, f"--port={port}"]
+    if artifact_dir := os.environ.get("CASHFLOW_SCREENSHOT_DIR"):
+        artifacts = Path(artifact_dir)
+        artifacts.mkdir(parents=True, exist_ok=True)
+        driver_args.append(f"--log-path={(artifacts / 'chromedriver.log').resolve()}")
+    process = subprocess.Popen(driver_args, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     try:
         for _ in range(50):
             try:
@@ -135,6 +140,8 @@ def browser_check(cases, root):
                     }
                 }
             },
+            # Cold Chrome startup on hosted runners can exceed the per-command limit.
+            timeout=60,
         )["sessionId"]
 
         def execute(script, *args):
