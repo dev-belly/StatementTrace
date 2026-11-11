@@ -1,0 +1,42 @@
+version: 2
+models:
+  - name: stg_facts
+    description: Typed selected facts with filed dates, source identities and explicit missingness.
+    config:
+      contract:
+        enforced: true
+    columns:
+      - {name: symbol, data_type: varchar, data_tests: [not_null]}
+      - {name: period, data_type: varchar, data_tests: [not_null]}
+      - {name: start, data_type: date, data_tests: [not_null]}
+      - {name: end, quote: true, data_type: date, data_tests: [not_null]}
+      - {name: as_of, data_type: date, data_tests: [not_null]}
+      - name: metric
+        data_type: varchar
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [revenue, net_income, operating_cash_flow, capex]
+      - {name: value_usd, data_type: bigint}
+      - name: status
+        data_type: varchar
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [selected, missing_input]
+      - {name: filed, data_type: date}
+      - {name: accession, data_type: varchar}
+      - {name: tag, data_type: varchar}
+      - {name: fact_id, data_type: varchar}
+      - {name: source_url, data_type: varchar}
+  - name: int_annual_cashflow
+    description: One row per exact issuer fiscal window; integral USD arithmetic uses decimal(38,0).
+  - name: mart_cashflow
+    description: Adjacent-period cash-flow bridge and exact ratio pairs; NULL never means zero.
+    columns:
+      - {name: symbol, data_tests: [not_null]}
+      - {name: period, data_tests: [not_null]}
+      - {name: as_of, data_tests: [not_null]}
+      - {name: status, data_tests: [not_null]}

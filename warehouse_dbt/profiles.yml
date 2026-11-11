@@ -1,0 +1,8 @@
+statementtrace_warehouse:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('STATEMENTTRACE_DUCKDB', '../output/research.duckdb') }}"
+      schema: main
+      threads: 2

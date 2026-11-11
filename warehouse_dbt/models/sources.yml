@@ -1,0 +1,9 @@
+version: 2
+sources:
+  - name: frozen_packet
+    description: Selected filing facts; public availability is determined upstream by the saved cutoff.
+    tables:
+      - name: source_facts
+        description: Four input slots per issuer and exact fiscal window, including explicit missing slots.
+        meta:
+          external_location: "read_parquet('{{ env_var('STATEMENTTRACE_FACTS', '../output/warehouse/source_facts.parquet') | replace(\"'\", \"''\") }}')"
