@@ -45,3 +45,10 @@ the separate warehouse matrix installs the locked engines and runs every test.
 The dbt script builds models and tests, checks exact mart parity and requires a
 one-row future-filing mutation to fail the named cutoff test. Keep dbt SQL changes
 consistent with Python expectations and the packaged direct DuckDB query.
+
+For the read-only API, also enable `--extra api` during `uv sync`. Run the same
+unit suite plus `uv run --locked python scripts/check_api.py output/warehouse`.
+The warehouse CI enables this extra and checks actual localhost HTTP on Linux
+and Windows. The wheel smoke installs the API extra and starts its service
+outside the checkout. Keep amounts as integer strings, preserve missing slots,
+reject unsupported query parameters, and validate captured bytes before serving.

@@ -1,6 +1,7 @@
 """Command line entry points."""
 
 import argparse
+import importlib
 import json
 import sys
 from importlib.resources import files
@@ -17,6 +18,23 @@ def demo_inputs():
         read_json(resources.joinpath("apple_excerpt.json").read_bytes()),
         read_json(resources.joinpath("demo_request.json").read_bytes()),
     )
+
+
+def api_dependencies():
+    try:
+        return importlib.import_module("statementtrace.api"), importlib.import_module("uvicorn")
+    except ImportError as exc:
+        raise ContractError('API command requires: python -m pip install -e ".[warehouse,api]"') from exc
+
+
+def port_number(value):
+    try:
+        port = int(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("port must be an integer between 1 and 65535") from exc
+    if not 1 <= port <= 65535:
+        raise argparse.ArgumentTypeError("port must be between 1 and 65535")
+    return port
 
 
 def main(argv=None):
@@ -41,9 +59,20 @@ def main(argv=None):
     warehouse.add_argument("--as-of", help="Override the case's filed-date cutoff")
     warehouse_check = commands.add_parser("verify-warehouse", help="Check hashes, source replay and exact SQL parity")
     warehouse_check.add_argument("directory")
+    serve = commands.add_parser(
+        "serve-warehouse", help="Serve a verified warehouse through the read-only financial API"
+    )
+    serve.add_argument("directory")
+    serve.add_argument("--host", default="127.0.0.1")
+    serve.add_argument("--port", type=port_number, default=8000)
     args = parser.parse_args(argv)
     try:
-        if args.command == "warehouse":
+        if args.command == "serve-warehouse":
+            api, uvicorn = api_dependencies()
+            app = api.create_app(args.directory)
+            uvicorn.run(app, host=args.host, port=args.port)
+            return 0
+        elif args.command == "warehouse":
             from .warehouse import write_warehouse
 
             case = read_json(Path(args.case).read_bytes()) if args.case else demo_case()

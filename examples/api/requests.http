@@ -1,0 +1,19 @@
+@base = http://127.0.0.1:8000
+
+### Verified snapshot identity
+GET {{base}}/v1/snapshot
+
+### Alphabet FY2024, exact USD amounts and ratio pairs
+GET {{base}}/v1/cashflow?symbol=GOOGL&period=2024
+
+### Follow Apple cash capex to its filing
+GET {{base}}/v1/facts?symbol=AAPL&period=2024&metric=capex
+
+### Page through source facts, retaining the snapshot ID
+GET {{base}}/v1/facts?limit=7&offset=7
+
+### Inspect source contracts and Python/DuckDB parity
+GET {{base}}/v1/quality
+
+### Unsupported cutoff must return 422
+GET {{base}}/v1/cashflow?as_of=1900-01-01

@@ -67,6 +67,31 @@ research workflows on a small curated packet, without a scale or speed claim.
 The existing `demo` and `compare` commands still install with no runtime dependencies.
 [中文运行与面试讲解](docs/WAREHOUSE.zh-CN.md).
 
+## Typed financial API: FastAPI + Pydantic + Uvicorn
+
+Query a verified warehouse by issuer and fiscal period, then follow its selected
+facts to their filings. The API captures and verifies one packet before serving;
+every response identifies the same snapshot. Amounts use exact integer strings,
+ratios use integer numerator/denominator pairs, and missing values remain `null`.
+
+```bash
+uv sync --locked --extra warehouse --extra api --extra dev
+uv run --locked statementtrace warehouse --out output/api-demo
+uv run --locked statementtrace serve-warehouse output/api-demo
+```
+
+Open `http://127.0.0.1:8000/docs` for Swagger UI, or query
+`http://127.0.0.1:8000/v1/cashflow?symbol=GOOGL&period=2024`.
+`/v1/facts` supports the same filters plus a source metric; both endpoints provide
+bounded pagination. Unknown or duplicate parameters receive HTTP 422, including
+an unsupported `as_of` override. Build a new packet and restart to change cutoffs.
+The service exposes GET routes; no arbitrary SQL or file-upload interface is provided.
+
+[中文 API 运行、精度与面试讲解](docs/API.zh-CN.md) ·
+[Typed models and application factory](src/statementtrace/api.py) ·
+[HTTP request examples](examples/api/requests.http) ·
+[Real HTTP smoke](scripts/check_api.py)
+
 ## Filing-date analysis underneath the study
 
 Which numbers were publicly filed by this cutoff, and which records produced this ratio? StatementTrace answers with a reproducible report from SEC CompanyFacts-shaped JSON. The offline demo uses **33 manually curated records from Apple's 2023/2024 Form 10-K tables**; it is not an unmodified API download.
