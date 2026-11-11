@@ -3,6 +3,7 @@
 [![CI](https://github.com/dev-belly/StatementTrace/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-belly/StatementTrace/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.11%2B-3776AB)
 ![Runtime](https://img.shields.io/badge/runtime-standard_library-128a82)
+![Optional warehouse](https://img.shields.io/badge/optional-Polars_%2B_DuckDB_%2B_dbt-1d634b)
 
 **From public filings to an inspectable financial research conclusion.**
 
@@ -34,6 +35,37 @@ the frozen source packet and the SQLite query. It works without JavaScript or
 network access after installation. Add `--as-of 2025-02-04` to `compare` and use
 a new output directory to see Alphabet become unavailable under the packet's
 filed-date rule. The packet does not contain its earlier filings.
+
+## Financial data engineering: Polars → Parquet → DuckDB → dbt
+
+The same filing case also runs through a typed columnar pipeline. Polars lazily
+normalizes selected facts into Zstd Parquet; DuckDB recomputes the annual cash-flow
+mart; a three-model dbt project rebuilds it with source contracts and data tests.
+Every route is checked against the Python result: **24 input slots, six issuer-years,
+138 exact field comparisons per SQL route** in the default case.
+
+| Tool | Implemented responsibility | Inspect |
+| --- | --- | --- |
+| Polars | Lazy NDJSON scan, explicit integer/date schema, typed missing slots | [Pipeline](src/statementtrace/warehouse.py) |
+| Parquet + Zstd | Portable source and mart files; dates and exact amounts retained | [Packet format](docs/WAREHOUSE.zh-CN.md#产物与精度) |
+| DuckDB | SQL pivot, window functions, adjacent-period bridge, exact ratio pairs | [SQL](src/statementtrace/data/warehouse_cashflow.sql) |
+| dbt Core + dbt-duckdb | Staging contract, annual model, cash-flow mart and 21 data tests | [Models](warehouse_dbt/models) |
+| uv + GitHub Actions | Locked dependencies; Linux/Windows and installed-wheel checks | [CI](.github/workflows/warehouse.yml) |
+
+From this checkout, with [uv](https://docs.astral.sh/uv/) installed:
+
+```bash
+uv sync --locked --extra warehouse --extra dbt --extra dev
+uv run --locked statementtrace warehouse --out output/warehouse
+uv run --locked statementtrace verify-warehouse output/warehouse
+uv run --locked python scripts/check_warehouse_dbt.py output/warehouse
+```
+
+The last command actually runs `dbt build`, compares its mart with Python and
+checks that a single future-filed input fails the cutoff test. These are local
+research workflows on a small curated packet, without a scale or speed claim.
+The existing `demo` and `compare` commands still install with no runtime dependencies.
+[中文运行与面试讲解](docs/WAREHOUSE.zh-CN.md).
 
 ## Filing-date analysis underneath the study
 

@@ -1,0 +1,12 @@
+name: statementtrace_warehouse
+version: '1.0.0'
+config-version: 2
+profile: statementtrace_warehouse
+flags:
+  send_anonymous_usage_stats: false
+model-paths: [models]
+test-paths: [tests]
+clean-targets: [target, dbt_packages]
+models:
+  statementtrace_warehouse:
+    +materialized: table

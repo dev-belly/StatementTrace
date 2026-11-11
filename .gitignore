@@ -6,3 +6,9 @@ __pycache__/
 build/
 dist/
 /output/
+warehouse_dbt/target/
+warehouse_dbt/logs/
+warehouse_dbt/dbt_packages/
+warehouse_dbt/.user.yml
+*.duckdb
+*.duckdb.wal
