@@ -45,19 +45,7 @@ jobs:
           uv run --locked statementtrace warehouse --as-of 2025-02-04 --out output/early
           uv run --locked python scripts/check_warehouse_dbt.py output/early
       - name: Installed wheel outside checkout
-        shell: bash
-        run: |
-          uv build --wheel --out-dir output/wheels
-          uv venv output/installed
-          if [ "$RUNNER_OS" = Windows ]; then
-            installed_python="$GITHUB_WORKSPACE/output/installed/Scripts/python.exe"
-          else
-            installed_python="$GITHUB_WORKSPACE/output/installed/bin/python"
-          fi
-          uv pip install --python "$installed_python" "$(pwd)/output/wheels/statementtrace-0.1.0-py3-none-any.whl[warehouse]"
-          cd "$RUNNER_TEMP"
-          "$installed_python" -m statementtrace warehouse --out wheel-warehouse
-          "$installed_python" -m statementtrace verify-warehouse wheel-warehouse
+        run: uv run --locked python scripts/check_warehouse_wheel.py
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: financial-warehouse-${{ matrix.os }}-${{ matrix.python }}

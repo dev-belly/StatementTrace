@@ -37,6 +37,7 @@ uv run --locked statementtrace verify-warehouse output/warehouse
 uv run --locked python scripts/check_warehouse_dbt.py output/warehouse
 uv run --locked statementtrace warehouse --as-of 2025-02-04 --out output/early
 uv run --locked python scripts/check_warehouse_dbt.py output/early
+uv run --locked python scripts/check_warehouse_wheel.py
 ```
 
 The base test job intentionally skips the columnar tests when their extra is absent;
