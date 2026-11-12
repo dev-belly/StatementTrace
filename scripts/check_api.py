@@ -13,6 +13,29 @@ import urllib.request
 from pathlib import Path
 
 
+def stop_server(process):
+    """Stop the server and its Windows launcher descendants before closing logs."""
+    if process.poll() is not None:
+        return
+    if os.name == "nt":
+        result = subprocess.run(
+            ["taskkill", "/PID", str(process.pid), "/T", "/F"],
+            capture_output=True,
+            check=False,
+            timeout=10,
+        )
+        if result.returncode and process.poll() is None:
+            raise RuntimeError("Could not stop the API process tree: " + repr(result.stderr))
+        process.wait(timeout=10)
+    else:
+        process.terminate()
+        try:
+            process.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait(timeout=10)
+
+
 def check(directory, executable=None):
     packet = Path(directory).resolve()
     analysis = json.loads((packet / "analysis.json").read_bytes())
@@ -97,12 +120,7 @@ def check(directory, executable=None):
                     if status != status_expected:
                         raise RuntimeError(f"HTTP {method} {path}: {status}, expected {status_expected}")
             finally:
-                process.terminate()
-                try:
-                    process.wait(timeout=10)
-                except subprocess.TimeoutExpired:
-                    process.kill()
-                    process.wait(timeout=10)
+                stop_server(process)
     return {"real_http": True, "routes": 6, "requests": requests, **identity}
 
 
