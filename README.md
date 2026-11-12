@@ -65,7 +65,7 @@ The last command actually runs `dbt build`, compares its mart with Python and
 checks that a single future-filed input fails the cutoff test. These are local
 research workflows on a small curated packet, without a scale or speed claim.
 The existing `demo` and `compare` commands still install with no runtime dependencies.
-[中文运行与面试讲解](docs/WAREHOUSE.zh-CN.md).
+[中文运行与方法说明](docs/WAREHOUSE.zh-CN.md).
 
 ## Typed financial API: FastAPI + Pydantic + Uvicorn
 
@@ -87,7 +87,7 @@ bounded pagination. Unknown or duplicate parameters receive HTTP 422, including
 an unsupported `as_of` override. Build a new packet and restart to change cutoffs.
 The service exposes GET routes; no arbitrary SQL or file-upload interface is provided.
 
-[中文 API 运行、精度与面试讲解](docs/API.zh-CN.md) ·
+[中文 API 运行与精度说明](docs/API.zh-CN.md) ·
 [Typed models and application factory](src/statementtrace/api.py) ·
 [HTTP request examples](examples/api/requests.http) ·
 [Real HTTP smoke](scripts/check_api.py)
@@ -96,7 +96,7 @@ The service exposes GET routes; no arbitrary SQL or file-upload interface is pro
 
 Which numbers were publicly filed by this cutoff, and which records produced this ratio? StatementTrace answers with a reproducible report from SEC CompanyFacts-shaped JSON. The offline demo uses **33 manually curated records from Apple's 2023/2024 Form 10-K tables**; it is not an unmodified API download.
 
-**[Try the live financial report](https://dev-belly.github.io/StatementTrace/)** · [中文面试讲解](docs/INTERVIEW.md)
+**[Try the live financial report](https://dev-belly.github.io/StatementTrace/)**
 
 **Try one cutoff change:** [FY2024 before filing](https://dev-belly.github.io/StatementTrace/#as_of=2024-10-31&period=2024) → [after filing](https://dev-belly.github.io/StatementTrace/#as_of=2024-11-01&period=2024). See missing financial inputs become available, then follow the selected facts to the source filing. No installation or account is needed.
 
@@ -238,7 +238,6 @@ unchanged. See the [spreadsheet export contract](docs/METHODOLOGY.md#spreadsheet
 
 - [方法与边界](docs/METHODOLOGY.md)
 - [公开数据来源](docs/SOURCES.md)
-- [三分钟面试讲解](docs/INTERVIEW.md)
 - [可复算演示](examples/demo)
 
 Code: MIT. Financial facts retain filing attribution; the license does not relicense third-party filings. No production-service, investment-return or credit-rating claim is made.
