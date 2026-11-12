@@ -100,7 +100,19 @@ Which numbers were publicly filed by this cutoff, and which records produced thi
 
 **Try one cutoff change:** [FY2024 before filing](https://dev-belly.github.io/StatementTrace/#as_of=2024-10-31&period=2024) → [after filing](https://dev-belly.github.io/StatementTrace/#as_of=2024-11-01&period=2024). See missing financial inputs become available, then follow the selected facts to the source filing. No installation or account is needed.
 
-![StatementTrace demo](docs/preview.svg)
+**Demo snapshot · Apple FY2024**
+
+SEC filed-date cutoff: **2024-11-01**. Values are in USD millions.
+
+| Revenue | Net margin | Free cash flow |
+| ---: | ---: | ---: |
+| 391,035 | 23.97% | 108,807 |
+
+33 curated records · 6 as-of panels · 9 metrics per panel.
+
+Exact fiscal periods → selected facts → formulas → source filings.
+
+Offline public-filing excerpt; missing values remain missing and lineage can be replayed.
 
 ## Quick start
 
