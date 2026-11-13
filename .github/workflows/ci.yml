@@ -36,6 +36,8 @@ jobs:
           python scripts/check_cashflow.py
           statementtrace verify examples/demo
           statementtrace verify-comparison examples/cashflow
+          statementtrace compare --language zh-CN --out output/ci-cashflow-zh
+          statementtrace verify-comparison output/ci-cashflow-zh
           python scripts/generate_preview.py --check
       - name: Installed wheel outside checkout
         run: |
@@ -47,6 +49,8 @@ jobs:
           /tmp/statementtrace-wheel/bin/statementtrace verify /tmp/wheel-demo
           /tmp/statementtrace-wheel/bin/statementtrace compare --out /tmp/wheel-cashflow
           /tmp/statementtrace-wheel/bin/statementtrace verify-comparison /tmp/wheel-cashflow
+          /tmp/statementtrace-wheel/bin/statementtrace compare --language zh-CN --out /tmp/wheel-cashflow-zh
+          /tmp/statementtrace-wheel/bin/statementtrace verify-comparison /tmp/wheel-cashflow-zh
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: demo-python-${{ matrix.python }}
@@ -110,6 +114,11 @@ jobs:
           & $wheelPython -m statementtrace compare --out $cashflowPath
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           & $wheelPython -m statementtrace verify-comparison $cashflowPath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $chinesePath = Join-Path $env:RUNNER_TEMP 'statementtrace-wheel-cashflow-zh'
+          & $wheelPython -m statementtrace compare --language zh-CN --out $chinesePath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & $wheelPython -m statementtrace verify-comparison $chinesePath
 
   deploy:
     name: Deploy verified demo
@@ -131,10 +140,13 @@ jobs:
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - name: Stage filing demo and cash-flow research
         run: |
+          python -m pip install .
           mkdir _site
           cp -R examples/demo/. _site/
           mkdir _site/cashflow
           cp -R examples/cashflow/. _site/cashflow/
+          statementtrace compare --language zh-CN --out _site/cashflow/zh
+          statementtrace verify-comparison _site/cashflow/zh
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: _site

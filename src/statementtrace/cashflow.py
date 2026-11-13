@@ -19,6 +19,35 @@ INPUTS = ("revenue", "net_income", "operating_cash_flow", "capex")
 AMOUNTS = (*INPUTS, "free_cash_flow", "cfo_minus_profit")
 RATIOS = ("net_margin", "fcf_margin", "cash_conversion", "capex_cfo", "net_income_growth", "fcf_growth")
 BRIDGE = ("delta_cfo", "negative_delta_capex", "delta_fcf", "bridge_residual")
+REPORT_LANGUAGES = ("en", "zh-CN")
+
+# Only presentation changes with language. Source fields and financial values
+# keep their original identities in every research export.
+CHINESE = {
+    "unavailable": "数据不可得",
+    "FY2024": "2024 财年",
+    "Profit growth": "净利润同比",
+    "FCF growth": "自由现金流同比",
+    "FCF margin": "自由现金流率",
+    "Cash capex / CFO": "现金资本开支 / 经营现金流",
+    "Operating cash-flow change": "经营现金流增量",
+    "Cash-capex effect": "现金资本开支的影响",
+    "Free cash-flow change": "自由现金流增量",
+    " USD bn FCF": " 十亿美元 · 自由现金流",
+    "ΔFCF = ΔCFO − Δcash capex. Reconciliation residual: ": (
+        "自由现金流增量 = 经营现金流增量 − 现金资本开支增量。勾稽差额："
+    ),
+    "Issuer / FY": "公司 / 财年",
+    "Fiscal window": "实际财年区间",
+    "Days": "天数",
+    "Revenue": "营业收入",
+    "Net income": "净利润",
+    "CFO": "经营现金流",
+    "Cash capex": "现金资本开支",
+    "FCF": "自由现金流",
+    "SEC filing": "SEC 申报日",
+    "No adjacent, available periods at this cutoff.": "在此截止日，没有相邻且数据可得的财年可用于计算同比增量。",
+}
 
 
 def demo_case():
@@ -161,19 +190,24 @@ def serial_row(row):
     return {key: exact(value) if isinstance(value, Fraction) else value for key, value in row.items()}
 
 
-def render(result, downloads):
+def render(result, downloads, language="en"):
     e = html.escape
+    if language not in REPORT_LANGUAGES:
+        raise ContractError("Report language must be en or zh-CN")
+
+    def label(value):
+        return CHINESE.get(value, value) if language == "zh-CN" else value
 
     def amount(value):
-        return "unavailable" if value is None else f"{value / 1_000_000_000:,.3f}"
+        return label("unavailable") if value is None else f"{value / 1_000_000_000:,.3f}"
 
     def percent(value):
-        return "unavailable" if value is None else display(value * 100, 2) + "%"
+        return label("unavailable") if value is None else display(value * 100, 2) + "%"
 
     def table(headers, rows):
         return (
             "<div class='table-wrap'><table><thead><tr>"
-            + "".join(f"<th scope='col'>{e(label)}</th>" for label in headers)
+            + "".join(f"<th scope='col'>{e(label(header))}</th>" for header in headers)
             + "</tr></thead><tbody>"
             + "".join("<tr>" + "".join(f"<td>{e(str(cell))}</td>" for cell in row) + "</tr>" for row in rows)
             + "</tbody></table></div>"
@@ -200,7 +234,7 @@ def render(result, downloads):
         if baseline and row["delta_fcf"] is not None:
             scale = max(abs(row["delta_cfo"]), abs(row["negative_delta_capex"]), abs(row["delta_fcf"]), 1)
             bars = []
-            for label, key in [
+            for bar_label, key in [
                 ("Operating cash-flow change", "delta_cfo"),
                 ("Cash-capex effect", "negative_delta_capex"),
                 ("Free cash-flow change", "delta_fcf"),
@@ -209,15 +243,15 @@ def render(result, downloads):
                 width = abs(value) / scale * 100
                 bar_class = "bar negative" if value < 0 else "bar"
                 bars.append(
-                    f"<div class='bar-row'><span>{label}</span><div class='track'>"
+                    f"<div class='bar-row'><span>{label(bar_label)}</span><div class='track'>"
                     f"<div class='{bar_class}' style='width:{width:.3f}%'></div></div>"
                     f"<b>{amount(value)}</b></div>"
                 )
             bridges.append(
                 f"<article><div class='eyebrow'>{e(row['symbol'])} · FY2023 → FY2024</div>"
                 f"<h3>{amount(baseline['free_cash_flow'])} → {amount(row['free_cash_flow'])}"
-                f"<small> USD bn FCF</small></h3>{''.join(bars)}"
-                "<p class='muted'>ΔFCF = ΔCFO − Δcash capex. Reconciliation residual: "
+                f"<small>{label(' USD bn FCF')}</small></h3>{''.join(bars)}"
+                f"<p class='muted'>{label('ΔFCF = ΔCFO − Δcash capex. Reconciliation residual: ')}"
                 f"{amount(row['bridge_residual'])}.</p></article>"
             )
     details = table(
@@ -239,14 +273,15 @@ def render(result, downloads):
         {(row["symbol"], row["filed"], row["source_url"]) for row in result["sources"] if row["source_url"]}
     )
     source_links = "".join(
-        f"<li><a href='{e(url, quote=True)}'>{e(symbol)} · SEC filing {e(filed)}</a></li>"
+        f"<li><a href='{e(url, quote=True)}'>{e(symbol)} · {label('SEC filing')} {e(filed)}</a></li>"
         for symbol, filed, url in sources
     )
-    template = files("statementtrace").joinpath("data/cashflow_report.html").read_text(encoding="utf-8")
+    name = "cashflow_report.zh-CN.html" if language == "zh-CN" else "cashflow_report.html"
+    template = files("statementtrace").joinpath(f"data/{name}").read_text(encoding="utf-8")
     replacements = {
         "@@AS_OF@@": e(result["as_of"]),
         "@@OVERVIEW@@": overview,
-        "@@BRIDGES@@": "".join(bridges) or "<p>No adjacent, available periods at this cutoff.</p>",
+        "@@BRIDGES@@": "".join(bridges) or f"<p>{label('No adjacent, available periods at this cutoff.')}</p>",
         "@@DETAILS@@": details,
         "@@SOURCES@@": source_links,
     }
@@ -262,26 +297,29 @@ def render(result, downloads):
     return template.encode("utf-8")
 
 
-def build(case, as_of=None):
+def build(case, as_of=None, language="en"):
+    if language not in REPORT_LANGUAGES:
+        raise ContractError("Report language must be en or zh-CN")
     result = compare(case, as_of)
     checks = sql_crosscheck(result)
     serialized = [serial_row(row) for row in result["rows"]]
     fields = ("symbol", "entity", "period", "start", "end", "days", "as_of", "status", *AMOUNTS, *RATIOS, *BRIDGE)
+    analysis = {"schema_version": 1, "as_of": result["as_of"], "sql_crosscheck": checks, "rows": serialized}
+    if language != "en":
+        analysis["language"] = language
     packet = {
         "case.json": canonical(case),
-        "analysis.json": canonical(
-            {"schema_version": 1, "as_of": result["as_of"], "sql_crosscheck": checks, "rows": serialized}
-        ),
+        "analysis.json": canonical(analysis),
         "comparison.csv": csv_bytes(serialized, fields),
         "source_facts.csv": csv_bytes(result["sources"], tuple(result["sources"][0])),
         "comparison.sql": files("statementtrace").joinpath("data/cashflow_compare.sql").read_bytes(),
     }
-    packet["index.html"] = render(result, packet)
+    packet["index.html"] = render(result, packet, language)
     return packet
 
 
-def write_comparison(case, out, as_of=None):
-    packet = build(case, as_of)
+def write_comparison(case, out, as_of=None, language="en"):
+    packet = build(case, as_of, language)
     target = Path(out)
     if target.is_symlink() or (target.exists() and (not target.is_dir() or any(target.iterdir()))):
         raise ContractError("Comparison output must be a new or empty directory")
@@ -303,7 +341,7 @@ def verify_comparison(directory):
         raise ContractError("Comparison must be a real directory")
     case = read_json((target / "case.json").read_bytes())
     saved = read_json((target / "analysis.json").read_bytes())
-    expected = build(case, saved["as_of"])
+    expected = build(case, saved["as_of"], saved.get("language", "en"))
     if {path.name for path in target.iterdir()} != set(expected):
         raise ContractError("Comparison file set differs")
     for name, raw in expected.items():

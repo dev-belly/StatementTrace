@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="从公开财报解释利润与自由现金流的增长差异：三家公司、六个公司年度、来源事实与可复算结果。">
+<title>利润增长，现金跟上了吗？ · StatementTrace</title>
+<style>
+:root{color-scheme:light;--ink:#182421;--paper:#f4f3ed;--green:#185b45;--line:#d4d9d0;--muted:#57635b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.85 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+main{max-width:1120px;margin:auto;padding:32px 28px 64px}
+nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px}
+a{color:var(--green);text-underline-offset:4px}
+a:focus-visible{outline:3px solid #ad713b;outline-offset:4px}
+header{padding:64px 0 32px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--green)}
+h1{font-size:clamp(38px,6.6vw,76px);line-height:1.25;letter-spacing:-.04em;margin:20px 0 24px}
+h1 span{color:var(--green)}
+h2{font-size:27px;line-height:1.5;margin-top:46px;scroll-margin-top:24px}
+h3{font-size:27px;line-height:1.5;margin:14px 0 24px;font-variant-numeric:tabular-nums}
+h3 small{font-size:13px;font-weight:400;display:block;letter-spacing:0;color:var(--muted)}
+.lead{max-width:760px;font-size:20px}
+.muted{color:var(--muted);font-size:14px}
+.notice{padding:16px 20px;background:#e6eade;border-left:3px solid var(--green);font-size:14px}
+.toc{display:flex;gap:10px 24px;justify-content:flex-start;margin:24px 0}
+.table-wrap{overflow-x:auto;margin:20px 0 32px}
+table{border-collapse:collapse;width:100%;white-space:nowrap;font-variant-numeric:tabular-nums;font-size:14px}
+th,td{padding:14px;text-align:right;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:#e6eade}
+th:first-child,td:first-child{text-align:left}
+article{padding:26px 0;border-top:1px solid var(--line)}
+.bar-row{display:grid;grid-template-columns:210px 1fr 90px;gap:16px;align-items:center;margin:12px 0;font-size:14px}
+.track{background:#e0e4db;height:22px}
+.bar{height:22px;background:var(--green)}
+.bar.negative{background:#b9693e}
+.bar-row b{text-align:right;font-variant-numeric:tabular-nums}
+.downloads{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+.downloads a{border:1px solid var(--green);padding:8px 14px;text-decoration:none;font-size:14px}
+.glossary{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;margin:20px 0}
+.glossary p{margin:0;font-size:14px}
+footer{border-top:1px solid var(--line);margin-top:46px;padding-top:20px;font-size:14px}
+code{font-size:13px;overflow-wrap:anywhere}
+li a{overflow-wrap:anywhere}
+@media(max-width:600px){main{padding:22px 18px 40px}header{padding-top:36px}
+.lead{font-size:18px}.bar-row{grid-template-columns:1fr 76px;gap:6px}.bar-row span{grid-column:1/-1}
+h2{font-size:23px}.glossary{grid-template-columns:1fr}.toc{font-size:13px;gap:8px 18px}}
+@media print{@page{margin:16mm}body{background:white;color:#182421;font-size:11px}main{padding:0;max-width:none}
+header{padding-top:12px}h1{font-size:38px}h2{font-size:20px;margin-top:24px}.lead{font-size:14px}
+.toc,.downloads{display:none}.table-wrap{overflow:visible}table{font-size:9px;white-space:normal}
+th,td{padding:7px 4px}article{break-inside:avoid}.bar-row{font-size:11px;grid-template-columns:140px 1fr 70px}
+.notice,.muted,footer,.glossary p{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body><main>
+<nav aria-label="项目导航"><a href="https://github.com/dev-belly/StatementTrace">StatementTrace / 财报研究</a><a href="https://github.com/dev-belly">dev-belly</a></nav>
+<header>
+<div class="eyebrow">历史财报研究 / 2023–2024 财年 / 申报日截止 @@AS_OF@@</div>
+<h1>利润增长，<br><span>现金跟上了吗？</span></h1>
+<p class="lead">一家公司的盈利增加后，扣除资本开支，还剩下多少现金？从 Apple、Microsoft 与 Alphabet 的公开财报出发，追踪增长差异的来源。</p>
+<p class="muted">研究问题 → 24 条人工整理的财报事实 → Python 与 SQL 复算 → 六个公司年度 → 自由现金流变动归因。</p>
+</header>
+<nav class="toc" aria-label="阅读顺序"><a href="#outcome">01 看结果</a><a href="#bridge">02 拆增量</a><a href="#amounts">03 核金额</a><a href="#evidence">04 查来源</a></nav>
+<p class="notice">这是历史案例。三家公司的财年分别结束于六月、九月和十二月，Apple 的 2023 财年包含 53 周。先比较各家公司自身的同比；跨公司金额没有按相同日历区间调整。</p>
+<h2 id="outcome">01 / 利润与现金，讲的是两件事</h2>
+<p>净利润增长与自由现金流增长不一定同步。下表使用报告财年的实际金额计算同比，没有进行周数标准化；“数据不可得”保留为缺失，不按零处理。</p>
+@@OVERVIEW@@
+<h2 id="bridge">02 / 把现金流的变化拆开</h2>
+<p>金额单位为<strong>十亿美元</strong>。绿色表示对自由现金流增量的正贡献，棕色表示负贡献；三条横柱展示有符号的增量，不是时间序列。</p>
+@@BRIDGES@@
+<h2 id="amounts">03 / 回到实际财年和原始金额</h2>
+<p class="muted">金额单位为十亿美元。自由现金流 = 经营现金流 − 购建固定资产的现金支出。现金资本开支以正的流出金额保存；不含收购与非现金资产增加。</p>
+@@DETAILS@@
+<h2 id="evidence">04 / 查看来源，独立复算</h2>
+<div class="downloads"><a href="comparison.csv" download>对比结果 CSV</a><a href="source_facts.csv" download>来源事实 CSV</a><a href="comparison.sql" download>SQLite 查询</a><a href="case.json" download>冻结来源数据包</a><a href="analysis.json" download>精确结果 JSON</a></div>
+<ul>@@SOURCES@@</ul>
+<p class="muted">数据包由人工从已申报的报表中整理，不是直接下载的原始 CompanyFacts 数据。Python 按申报日与准确财年区间选择事实，SQLite 在已选来源记录上独立核对算术；两条计算路径一致不能独立证明抄录无误。</p>
+<h2>读图时需要的三个口径</h2>
+<div class="glossary">
+<p><strong>CFO / 经营现金流</strong><br>包含非现金调整以及营运资本、税款支付时点的影响，不能直接等同于净利润。</p>
+<p><strong>Cash capex / 现金资本开支</strong><br>本案例使用现金流量表中的固定资产购建支出；不含收购、融资租赁等非现金增加。</p>
+<p><strong>FCF / 自由现金流</strong><br>本报告统一定义为 CFO 减现金资本开支。来源 CSV 保留整数金额，JSON 保留精确分数；页面金额仅用于阅读。</p>
+<p><strong>仍待研究的问题</strong><br>增长差异可能与投入周期、税款和租赁有关，需要继续阅读附注。CFO 与净利润的比值本身不构成盈利质量或估值结论。</p>
+</div>
+<footer><a href="https://github.com/dev-belly/StatementTrace/blob/main/docs/CASHFLOW_STUDY.zh-CN.md">中文研究简报与进一步问题</a><p>本地生成：<code>statementtrace compare --language zh-CN --out output/cashflow-zh</code>。使用 <code>--as-of YYYY-MM-DD</code> 比较不同的申报日截止时点。下载文件为 UTF-8；Excel 读取 CSV 时请选择 UTF-8，原始标识与精确值以 JSON 为准。</p><p class="muted">中文排版使用本机字体，不依赖字体 CDN。断网时可以阅读全部内容、查看来源地址并下载内嵌文件；访问 SEC 原网页需要网络。可用浏览器的“打印”保存 PDF。</p></footer>
+</main></body></html>

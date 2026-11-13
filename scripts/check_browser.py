@@ -267,9 +267,9 @@ def browser_check(cases, root):
                     for kind in ("metrics", "facts"):
                         download_view(latest, kind)
 
-        for width in (1280, 390):
+        for report_name, width in (("cashflow", 1280), ("cashflow", 390), ("cashflow-zh", 1280), ("cashflow-zh", 390)):
             call("POST", f"/session/{session}/window/rect", {"width": width, "height": 1000})
-            navigate((root / "cashflow" / "index.html").as_uri())
+            navigate((root / report_name / "index.html").as_uri())
             overview = execute(
                 "return Array.from(document.querySelector('table').querySelectorAll('tbody tr'), "
                 "r => Array.from(r.cells, c => c.textContent));"
@@ -287,16 +287,24 @@ def browser_check(cases, root):
                 "document.querySelectorAll('script').length === 0;"
             ):
                 raise AssertionError("Cash-flow comparison layout or static content differs")
+            if report_name == "cashflow-zh" and not execute(
+                "return document.documentElement.lang === 'zh-CN' && "
+                "document.querySelector('h1').textContent.includes('现金跟上了吗？') && "
+                "document.querySelector('th').textContent === '2024 财年' && "
+                "document.querySelectorAll('article')[1].textContent.includes('勾稽差额：0.000') && "
+                "!document.body.textContent.includes('\\ufffd');"
+            ):
+                raise AssertionError("Chinese research text or reconciliation differs")
             screenshot_dir = os.environ.get("CASHFLOW_SCREENSHOT_DIR")
             if screenshot_dir:
                 screenshot = call("GET", f"/session/{session}/screenshot")
                 destination = Path(screenshot_dir)
                 destination.mkdir(parents=True, exist_ok=True)
-                (destination / f"cashflow-{width}.png").write_bytes(base64.b64decode(screenshot))
+                (destination / f"{report_name}-{width}.png").write_bytes(base64.b64decode(screenshot))
             for filename in ("comparison.csv", "source_facts.csv", "comparison.sql", "case.json", "analysis.json"):
                 destination = downloads / filename
                 destination.unlink(missing_ok=True)
-                expected = (root / "cashflow" / filename).read_bytes()
+                expected = (root / report_name / filename).read_bytes()
                 element = call(
                     "POST",
                     f"/session/{session}/element",
@@ -342,7 +350,8 @@ def browser_check(cases, root):
                     "viewports": viewport_widths,
                     "no_js_panels": visible,
                     "cashflow_viewports": [1280, 390],
-                    "cashflow_downloads": 10,
+                    "cashflow_languages": ["en", "zh-CN"],
+                    "cashflow_downloads": 20,
                     **counts,
                 }
             )
@@ -374,6 +383,7 @@ def main():
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary).resolve()
         write_comparison(demo_case(), root / "cashflow")
+        write_comparison(demo_case(), root / "cashflow-zh", language="zh-CN")
         cases = []
         for index, labels in enumerate(pairs):
             data, request = demo_inputs()
