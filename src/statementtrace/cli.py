@@ -7,7 +7,7 @@ import sys
 from importlib.resources import files
 from pathlib import Path
 
-from .cashflow import demo_case, verify_comparison, write_comparison
+from .cashflow import REPORT_LANGUAGES, demo_case, verify_comparison, write_comparison
 from .contracts import ContractError, read_json
 from .report import verify, write_report
 
@@ -51,6 +51,7 @@ def main(argv=None):
     comparison = commands.add_parser("compare", help="Build the historical three-issuer cash-flow study")
     comparison.add_argument("--out", required=True)
     comparison.add_argument("--as-of", help="Override the default 2025-02-05 filed-date cutoff")
+    comparison.add_argument("--language", choices=REPORT_LANGUAGES, default="en", help="Report presentation language")
     comparison_check = commands.add_parser("verify-comparison", help="Recompute a saved cash-flow comparison")
     comparison_check.add_argument("directory")
     warehouse = commands.add_parser("warehouse", help="Build a typed Polars/Parquet/DuckDB financial packet")
@@ -82,7 +83,7 @@ def main(argv=None):
 
             result = verify_warehouse(args.directory)
         elif args.command == "compare":
-            result = write_comparison(demo_case(), args.out, args.as_of)
+            result = write_comparison(demo_case(), args.out, args.as_of, args.language)
         elif args.command == "verify-comparison":
             result = verify_comparison(args.directory)
         elif args.command == "verify":

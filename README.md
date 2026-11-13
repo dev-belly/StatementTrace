@@ -1,5 +1,7 @@
 # StatementTrace
 
+[English](README.md) · [中文项目说明](README.zh-CN.md) · [中文研究报告](https://dev-belly.github.io/StatementTrace/cashflow/zh/)
+
 [![CI](https://github.com/dev-belly/StatementTrace/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-belly/StatementTrace/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.11%2B-3776AB)
 ![Runtime](https://img.shields.io/badge/runtime-standard_library-128a82)
@@ -35,6 +37,11 @@ the frozen source packet and the SQLite query. It works without JavaScript or
 network access after installation. Add `--as-of 2025-02-04` to `compare` and use
 a new output directory to see Alphabet become unavailable under the packet's
 filed-date rule. The packet does not contain its earlier filings.
+
+For a complete Chinese report, use `statementtrace compare --language zh-CN --out output/cashflow-zh`.
+The language is retained for semantic replay. Source JSON, CSV and SQL retain
+their original identities and bytes; only presentation and its language metadata
+change. Both reports work offline without JavaScript or external fonts.
 
 ## Financial data engineering: Polars → Parquet → DuckDB → dbt
 
