@@ -449,6 +449,10 @@ def render_bridge(result, downloads, language):
             "UTF-8 · Offline downloads · No JavaScript · Python 3.11+",
         ),
         "@@TITLE@@": label("利润到现金，中间发生了什么？", "What turns profit into operating cash?"),
+        "@@HEADLINE@@": label(
+            "利润到现金，<br><span>中间发生了什么？</span>",
+            "What turns profit<br><span> into operating cash?</span>",
+        ),
         "@@LEAD@@": label(
             "沿三份年报，拆开净利润、非现金调节与经营资产负债变动，再检查税款、收购和租赁的现金边界。",
             "Trace net income, adjustments and operating balance changes through three filings, "
