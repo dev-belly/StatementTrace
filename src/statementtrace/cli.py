@@ -54,6 +54,12 @@ def main(argv=None):
     comparison.add_argument("--language", choices=REPORT_LANGUAGES, default="en", help="Report presentation language")
     comparison_check = commands.add_parser("verify-comparison", help="Recompute a saved cash-flow comparison")
     comparison_check.add_argument("directory")
+    bridge = commands.add_parser("profit-bridge", help="Reconcile net income to CFO and inspect tax/lease boundaries")
+    bridge.add_argument("--out", required=True)
+    bridge.add_argument("--as-of", help="Override the historical filed-date cutoff")
+    bridge.add_argument("--language", choices=REPORT_LANGUAGES, default="zh-CN")
+    bridge_check = commands.add_parser("verify-profit-bridge", help="Replay the saved operating cash-flow bridge")
+    bridge_check.add_argument("directory")
     warehouse = commands.add_parser("warehouse", help="Build a typed Polars/Parquet/DuckDB financial packet")
     warehouse.add_argument("--out", required=True)
     warehouse.add_argument("--case", help="Saved cash-flow case JSON; default: the three-issuer historical case")
@@ -68,7 +74,15 @@ def main(argv=None):
     serve.add_argument("--port", type=port_number, default=8000)
     args = parser.parse_args(argv)
     try:
-        if args.command == "serve-warehouse":
+        if args.command in {"profit-bridge", "verify-profit-bridge"}:
+            from .profit_bridge import demo_bridge_case, verify_bridge, write_bridge
+
+            result = (
+                write_bridge(demo_bridge_case(), args.out, args.as_of, args.language)
+                if args.command == "profit-bridge"
+                else verify_bridge(args.directory)
+            )
+        elif args.command == "serve-warehouse":
             api, uvicorn = api_dependencies()
             app = api.create_app(args.directory)
             uvicorn.run(app, host=args.host, port=args.port)

@@ -323,6 +323,53 @@ def browser_check(cases, root):
                         f"observed {actual_size}; files: {saved}"
                     )
 
+        for report_name, lang in (("profit-bridge", "zh-CN"), ("profit-bridge-en", "en")):
+            for width in (1280, 390):
+                call("POST", f"/session/{session}/window/rect", {"width": width, "height": 1000})
+                navigate((root / report_name / "index.html").as_uri())
+                actual = execute(
+                    "return Array.from(document.querySelector('table tbody').rows, "
+                    "r => Array.from(r.cells, c => c.textContent));"
+                )
+                if actual != [
+                    ["AAPL / 2023", "96.995", "20.125", "-6.577", "110.543", "0.000"],
+                    ["AAPL / 2024", "93.736", "20.867", "3.651", "118.254", "0.000"],
+                    ["GOOGL / 2023", "73.795", "31.796", "-3.845", "101.746", "0.000"],
+                    ["GOOGL / 2024", "100.118", "33.587", "-8.406", "125.299", "0.000"],
+                    ["MSFT / 2023", "72.361", "17.609", "-2.388", "87.582", "0.000"],
+                    ["MSFT / 2024", "88.136", "28.588", "1.824", "118.548", "0.000"],
+                ]:
+                    raise AssertionError("Profit/CFO bridge differs from source-table expectations")
+                if not execute(
+                    "return document.documentElement.lang === arguments[0] && "
+                    "document.documentElement.scrollWidth <= innerWidth + 1 && "
+                    "document.querySelectorAll('script').length === 0 && "
+                    "document.querySelectorAll('a[download]').length === 5 && "
+                    "document.body.textContent.includes('≈23.4') && "
+                    "document.body.textContent.includes('4.939') && !document.body.textContent.includes('\\ufffd');",
+                    lang,
+                ):
+                    raise AssertionError("Profit/CFO bridge layout, language or cash boundary differs")
+                for filename in ("bridge.csv", "sources.csv"):
+                    path = downloads / filename
+                    path.unlink(missing_ok=True)
+                    expected = (root / report_name / filename).read_bytes()
+                    element = call(
+                        "POST",
+                        f"/session/{session}/element",
+                        {"using": "css selector", "value": f"a[download='{filename}']"},
+                    )["element-6066-11e4-a52e-4f735466cecf"]
+                    call("POST", f"/session/{session}/element/{element}/click", {})
+                    for _ in range(100):
+                        if path.is_file() and path.read_bytes() == expected:
+                            break
+                        time.sleep(0.05)
+                    else:
+                        raise AssertionError(f"Profit/CFO downloaded bytes differ: {filename}")
+                if screenshot_dir := os.environ.get("CASHFLOW_SCREENSHOT_DIR"):
+                    screenshot = call("GET", f"/session/{session}/screenshot")
+                    (Path(screenshot_dir) / f"{report_name}-{width}.png").write_bytes(base64.b64decode(screenshot))
+
         call(
             "POST",
             f"/session/{session}/goog/cdp/execute",
@@ -352,6 +399,9 @@ def browser_check(cases, root):
                     "cashflow_viewports": [1280, 390],
                     "cashflow_languages": ["en", "zh-CN"],
                     "cashflow_downloads": 20,
+                    "profit_bridge_viewports": [1280, 390],
+                    "profit_bridge_languages": ["zh-CN", "en"],
+                    "profit_bridge_downloads": 8,
                     **counts,
                 }
             )
@@ -371,6 +421,7 @@ def main():
     from statementtrace.cashflow import demo_case, write_comparison
     from statementtrace.cli import demo_inputs
     from statementtrace.engine import analyze
+    from statementtrace.profit_bridge import demo_bridge_case, write_bridge
     from statementtrace.report import build, csv_label, view_csv_filename
 
     pairs = [
@@ -384,6 +435,8 @@ def main():
         root = Path(temporary).resolve()
         write_comparison(demo_case(), root / "cashflow")
         write_comparison(demo_case(), root / "cashflow-zh", language="zh-CN")
+        write_bridge(demo_bridge_case(), root / "profit-bridge")
+        write_bridge(demo_bridge_case(), root / "profit-bridge-en", language="en")
         cases = []
         for index, labels in enumerate(pairs):
             data, request = demo_inputs()

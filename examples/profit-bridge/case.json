@@ -1,0 +1,1041 @@
+{
+  "anchor_case": {
+    "as_of": "2025-02-05",
+    "basis": "Manually curated FY2023/FY2024 comparative figures from three FY2024 Form 10-K filings; not an unmodified API response. Raw USD-million amounts scaled to integral USD. Cash capex is a positive outflow magnitude.",
+    "companies": [
+      {
+        "facts": {
+          "_statementtrace": {
+            "comparatives": "Both years are taken from this one FY2024 filing, not reconstructed from historical API vintages.",
+            "kind": "manually_curated_public_filing_excerpt",
+            "scale": 1000000,
+            "source_tables": [
+              "Income statement: FY2023/FY2024 comparative columns",
+              "Cash flow statement: FY2023/FY2024 comparative columns"
+            ],
+            "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+            "stored_unit": "USD",
+            "table_unit": "USD millions"
+          },
+          "cik": 320193,
+          "entityName": "Apple Inc.",
+          "facts": {
+            "us-gaap": {
+              "NetCashProvidedByUsedInOperatingActivities": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0000320193-24-000123",
+                      "end": "2023-09-30",
+                      "filed": "2024-11-01",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2022-09-25",
+                      "val": 110543000000
+                    },
+                    {
+                      "accn": "0000320193-24-000123",
+                      "end": "2024-09-28",
+                      "filed": "2024-11-01",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2023-10-01",
+                      "val": 118254000000
+                    }
+                  ]
+                }
+              },
+              "NetIncomeLoss": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0000320193-24-000123",
+                      "end": "2023-09-30",
+                      "filed": "2024-11-01",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2022-09-25",
+                      "val": 96995000000
+                    },
+                    {
+                      "accn": "0000320193-24-000123",
+                      "end": "2024-09-28",
+                      "filed": "2024-11-01",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2023-10-01",
+                      "val": 93736000000
+                    }
+                  ]
+                }
+              },
+              "PaymentsToAcquirePropertyPlantAndEquipment": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0000320193-24-000123",
+                      "end": "2023-09-30",
+                      "filed": "2024-11-01",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2022-09-25",
+                      "val": 10959000000
+                    },
+                    {
+                      "accn": "0000320193-24-000123",
+                      "end": "2024-09-28",
+                      "filed": "2024-11-01",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2023-10-01",
+                      "val": 9447000000
+                    }
+                  ]
+                }
+              },
+              "RevenueFromContractWithCustomerExcludingAssessedTax": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0000320193-24-000123",
+                      "end": "2023-09-30",
+                      "filed": "2024-11-01",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2022-09-25",
+                      "val": 383285000000
+                    },
+                    {
+                      "accn": "0000320193-24-000123",
+                      "end": "2024-09-28",
+                      "filed": "2024-11-01",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2023-10-01",
+                      "val": 391035000000
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "periods": [
+          {
+            "end": "2023-09-30",
+            "label": "2023",
+            "start": "2022-09-25"
+          },
+          {
+            "end": "2024-09-28",
+            "label": "2024",
+            "start": "2023-10-01"
+          }
+        ],
+        "symbol": "AAPL"
+      },
+      {
+        "facts": {
+          "_statementtrace": {
+            "comparatives": "Both years are taken from this one FY2024 filing, not reconstructed from historical API vintages.",
+            "kind": "manually_curated_public_filing_excerpt",
+            "scale": 1000000,
+            "source_tables": [
+              "Income statement: FY2023/FY2024 comparative columns",
+              "Cash flow statement: FY2023/FY2024 comparative columns"
+            ],
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+            "stored_unit": "USD",
+            "table_unit": "USD millions"
+          },
+          "cik": 789019,
+          "entityName": "Microsoft Corporation",
+          "facts": {
+            "us-gaap": {
+              "NetCashProvidedByUsedInOperatingActivities": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0000950170-24-087843",
+                      "end": "2023-06-30",
+                      "filed": "2024-07-30",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2022-07-01",
+                      "val": 87582000000
+                    },
+                    {
+                      "accn": "0000950170-24-087843",
+                      "end": "2024-06-30",
+                      "filed": "2024-07-30",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2023-07-01",
+                      "val": 118548000000
+                    }
+                  ]
+                }
+              },
+              "NetIncomeLoss": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0000950170-24-087843",
+                      "end": "2023-06-30",
+                      "filed": "2024-07-30",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2022-07-01",
+                      "val": 72361000000
+                    },
+                    {
+                      "accn": "0000950170-24-087843",
+                      "end": "2024-06-30",
+                      "filed": "2024-07-30",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2023-07-01",
+                      "val": 88136000000
+                    }
+                  ]
+                }
+              },
+              "PaymentsToAcquirePropertyPlantAndEquipment": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0000950170-24-087843",
+                      "end": "2023-06-30",
+                      "filed": "2024-07-30",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2022-07-01",
+                      "val": 28107000000
+                    },
+                    {
+                      "accn": "0000950170-24-087843",
+                      "end": "2024-06-30",
+                      "filed": "2024-07-30",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2023-07-01",
+                      "val": 44477000000
+                    }
+                  ]
+                }
+              },
+              "RevenueFromContractWithCustomerExcludingAssessedTax": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0000950170-24-087843",
+                      "end": "2023-06-30",
+                      "filed": "2024-07-30",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2022-07-01",
+                      "val": 211915000000
+                    },
+                    {
+                      "accn": "0000950170-24-087843",
+                      "end": "2024-06-30",
+                      "filed": "2024-07-30",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2023-07-01",
+                      "val": 245122000000
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "periods": [
+          {
+            "end": "2023-06-30",
+            "label": "2023",
+            "start": "2022-07-01"
+          },
+          {
+            "end": "2024-06-30",
+            "label": "2024",
+            "start": "2023-07-01"
+          }
+        ],
+        "symbol": "MSFT"
+      },
+      {
+        "facts": {
+          "_statementtrace": {
+            "comparatives": "Both years are taken from this one FY2024 filing, not reconstructed from historical API vintages.",
+            "kind": "manually_curated_public_filing_excerpt",
+            "scale": 1000000,
+            "source_tables": [
+              "Income statement: FY2023/FY2024 comparative columns",
+              "Cash flow statement: FY2023/FY2024 comparative columns"
+            ],
+            "source_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000014/goog-20241231.htm",
+            "stored_unit": "USD",
+            "table_unit": "USD millions"
+          },
+          "cik": 1652044,
+          "entityName": "Alphabet Inc.",
+          "facts": {
+            "us-gaap": {
+              "NetCashProvidedByUsedInOperatingActivities": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0001652044-25-000014",
+                      "end": "2023-12-31",
+                      "filed": "2025-02-05",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2023-01-01",
+                      "val": 101746000000
+                    },
+                    {
+                      "accn": "0001652044-25-000014",
+                      "end": "2024-12-31",
+                      "filed": "2025-02-05",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2024-01-01",
+                      "val": 125299000000
+                    }
+                  ]
+                }
+              },
+              "NetIncomeLoss": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0001652044-25-000014",
+                      "end": "2023-12-31",
+                      "filed": "2025-02-05",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2023-01-01",
+                      "val": 73795000000
+                    },
+                    {
+                      "accn": "0001652044-25-000014",
+                      "end": "2024-12-31",
+                      "filed": "2025-02-05",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2024-01-01",
+                      "val": 100118000000
+                    }
+                  ]
+                }
+              },
+              "PaymentsToAcquirePropertyPlantAndEquipment": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0001652044-25-000014",
+                      "end": "2023-12-31",
+                      "filed": "2025-02-05",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2023-01-01",
+                      "val": 32251000000
+                    },
+                    {
+                      "accn": "0001652044-25-000014",
+                      "end": "2024-12-31",
+                      "filed": "2025-02-05",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "cash_flows",
+                      "start": "2024-01-01",
+                      "val": 52535000000
+                    }
+                  ]
+                }
+              },
+              "RevenueFromContractWithCustomerExcludingAssessedTax": {
+                "units": {
+                  "USD": [
+                    {
+                      "accn": "0001652044-25-000014",
+                      "end": "2023-12-31",
+                      "filed": "2025-02-05",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2023-01-01",
+                      "val": 307394000000
+                    },
+                    {
+                      "accn": "0001652044-25-000014",
+                      "end": "2024-12-31",
+                      "filed": "2025-02-05",
+                      "form": "10-K",
+                      "fp": "FY",
+                      "fy": 2024,
+                      "source_section": "income_statement",
+                      "start": "2024-01-01",
+                      "val": 350018000000
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "periods": [
+          {
+            "end": "2023-12-31",
+            "label": "2023",
+            "start": "2023-01-01"
+          },
+          {
+            "end": "2024-12-31",
+            "label": "2024",
+            "start": "2024-01-01"
+          }
+        ],
+        "symbol": "GOOGL"
+      }
+    ],
+    "reviewed_on": "2026-11-10",
+    "schema_version": 1
+  },
+  "detail_case": {
+    "basis": "Manually curated FY2023/FY2024 comparative cash-flow lines and notes from the same FY2024 filings as the original cash-flow study. Signed operating contributions are reported USD millions; supplemental outflows are positive magnitudes. Null means not isolated in the selected excerpt, not zero. This is not an unmodified SEC API response.",
+    "companies": [
+      {
+        "accession": "0000320193-24-000123",
+        "filed": "2024-11-01",
+        "lines": [
+          {
+            "group": "adjustments",
+            "id": "depreciation",
+            "label": "Depreciation and amortization",
+            "values_millions": {
+              "2023": 11519,
+              "2024": 11445
+            },
+            "zh": "折旧与摊销"
+          },
+          {
+            "group": "adjustments",
+            "id": "share_compensation",
+            "label": "Share-based compensation expense",
+            "values_millions": {
+              "2023": 10833,
+              "2024": 11688
+            },
+            "zh": "股份支付费用"
+          },
+          {
+            "group": "adjustments",
+            "id": "other_adjustments",
+            "label": "Other",
+            "values_millions": {
+              "2023": -2227,
+              "2024": -2266
+            },
+            "zh": "其他调节"
+          },
+          {
+            "group": "operating_changes",
+            "id": "receivables",
+            "label": "Accounts receivable, net",
+            "values_millions": {
+              "2023": -1688,
+              "2024": -3788
+            },
+            "zh": "应收账款变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "vendor_receivables",
+            "label": "Vendor non-trade receivables",
+            "values_millions": {
+              "2023": 1271,
+              "2024": -1356
+            },
+            "zh": "供应商非贸易应收款变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "inventories",
+            "label": "Inventories",
+            "values_millions": {
+              "2023": -1618,
+              "2024": -1046
+            },
+            "zh": "存货变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "other_assets",
+            "label": "Other current and non-current assets",
+            "values_millions": {
+              "2023": -5684,
+              "2024": -11731
+            },
+            "zh": "其他流动及非流动资产变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "payables",
+            "label": "Accounts payable",
+            "values_millions": {
+              "2023": -1889,
+              "2024": 6020
+            },
+            "zh": "应付账款变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "other_liabilities",
+            "label": "Other current and non-current liabilities",
+            "values_millions": {
+              "2023": 3031,
+              "2024": 15552
+            },
+            "zh": "其他流动及非流动负债变动"
+          }
+        ],
+        "operating_section": "Consolidated Statements of Cash Flows, p. 33; signed contributions to cash generated by operating activities",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+        "supplemental": [
+          {
+            "id": "tax_expense",
+            "label": "Provision for income taxes",
+            "precision_millions": 1,
+            "section": "Note 7, Income Taxes; provision for income taxes",
+            "values_millions": {
+              "2023": 16741,
+              "2024": 29749
+            },
+            "zh": "所得税费用"
+          },
+          {
+            "id": "cash_taxes",
+            "label": "Cash paid for income taxes, net",
+            "precision_millions": 1,
+            "section": "Consolidated Statements of Cash Flows; supplemental disclosure",
+            "values_millions": {
+              "2023": 18679,
+              "2024": 26102
+            },
+            "zh": "所得税净现金支付"
+          },
+          {
+            "id": "acquisition_line",
+            "label": "Acquisition-related investing outflow",
+            "precision_millions": 1,
+            "section": "Cash-flow investing section: Other is a mixed line; no separate acquisition amount is isolated in this packet",
+            "values_millions": {
+              "2023": null,
+              "2024": null
+            },
+            "zh": "收购相关投资现金支出"
+          },
+          {
+            "id": "finance_lease_additions",
+            "label": "Finance-lease asset additions",
+            "precision_millions": 1,
+            "section": "Note 8, Leases: combined ROU additions are not split into finance/operating additions in the selected disclosure",
+            "values_millions": {
+              "2023": null,
+              "2024": null
+            },
+            "zh": "融资租赁非现金资产增加"
+          },
+          {
+            "id": "finance_lease_principal",
+            "label": "Finance-lease principal cash payments",
+            "precision_millions": 1,
+            "section": "Note 8, Leases: not separately isolated in this packet",
+            "values_millions": {
+              "2023": null,
+              "2024": null
+            },
+            "zh": "融资租赁本金现金支付"
+          },
+          {
+            "id": "finance_lease_interest",
+            "label": "Finance-lease interest cash payments",
+            "precision_millions": 1,
+            "section": "Note 8, Leases: not separately isolated in this packet",
+            "values_millions": {
+              "2023": null,
+              "2024": null
+            },
+            "zh": "融资租赁利息现金支付"
+          },
+          {
+            "id": "combined_lease_additions",
+            "label": "ROU assets obtained in exchange for lease liabilities, combined",
+            "precision_millions": 100,
+            "section": "Note 8, Leases; narrative in USD billions, rounded to one decimal; not a finance-only figure",
+            "values_millions": {
+              "2023": 2100,
+              "2024": 1000
+            },
+            "zh": "租赁使用权资产非现金增加（合并口径）"
+          }
+        ],
+        "symbol": "AAPL"
+      },
+      {
+        "accession": "0000950170-24-087843",
+        "filed": "2024-07-30",
+        "lines": [
+          {
+            "group": "adjustments",
+            "id": "depreciation_other",
+            "label": "Depreciation, amortization, and other",
+            "values_millions": {
+              "2023": 13861,
+              "2024": 22287
+            },
+            "zh": "折旧、摊销及其他调节"
+          },
+          {
+            "group": "adjustments",
+            "id": "share_compensation",
+            "label": "Stock-based compensation expense",
+            "values_millions": {
+              "2023": 9611,
+              "2024": 10734
+            },
+            "zh": "股份支付费用"
+          },
+          {
+            "group": "adjustments",
+            "id": "investment_losses",
+            "label": "Net recognized losses (gains) on investments and derivatives",
+            "values_millions": {
+              "2023": 196,
+              "2024": 305
+            },
+            "zh": "投资及衍生品净损失（收益）调节"
+          },
+          {
+            "group": "adjustments",
+            "id": "deferred_taxes",
+            "label": "Deferred income taxes",
+            "values_millions": {
+              "2023": -6059,
+              "2024": -4738
+            },
+            "zh": "递延所得税调节"
+          },
+          {
+            "group": "operating_changes",
+            "id": "receivables",
+            "label": "Accounts receivable",
+            "values_millions": {
+              "2023": -4087,
+              "2024": -7191
+            },
+            "zh": "应收账款变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "inventories",
+            "label": "Inventories",
+            "values_millions": {
+              "2023": 1242,
+              "2024": 1284
+            },
+            "zh": "存货变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "other_current_assets",
+            "label": "Other current assets",
+            "values_millions": {
+              "2023": -1991,
+              "2024": -1648
+            },
+            "zh": "其他流动资产变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "other_long_term_assets",
+            "label": "Other long-term assets",
+            "values_millions": {
+              "2023": -2833,
+              "2024": -6817
+            },
+            "zh": "其他长期资产变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "payables",
+            "label": "Accounts payable",
+            "values_millions": {
+              "2023": -2721,
+              "2024": 3545
+            },
+            "zh": "应付账款变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "unearned_revenue",
+            "label": "Unearned revenue",
+            "values_millions": {
+              "2023": 5535,
+              "2024": 5348
+            },
+            "zh": "预收收入变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "income_taxes",
+            "label": "Income taxes",
+            "values_millions": {
+              "2023": -358,
+              "2024": 1687
+            },
+            "zh": "所得税相关资产负债变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "other_current_liabilities",
+            "label": "Other current liabilities",
+            "values_millions": {
+              "2023": 2272,
+              "2024": 4867
+            },
+            "zh": "其他流动负债变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "other_long_term_liabilities",
+            "label": "Other long-term liabilities",
+            "values_millions": {
+              "2023": 553,
+              "2024": 749
+            },
+            "zh": "其他长期负债变动"
+          }
+        ],
+        "operating_section": "Cash Flows Statements, p. 59; signed contributions to net cash from operations",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+        "supplemental": [
+          {
+            "id": "tax_expense",
+            "label": "Provision for income taxes",
+            "precision_millions": 1,
+            "section": "Note 12, Income Taxes; provision table",
+            "values_millions": {
+              "2023": 16950,
+              "2024": 19651
+            },
+            "zh": "所得税费用"
+          },
+          {
+            "id": "cash_taxes",
+            "label": "Income taxes paid, net of refunds",
+            "precision_millions": 100,
+            "section": "Note 12, Income Taxes; narrative in USD billions, rounded to one decimal",
+            "values_millions": {
+              "2023": 23100,
+              "2024": 23400
+            },
+            "zh": "所得税净现金支付"
+          },
+          {
+            "id": "acquisition_line",
+            "label": "Acquisition of companies, net of cash acquired, and purchases of intangible and other assets",
+            "precision_millions": 1,
+            "section": "Cash Flows Statements; investing; includes intangible and other assets, not pure acquisition spending",
+            "values_millions": {
+              "2023": 1670,
+              "2024": 69132
+            },
+            "zh": "收购公司、无形及其他资产现金支出（扣所获现金）"
+          },
+          {
+            "id": "finance_lease_additions",
+            "label": "ROU assets obtained in exchange for lease obligations: finance leases",
+            "precision_millions": 1,
+            "section": "Note 13, Leases; supplemental cash-flow table",
+            "values_millions": {
+              "2023": 3128,
+              "2024": 11633
+            },
+            "zh": "融资租赁非现金资产增加"
+          },
+          {
+            "id": "finance_lease_principal",
+            "label": "Financing cash flows from finance leases",
+            "precision_millions": 1,
+            "section": "Note 13, Leases; supplemental cash-flow table; financing activities",
+            "values_millions": {
+              "2023": 1056,
+              "2024": 1286
+            },
+            "zh": "融资租赁本金现金支付"
+          },
+          {
+            "id": "finance_lease_interest",
+            "label": "Operating cash flows from finance leases",
+            "precision_millions": 1,
+            "section": "Note 13, Leases; supplemental cash-flow table; operating activities",
+            "values_millions": {
+              "2023": 501,
+              "2024": 734
+            },
+            "zh": "融资租赁利息现金支付（已在 CFO 内）"
+          }
+        ],
+        "symbol": "MSFT"
+      },
+      {
+        "accession": "0001652044-25-000014",
+        "filed": "2025-02-05",
+        "lines": [
+          {
+            "group": "adjustments",
+            "id": "depreciation",
+            "label": "Depreciation of property and equipment",
+            "values_millions": {
+              "2023": 11946,
+              "2024": 15311
+            },
+            "zh": "固定资产折旧"
+          },
+          {
+            "group": "adjustments",
+            "id": "share_compensation",
+            "label": "Stock-based compensation expense",
+            "values_millions": {
+              "2023": 22460,
+              "2024": 22785
+            },
+            "zh": "股份支付费用"
+          },
+          {
+            "group": "adjustments",
+            "id": "deferred_taxes",
+            "label": "Deferred income taxes",
+            "values_millions": {
+              "2023": -7763,
+              "2024": -5257
+            },
+            "zh": "递延所得税调节"
+          },
+          {
+            "group": "adjustments",
+            "id": "investment_losses",
+            "label": "Loss (gain) on debt and equity securities, net",
+            "values_millions": {
+              "2023": 823,
+              "2024": -2671
+            },
+            "zh": "债权及股权证券净损失（收益）调节"
+          },
+          {
+            "group": "adjustments",
+            "id": "other_adjustments",
+            "label": "Other",
+            "values_millions": {
+              "2023": 4330,
+              "2024": 3419
+            },
+            "zh": "其他调节"
+          },
+          {
+            "group": "operating_changes",
+            "id": "receivables",
+            "label": "Accounts receivable, net",
+            "values_millions": {
+              "2023": -7833,
+              "2024": -5891
+            },
+            "zh": "应收账款变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "income_taxes",
+            "label": "Income taxes, net",
+            "values_millions": {
+              "2023": 523,
+              "2024": -2418
+            },
+            "zh": "所得税相关资产负债净变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "other_assets",
+            "label": "Other assets",
+            "values_millions": {
+              "2023": -2143,
+              "2024": -1397
+            },
+            "zh": "其他经营资产变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "payables",
+            "label": "Accounts payable",
+            "values_millions": {
+              "2023": 664,
+              "2024": 359
+            },
+            "zh": "应付账款变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "other_liabilities",
+            "label": "Accrued expenses and other liabilities",
+            "values_millions": {
+              "2023": 3937,
+              "2024": -1161
+            },
+            "zh": "应计费用及其他负债变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "revenue_share",
+            "label": "Accrued revenue share",
+            "values_millions": {
+              "2023": 482,
+              "2024": 1059
+            },
+            "zh": "应计收入分成变动"
+          },
+          {
+            "group": "operating_changes",
+            "id": "deferred_revenue",
+            "label": "Deferred revenue",
+            "values_millions": {
+              "2023": 525,
+              "2024": 1043
+            },
+            "zh": "递延收入变动"
+          }
+        ],
+        "operating_section": "Consolidated Statements of Cash Flows, p. 56; asset/liability changes are net of acquisition effects",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000014/goog-20241231.htm",
+        "supplemental": [
+          {
+            "id": "tax_expense",
+            "label": "Provision for income taxes",
+            "precision_millions": 1,
+            "section": "Note 14, Income Taxes; provision table",
+            "values_millions": {
+              "2023": 11922,
+              "2024": 19697
+            },
+            "zh": "所得税费用"
+          },
+          {
+            "id": "cash_taxes",
+            "label": "Cash paid for income taxes, net of refunds",
+            "precision_millions": 100,
+            "section": "Note 14, Income Taxes; narrative in USD billions, rounded to one decimal",
+            "values_millions": {
+              "2023": 19200,
+              "2024": 27400
+            },
+            "zh": "所得税净现金支付"
+          },
+          {
+            "id": "acquisition_line",
+            "label": "Acquisitions, net of cash acquired, and purchases of intangible assets",
+            "precision_millions": 1,
+            "section": "Consolidated Statements of Cash Flows; investing; includes intangible assets, not pure acquisition spending",
+            "values_millions": {
+              "2023": 495,
+              "2024": 2931
+            },
+            "zh": "收购及无形资产现金支出（扣所获现金）"
+          },
+          {
+            "id": "finance_lease_additions",
+            "label": "Assets obtained in exchange for lease liabilities: finance leases",
+            "precision_millions": 1,
+            "section": "Note 4, Leases; supplemental cash-flow table",
+            "values_millions": {
+              "2023": 564,
+              "2024": 313
+            },
+            "zh": "融资租赁非现金资产增加"
+          },
+          {
+            "id": "finance_lease_principal",
+            "label": "Financing cash flows used for finance leases",
+            "precision_millions": 1,
+            "section": "Note 4, Leases; supplemental cash-flow table; included in financing repayments of debt",
+            "values_millions": {
+              "2023": 705,
+              "2024": 405
+            },
+            "zh": "融资租赁本金现金支付"
+          },
+          {
+            "id": "finance_lease_interest",
+            "label": "Operating cash flows used for finance leases",
+            "precision_millions": 1,
+            "section": "Note 4, Leases; supplemental cash-flow table; operating activities",
+            "values_millions": {
+              "2023": 35,
+              "2024": 31
+            },
+            "zh": "融资租赁利息现金支付（已在 CFO 内）"
+          }
+        ],
+        "symbol": "GOOGL"
+      }
+    ],
+    "reviewed_on": "2026-11-15",
+    "schema_version": 1
+  },
+  "schema_version": 1
+}

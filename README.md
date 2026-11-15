@@ -2,6 +2,8 @@
 
 [English](README.md) · [中文项目说明](README.zh-CN.md) · [中文研究报告](https://dev-belly.github.io/StatementTrace/cashflow/zh/)
 
+**Completed operating-cash-flow drill-down:** [Profit-to-CFO research](https://dev-belly.github.io/StatementTrace/cashflow/profit-bridge/en/) reconciles all six issuer-years and separates tax payments, acquisition-related spending and finance leases. Preserve 116 selected values and 8 explicit missing fields; Python/SQLite check 144 exact fields. [Method, sources and replay](docs/PROFIT_BRIDGE.zh-CN.md).
+
 [![CI](https://github.com/dev-belly/StatementTrace/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-belly/StatementTrace/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.11%2B-3776AB)
 ![Runtime](https://img.shields.io/badge/runtime-standard_library-128a82)
