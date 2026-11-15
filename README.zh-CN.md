@@ -2,6 +2,8 @@
 
 [English](README.md) · [直接读中文报告](https://dev-belly.github.io/StatementTrace/cashflow/zh/) · [研究解释](docs/CASHFLOW_STUDY.zh-CN.md)
 
+**已补完经营现金流拆解：** [净利润到 CFO 的逐项研究](https://dev-belly.github.io/StatementTrace/cashflow/profit-bridge/)保留六个年度的调节行、税费与现金支付、收购支出及融资租赁边界。116 个选中值、8 个明确缺失；Python / SQLite 精确核对 144 个字段。[研究说明与复现](docs/PROFIT_BRIDGE.zh-CN.md)。
+
 **利润涨了，扣除资本开支后，现金也增长了吗？**
 
 从 Apple、Microsoft、Alphabet 的公开年报中整理 24 条事实，比较 2023–2024 财年的六个公司年度。每个结果都可以追到原始申报、准确财年区间、计算公式与 SQL。

@@ -34,6 +34,10 @@ jobs:
         run: |
           python scripts/check_demo.py
           python scripts/check_cashflow.py
+          python scripts/check_profit_bridge.py
+          statementtrace verify-profit-bridge examples/profit-bridge
+          statementtrace profit-bridge --language en --out output/ci-profit-bridge-en
+          statementtrace verify-profit-bridge output/ci-profit-bridge-en
           statementtrace verify examples/demo
           statementtrace verify-comparison examples/cashflow
           statementtrace compare --language zh-CN --out output/ci-cashflow-zh
@@ -51,6 +55,8 @@ jobs:
           /tmp/statementtrace-wheel/bin/statementtrace verify-comparison /tmp/wheel-cashflow
           /tmp/statementtrace-wheel/bin/statementtrace compare --language zh-CN --out /tmp/wheel-cashflow-zh
           /tmp/statementtrace-wheel/bin/statementtrace verify-comparison /tmp/wheel-cashflow-zh
+          /tmp/statementtrace-wheel/bin/statementtrace profit-bridge --out /tmp/wheel-profit-bridge
+          /tmp/statementtrace-wheel/bin/statementtrace verify-profit-bridge /tmp/wheel-profit-bridge
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: demo-python-${{ matrix.python }}
@@ -86,6 +92,10 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python scripts/check_cashflow.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python scripts/check_profit_bridge.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          statementtrace verify-profit-bridge examples/profit-bridge
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           statementtrace verify examples/demo
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           statementtrace verify-comparison examples/cashflow
@@ -119,6 +129,11 @@ jobs:
           & $wheelPython -m statementtrace compare --language zh-CN --out $chinesePath
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           & $wheelPython -m statementtrace verify-comparison $chinesePath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $bridgePath = Join-Path $env:RUNNER_TEMP 'statementtrace-wheel-profit-bridge'
+          & $wheelPython -m statementtrace profit-bridge --out $bridgePath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & $wheelPython -m statementtrace verify-profit-bridge $bridgePath
 
   deploy:
     name: Deploy verified demo
@@ -147,6 +162,11 @@ jobs:
           cp -R examples/cashflow/. _site/cashflow/
           statementtrace compare --language zh-CN --out _site/cashflow/zh
           statementtrace verify-comparison _site/cashflow/zh
+          mkdir _site/cashflow/profit-bridge
+          cp -R examples/profit-bridge/. _site/cashflow/profit-bridge/
+          statementtrace verify-profit-bridge _site/cashflow/profit-bridge
+          statementtrace profit-bridge --language en --out _site/cashflow/profit-bridge/en
+          statementtrace verify-profit-bridge _site/cashflow/profit-bridge/en
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: _site
