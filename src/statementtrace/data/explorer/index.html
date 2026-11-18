@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>财报数据浏览器 · StatementTrace</title>
+  <link rel="stylesheet" href="./explorer.css">
+  <script type="module" src="./explorer.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="https://github.com/dev-belly/StatementTrace">StatementTrace</a>
+      <a href="../docs">API 文档</a>
+    </div>
+  </header>
+  <main>
+    <div class="view-header">
+      <h1>财报数据浏览器</h1>
+      <p id="snapshot" hidden>申报截止日 <time id="cutoff"></time> <code id="snapshot-id"></code></p>
+    </div>
+    <div class="filters">
+      <div class="filter">
+        <label for="symbol">公司</label>
+        <select id="symbol" disabled></select>
+      </div>
+      <div class="filter">
+        <label for="period">财年</label>
+        <select id="period" disabled></select>
+      </div>
+    </div>
+    <div class="status-row">
+      <p id="status" role="status">正在读取数据快照…</p>
+      <button type="button" id="retry" hidden>重新读取</button>
+    </div>
+    <noscript>此页面需要 JavaScript 才能查询接口。<a href="https://dev-belly.github.io/StatementTrace/cashflow/zh/">查看静态报告</a></noscript>
+    <div id="results" hidden>
+      <section aria-labelledby="metrics-heading">
+        <div class="section-heading">
+          <h2 id="metrics-heading">金额</h2>
+          <span>USD · 选择指标查看来源</span>
+        </div>
+        <div id="metrics" class="metrics"></div>
+      </section>
+      <section id="evidence" class="evidence" aria-labelledby="evidence-heading">
+        <div class="section-heading">
+          <h2 id="evidence-heading">来源证据</h2>
+          <button type="button" id="all-facts" hidden>查看全部</button>
+        </div>
+        <p id="evidence-description" role="status" hidden></p>
+        <div class="table-wrap">
+          <table role="table" aria-label="财报来源表">
+            <thead>
+              <tr><th scope="col">指标</th><th scope="col">金额（USD）</th><th scope="col">申报日期</th><th scope="col">原始申报</th></tr>
+            </thead>
+            <tbody id="facts" role="rowgroup"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

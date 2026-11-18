@@ -41,7 +41,7 @@ statementtrace verify-comparison output/cashflow-zh
 | 财报事实选择 | 申报日截止、准确财年、修订冲突、缺失状态 | [选择引擎](src/statementtrace/engine.py) |
 | 现金流归因 | 整数金额、精确分数、相邻财年增量与差额勾稽 | [Python](src/statementtrace/cashflow.py) · [SQL](src/statementtrace/data/cashflow_compare.sql) |
 | 数据工程 | Polars → Parquet → DuckDB → dbt；每条 SQL 路径对照 Python 核验 138 个字段 | [中文管道说明](docs/WAREHOUSE.zh-CN.md) |
-| 程序调用 | FastAPI / Pydantic；六个只读接口、分页与同一快照标识 | [中文 API 指南](docs/API.zh-CN.md) |
+| 财报浏览器与接口 | 在页面选择公司和财年，点击现金流指标查看申报来源。FastAPI 提供六个只读接口，返回固定快照。 | [运行指南](docs/API.zh-CN.md#三分钟运行) |
 | 来源审阅 | 24 项金额、概念、申报编号与原网页 | [来源 CSV](examples/cashflow/source_facts.csv) |
 
 金额的页面显示经过舍入；CSV 保留整数，JSON 保留精确分数。Excel 导入 CSV 时请选择 UTF-8；精确标识与计算依据以来源 JSON 为准。

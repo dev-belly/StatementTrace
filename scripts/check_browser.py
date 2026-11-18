@@ -4,6 +4,7 @@ Requires Google Chrome and a matching chromedriver on PATH, or the
 CHROMEWEBDRIVER directory supplied by GitHub's Ubuntu runner image.
 """
 
+import argparse
 import base64
 import csv
 import io
@@ -77,7 +78,92 @@ catch { return false; }
 )
 
 
-def browser_check(cases, root):
+def check_explorer(execute, navigate, base):
+    def expect(expression, message):
+        for _ in range(100):
+            if execute("return " + expression):
+                return
+            time.sleep(0.05)
+        status = execute("return document.getElementById('status')?.textContent")
+        raise AssertionError(f"{message}. Explorer status: {status}")
+
+    def select(control, value):
+        execute(
+            "const control = document.getElementById(arguments[0]);"
+            "control.value = arguments[1];"
+            "control.dispatchEvent(new Event('change', {bubbles: true}));",
+            control,
+            value,
+        )
+
+    navigate(base + "/explorer/?symbol=AAPL&period=2024")
+    expect("document.getElementById('status').dataset.state === 'ready'", "The explorer did not render live data")
+    expect(
+        "document.getElementById('cutoff').textContent === '2025-02-04' && "
+        "document.querySelector('[data-metric=free_cash_flow] strong').textContent === '108,807,000,000' && "
+        "document.querySelector('[data-metric=revenue] strong').textContent === '9,007,199,254,740,993' && "
+        "document.querySelector('[data-metric=net_income] strong').textContent === '0'",
+        "The explorer changed an exact API amount",
+    )
+    execute("document.querySelector('[data-metric=free_cash_flow]').click()")
+    expect(
+        "document.querySelectorAll('#facts tr').length === 2 && "
+        "Array.from(document.querySelectorAll('#facts a')).length === 2 && "
+        "Array.from(document.querySelectorAll('#facts a')).every(a => a.hostname === 'www.sec.gov') && "
+        "document.querySelector('#facts a').getBoundingClientRect().right <= innerWidth && "
+        "document.getElementById('evidence-description').textContent.includes('资本开支') && "
+        "document.documentElement.scrollWidth <= innerWidth + 1",
+        "The free cash flow drill-down or viewport differs",
+    )
+    execute("document.getElementById('all-facts').click()")
+    expect("document.querySelectorAll('#facts tr').length === 4", "The complete evidence list did not return")
+    select("symbol", "GOOGL")
+    expect(
+        "document.getElementById('status').dataset.state === 'ready' && "
+        "document.querySelector('[data-metric=free_cash_flow] strong').textContent === '缺失' && "
+        "document.querySelectorAll('#facts a').length === 0 && "
+        "new URLSearchParams(location.search).get('symbol') === 'GOOGL'",
+        "Unavailable sources must stay missing and the selected company must be shareable",
+    )
+    select("period", "2023")
+    expect(
+        "document.getElementById('status').dataset.state === 'ready' && "
+        "document.getElementById('status').textContent.includes('FY2023') && "
+        "new URLSearchParams(location.search).get('period') === '2023'",
+        "Changing the fiscal year did not query the selected period",
+    )
+    execute(
+        """
+const originalFetch = window.fetch;
+window.slowResponses = 0;
+window.completedSlowResponses = 0;
+window.fetch = async (url, options) => {
+  if (new URL(url).searchParams.get('symbol') !== 'MSFT') return originalFetch(url, options);
+  window.slowResponses += 1;
+  const response = await originalFetch(url, {...options, signal: undefined});
+  await new Promise(resolve => setTimeout(resolve, 300));
+  const originalJSON = response.json.bind(response);
+  response.json = async () => {
+    const body = await originalJSON();
+    window.completedSlowResponses += 1;
+    return body;
+  };
+  return response;
+};
+"""
+    )
+    select("symbol", "MSFT")
+    expect("window.slowResponses === 2", "Both requests for the older selection should be in flight")
+    select("symbol", "AAPL")
+    expect(
+        "window.completedSlowResponses === 2 && "
+        "document.getElementById('status').dataset.state === 'ready' && "
+        "document.getElementById('status').textContent.startsWith('AAPL')",
+        "A slow previous selection replaced the current selection",
+    )
+
+
+def browser_check(cases, root, explorer_base=None):
     driver = shutil.which("chromedriver")
     if not driver:
         candidate = Path(os.environ.get("CHROMEWEBDRIVER", "")) / "chromedriver"
@@ -388,6 +474,13 @@ def browser_check(cases, root):
                 f"/session/{session}/goog/cdp/execute",
                 {"cmd": "Emulation.setScriptExecutionDisabled", "params": {"value": False}},
             )
+        if explorer_base:
+            for width in (1280, 390):
+                call("POST", f"/session/{session}/window/rect", {"width": width, "height": 1000})
+                check_explorer(execute, navigate, explorer_base)
+                if screenshot_dir := os.environ.get("CASHFLOW_SCREENSHOT_DIR"):
+                    screenshot = call("GET", f"/session/{session}/screenshot")
+                    (Path(screenshot_dir) / f"explorer-{width}.png").write_bytes(base64.b64decode(screenshot))
         print(
             json.dumps(
                 {
@@ -402,6 +495,7 @@ def browser_check(cases, root):
                     "profit_bridge_viewports": [1280, 390],
                     "profit_bridge_languages": ["zh-CN", "en"],
                     "profit_bridge_downloads": 8,
+                    "live_explorer": explorer_base is not None,
                     **counts,
                 }
             )
@@ -424,6 +518,9 @@ def main():
     from statementtrace.profit_bridge import demo_bridge_case, write_bridge
     from statementtrace.report import build, csv_label, view_csv_filename
 
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--explorer", action="store_true", help="Verify the explorer with warehouse/API extras")
+    args = parser.parse_args()
     pairs = [
         ["2023", "2024"],
         ["sample\rone", "sample\none"],
@@ -472,7 +569,21 @@ def main():
                 for panel in analyze(data, request)["panels"]
             ]
             cases.append({"file": filename, "views": views})
-        browser_check(cases, root)
+        if args.explorer:
+            from check_api import running_api
+
+            from statementtrace.warehouse import write_warehouse
+
+            case = demo_case()
+            concepts = case["companies"][0]["facts"]["facts"]["us-gaap"]
+            concepts["RevenueFromContractWithCustomerExcludingAssessedTax"]["units"]["USD"][1]["val"] = 2**53 + 1
+            concepts["NetIncomeLoss"]["units"]["USD"][1]["val"] = 0
+            packet = root / "explorer"
+            write_warehouse(case, packet, "2025-02-04")
+            with running_api(packet) as (base, _, _):
+                browser_check(cases, root, base)
+        else:
+            browser_check(cases, root)
 
 
 if __name__ == "__main__":

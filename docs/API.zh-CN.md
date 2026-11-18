@@ -18,11 +18,16 @@ uv run --locked statementtrace serve-warehouse output/api-demo
 也支持用 pip 安装：`python -m pip install -e '.[warehouse,api]'`。
 
 - 浏览器接口文档：`http://127.0.0.1:8000/docs`
+- 财报浏览器：`http://127.0.0.1:8000/explorer/?symbol=AAPL&period=2024`
 - OpenAPI JSON：`http://127.0.0.1:8000/openapi.json`
 - 查看 Alphabet FY2024：`http://127.0.0.1:8000/v1/cashflow?symbol=GOOGL&period=2024`
 
-Swagger UI 使用 FastAPI 默认的 CDN 脚本与样式。API 本身、OpenAPI JSON 和 curl 查询
-在依赖安装后不需要外网；CDN 不可达时可以直接使用这些入口。
+在财报浏览器选择公司和财年，点击「自由现金流」筛选到经营现金流与资本开支的证据，
+再点「查看原始申报」。页面显示快照截止日，使用整数格式展示美元金额，并把缺失和零分别标明。
+地址栏保留公司与财年，使用同一份快照的读者可以打开相同视图。
+
+浏览器页面和静态资源随 Python 包安装。查阅本机数据不需要外网，原始财报链接需要联网。
+Swagger UI 使用 FastAPI 默认的 CDN 脚本与样式。CDN 不可达时可以使用财报浏览器和 OpenAPI JSON。
 
 Linux/macOS 的 curl 示例；Windows PowerShell 可将 `curl` 换成 `curl.exe`：
 

@@ -25,7 +25,14 @@ api = ["fastapi>=0.115,<1", "pydantic>=2.10,<3", "uvicorn>=0.30,<1"]
 where = ["src"]
 
 [tool.setuptools.package-data]
-statementtrace = ["data/*.json", "data/*.sql", "data/*.html"]
+statementtrace = [
+    "data/*.json",
+    "data/*.sql",
+    "data/*.html",
+    "data/explorer/*.html",
+    "data/explorer/*.css",
+    "data/explorer/*.js",
+]
 
 [tool.ruff]
 line-length = 120
