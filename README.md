@@ -89,6 +89,12 @@ uv run --locked statementtrace warehouse --out output/api-demo
 uv run --locked statementtrace serve-warehouse output/api-demo
 ```
 
+Open the [financial explorer](http://127.0.0.1:8000/explorer/) after starting the server.
+Choose a company and fiscal year, then select free cash flow to see its operating
+cash flow and capex source filings. The page calls the same read-only API over HTTP
+and keeps the selected company and year in the address. The explorer ships in the
+wheel and runs on the same port as the API.
+
 Open `http://127.0.0.1:8000/docs` for Swagger UI, or query
 `http://127.0.0.1:8000/v1/cashflow?symbol=GOOGL&period=2024`.
 `/v1/facts` supports the same filters plus a source metric; both endpoints provide

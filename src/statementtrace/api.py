@@ -7,6 +7,7 @@ from typing import Annotated, Generic, Literal, TypeVar
 
 from fastapi import FastAPI, Query, Request
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
 from .cashflow import AMOUNTS, BRIDGE, RATIOS
@@ -264,4 +265,6 @@ def create_app(directory):
     async def source_facts(filters: Annotated[FactFilters, Query()]):
         return page(facts, filters, Fact)
 
+    explorer = Path(__file__).with_name("data") / "explorer"
+    app.mount("/explorer", StaticFiles(directory=explorer, html=True), name="explorer")
     return app
