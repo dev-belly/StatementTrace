@@ -176,6 +176,7 @@ def check_public_explorer(execute, navigate, base):
 
     navigate(base + "/explorer/?symbol=GOOGL&period=2024&as_of=2025-02-05")
     expect("document.querySelector('[data-metric=free_cash_flow] strong')?.textContent === '72,764,000,000'")
+    expect("document.querySelector('.allocation-caption')?.textContent === '自由现金流占 58.1% · 资本开支占 41.9%'")
     execute("document.querySelector('[data-metric=free_cash_flow]').click()")
     expect("document.querySelectorAll('#facts a').length === 2")
     execute(
@@ -184,6 +185,7 @@ def check_public_explorer(execute, navigate, base):
     )
     expect(
         "document.querySelector('[data-metric=free_cash_flow] strong')?.textContent === '缺失' && "
+        "!document.querySelector('.allocation') && "
         "document.querySelectorAll('#facts a').length === 0 && "
         "new URLSearchParams(location.search).get('as_of') === '2025-02-04' && "
         "document.documentElement.scrollWidth <= innerWidth"

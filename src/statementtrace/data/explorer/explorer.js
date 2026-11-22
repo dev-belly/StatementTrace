@@ -2,6 +2,7 @@ const api = new URL("../v1/", import.meta.url);
 const published = document.documentElement.dataset.mode === "snapshot";
 const companyNames = { AAPL: "Apple", GOOGL: "Alphabet", MSFT: "Microsoft" };
 const amountFormat = new Intl.NumberFormat("en-US");
+const shareFormat = new Intl.NumberFormat("zh-CN", { style: "percent", maximumFractionDigits: 1 });
 const metrics = [
   ["free_cash_flow", "自由现金流"],
   ["operating_cash_flow", "经营现金流"],
@@ -196,6 +197,22 @@ function showFacts(metric) {
   }
 }
 
+function showAllocation(button, amounts) {
+  if (amounts.operating_cash_flow === null || amounts.capex === null) return;
+  const cfo = BigInt(amounts.operating_cash_flow);
+  const capex = BigInt(amounts.capex);
+  if (cfo <= 0n || capex < 0n || capex > cfo) return;
+
+  const share = Number(((cfo - capex) * 1000n + cfo / 2n) / cfo) / 1000;
+  const bar = element("span", undefined, "allocation");
+  const retained = element("span");
+  retained.style.width = (share * 100) + "%";
+  bar.setAttribute("aria-hidden", "true");
+  bar.append(retained);
+  const caption = "自由现金流占 " + shareFormat.format(share) + " · 资本开支占 " + shareFormat.format(1 - share);
+  button.append(bar, element("span", caption, "allocation-caption"));
+}
+
 function renderMetrics(amounts) {
   const buttons = metrics.map(([metric, label]) => {
     const button = element("button", undefined, metric === "free_cash_flow" ? "metric featured" : "metric");
@@ -204,7 +221,10 @@ function renderMetrics(amounts) {
     button.setAttribute("aria-controls", "facts");
     const value = amounts[metric];
     button.append(element("span", label), element("strong", money(value), value === null ? "missing" : ""));
-    if (metric === "free_cash_flow") button.append(element("span", "经营现金流减去现金资本开支", "formula"));
+    if (metric === "free_cash_flow") {
+      button.append(element("span", "经营现金流减去现金资本开支", "formula"));
+      showAllocation(button, amounts);
+    }
     button.addEventListener("click", () => {
       showFacts(metric);
       byId("evidence").scrollIntoView({ block: "nearest" });
@@ -296,5 +316,8 @@ companySelect.addEventListener("change", () => {
 periodSelect.addEventListener("change", showSelection);
 cutoffSelect.addEventListener("change", () => void initialize(cutoffSelect.value));
 allFacts.addEventListener("click", () => showFacts());
-retry.addEventListener("click", () => void initialize());
+retry.addEventListener("click", () => {
+  savedSnapshots = undefined;
+  void initialize();
+});
 void initialize();

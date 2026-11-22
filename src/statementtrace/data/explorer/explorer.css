@@ -118,6 +118,9 @@ select:disabled { opacity: 0.65; }
 .metric.featured strong { color: #173f8a; font-size: clamp(1.62rem, 3.4vw, 2.7rem); letter-spacing: -0.03em; }
 .metric.featured .missing { color: var(--muted); }
 .metric .formula { font-size: 0.77rem; margin-top: 6px; }
+.metric .allocation { display: block; height: 7px; border-radius: 999px; overflow: hidden; background: #a9bee8; margin-top: 8px; }
+.allocation > span { height: 100%; display: block; background: #2457b0; }
+.metric .allocation-caption { font-size: 0.75rem; font-variant-numeric: tabular-nums; }
 
 .evidence { margin-top: 30px; }
 #evidence-description { margin-bottom: 10px; }
@@ -132,8 +135,9 @@ tr:last-child td { border-bottom: 0; }
 
 @media (max-width: 680px) {
   .intro { gap: 16px; }
-  .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-inline: 12px; }
-  #cutoff-field { grid-column: 1 / -1; }
+  .filters { grid-template-columns: minmax(0, 1fr); padding-inline: 12px; }
+  [data-mode="snapshot"] .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filters label:first-child { grid-column: 1 / -1; }
   .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .metric { padding: 11px; min-height: 78px; }
   .metric.featured { grid-row: auto; grid-column: 1 / -1; }
