@@ -17,7 +17,10 @@ import tempfile
 import time
 import urllib.error
 import urllib.request
+from functools import partial
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from threading import Thread
 
 ASSERT_VIEW = r"""
 function assertView(expected, exactAddress, unavailable) {
@@ -163,7 +166,33 @@ window.fetch = async (url, options) => {
     )
 
 
-def browser_check(cases, root, explorer_base=None):
+def check_public_explorer(execute, navigate, base):
+    def expect(expression):
+        for _ in range(100):
+            if execute("return " + expression):
+                return
+            time.sleep(0.05)
+        raise AssertionError(f"Public explorer condition failed: {expression}")
+
+    navigate(base + "/explorer/?symbol=GOOGL&period=2024&as_of=2025-02-05")
+    expect("document.querySelector('[data-metric=free_cash_flow] strong')?.textContent === '72,764,000,000'")
+    execute("document.querySelector('[data-metric=free_cash_flow]').click()")
+    expect("document.querySelectorAll('#facts a').length === 2")
+    execute(
+        "const cutoff = document.getElementById('cutoff-select');"
+        "cutoff.value = '2025-02-04'; cutoff.dispatchEvent(new Event('change'));"
+    )
+    expect(
+        "document.querySelector('[data-metric=free_cash_flow] strong')?.textContent === '缺失' && "
+        "document.querySelectorAll('#facts a').length === 0 && "
+        "new URLSearchParams(location.search).get('as_of') === '2025-02-04' && "
+        "document.documentElement.scrollWidth <= innerWidth"
+    )
+    navigate(execute("return location.href"))
+    expect("document.querySelector('[data-metric=free_cash_flow] strong')?.textContent === '缺失'")
+
+
+def browser_check(cases, root, explorer_base=None, public_base=None):
     driver = shutil.which("chromedriver")
     if not driver:
         candidate = Path(os.environ.get("CHROMEWEBDRIVER", "")) / "chromedriver"
@@ -481,6 +510,10 @@ def browser_check(cases, root, explorer_base=None):
                 if screenshot_dir := os.environ.get("CASHFLOW_SCREENSHOT_DIR"):
                     screenshot = call("GET", f"/session/{session}/screenshot")
                     (Path(screenshot_dir) / f"explorer-{width}.png").write_bytes(base64.b64decode(screenshot))
+        if public_base:
+            for width in (1280, 390):
+                call("POST", f"/session/{session}/window/rect", {"width": width, "height": 1000})
+                check_public_explorer(execute, navigate, public_base)
         print(
             json.dumps(
                 {
@@ -496,6 +529,7 @@ def browser_check(cases, root, explorer_base=None):
                     "profit_bridge_languages": ["zh-CN", "en"],
                     "profit_bridge_downloads": 8,
                     "live_explorer": explorer_base is not None,
+                    "public_explorer": public_base is not None,
                     **counts,
                 }
             )
@@ -570,6 +604,7 @@ def main():
             ]
             cases.append({"file": filename, "views": views})
         if args.explorer:
+            from build_pages_explorer import build as build_public_explorer
             from check_api import running_api
 
             from statementtrace.warehouse import write_warehouse
@@ -580,8 +615,17 @@ def main():
             concepts["NetIncomeLoss"]["units"]["USD"][1]["val"] = 0
             packet = root / "explorer"
             write_warehouse(case, packet, "2025-02-04")
-            with running_api(packet) as (base, _, _):
-                browser_check(cases, root, base)
+            public = root / "public"
+            build_public_explorer(public / "explorer")
+            handler = partial(SimpleHTTPRequestHandler, directory=public)
+            with running_api(packet) as (base, _, _), ThreadingHTTPServer(("127.0.0.1", 0), handler) as server:
+                thread = Thread(target=server.serve_forever, daemon=True)
+                thread.start()
+                try:
+                    browser_check(cases, root, base, f"http://127.0.0.1:{server.server_port}")
+                finally:
+                    server.shutdown()
+                    thread.join()
         else:
             browser_check(cases, root)
 

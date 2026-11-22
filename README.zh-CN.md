@@ -2,6 +2,8 @@
 
 [English](README.md) · [直接读中文报告](https://dev-belly.github.io/StatementTrace/cashflow/zh/) · [研究解释](docs/CASHFLOW_STUDY.zh-CN.md)
 
+[打开在线财报浏览器](https://dev-belly.github.io/StatementTrace/explorer/)。切换公司、财年和申报截止日，点击金额跳到对应申报。把 Alphabet 的截止日从 2025-02-05 切到 2025-02-04，可以看到缺失金额如何显示。[本地 FastAPI 运行指南](docs/API.zh-CN.md#三分钟运行)。
+
 **已补完经营现金流拆解：** [净利润到 CFO 的逐项研究](https://dev-belly.github.io/StatementTrace/cashflow/profit-bridge/)保留六个年度的调节行、税费与现金支付、收购支出及融资租赁边界。116 个选中值、8 个明确缺失；Python / SQLite 精确核对 144 个字段。[研究说明与复现](docs/PROFIT_BRIDGE.zh-CN.md)。
 
 **利润涨了，扣除资本开支后，现金也增长了吗？**

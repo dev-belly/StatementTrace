@@ -167,6 +167,7 @@ jobs:
           statementtrace verify-profit-bridge _site/cashflow/profit-bridge
           statementtrace profit-bridge --language en --out _site/cashflow/profit-bridge/en
           statementtrace verify-profit-bridge _site/cashflow/profit-bridge/en
+          python scripts/build_pages_explorer.py _site/explorer
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: _site
