@@ -1,5 +1,8 @@
 const api = new URL("../v1/", import.meta.url);
+const published = document.documentElement.dataset.mode === "snapshot";
+const companyNames = { AAPL: "Apple", GOOGL: "Alphabet", MSFT: "Microsoft" };
 const amountFormat = new Intl.NumberFormat("en-US");
+const shareFormat = new Intl.NumberFormat("zh-CN", { style: "percent", maximumFractionDigits: 1 });
 const metrics = [
   ["free_cash_flow", "自由现金流"],
   ["operating_cash_flow", "经营现金流"],
@@ -11,6 +14,7 @@ const labels = new Map(metrics);
 const byId = (id) => document.getElementById(id);
 const companySelect = byId("symbol");
 const periodSelect = byId("period");
+const cutoffSelect = byId("cutoff-select");
 const results = byId("results");
 const status = byId("status");
 const retry = byId("retry");
@@ -23,6 +27,14 @@ let activeRequest;
 let snapshot;
 let issuers = [];
 let facts = [];
+let savedSnapshots;
+let savedView;
+
+if (published) {
+  byId("mode").textContent = "公开申报 · 历史快照";
+  byId("api-docs").href = "https://github.com/dev-belly/StatementTrace/blob/main/docs/API.zh-CN.md";
+  byId("cutoff-field").hidden = false;
+}
 
 function element(tag, text, className) {
   const node = document.createElement(tag);
@@ -66,6 +78,48 @@ async function fetchJSON(path, signal) {
   };
 }
 
+async function loadCatalog(preferredCutoff, signal) {
+  if (published) {
+    if (!savedSnapshots) {
+      const response = await fetch(new URL("./snapshots.json", import.meta.url), { signal });
+      if (!response.ok) throw new Error("HTTP " + response.status);
+      const { schema_version: version, views } = await response.json();
+      if (version !== 1 || !Array.isArray(views) || views.length === 0) {
+        throw new Error("Invalid snapshot bundle");
+      }
+      savedSnapshots = views;
+    }
+    const view = savedSnapshots.find(({ snapshot }) => snapshot.as_of === preferredCutoff) ?? savedSnapshots[0];
+    return { metadata: view.snapshot, catalog: view.issuers, view };
+  }
+  const [metadata, catalog] = await Promise.all([
+    fetchJSON("snapshot", signal),
+    fetchJSON("issuers", signal),
+  ]);
+  if (!metadata.data.snapshot_id || [metadata, catalog].some((item) => item.snapshotId !== metadata.data.snapshot_id)) {
+    throw new Error("Snapshot mismatch");
+  }
+  return { metadata: metadata.data, catalog: catalog.data };
+}
+
+async function loadSelection(symbol, period, signal) {
+  if (published) {
+    const matches = (row) => row.symbol === symbol && row.period === period;
+    return { row: savedView.cashflow.find(matches), sourceRows: savedView.facts.filter(matches) };
+  }
+  const query = new URLSearchParams({ symbol, period });
+  const [cashflow, source] = await Promise.all([
+    fetchJSON("cashflow?" + query, signal),
+    fetchJSON("facts?" + query, signal),
+  ]);
+  if ([cashflow, source].some((page) =>
+    page.snapshotId !== snapshot.snapshot_id || page.data.snapshot.snapshot_id !== snapshot.snapshot_id
+  )) {
+    throw new Error("Snapshot mismatch");
+  }
+  return { row: cashflow.data.items[0], sourceRows: source.data.items };
+}
+
 function showSnapshotMismatch() {
   setStatus("error", "服务返回了不同的数据快照，请重新读取。");
 }
@@ -82,6 +136,7 @@ function rememberSelection(symbol, period) {
   const url = new URL(window.location.href);
   url.searchParams.set("symbol", symbol);
   url.searchParams.set("period", period);
+  if (published) url.searchParams.set("as_of", snapshot.as_of);
   window.history.replaceState(null, "", url);
 }
 
@@ -142,6 +197,22 @@ function showFacts(metric) {
   }
 }
 
+function showAllocation(button, amounts) {
+  if (amounts.operating_cash_flow === null || amounts.capex === null) return;
+  const cfo = BigInt(amounts.operating_cash_flow);
+  const capex = BigInt(amounts.capex);
+  if (cfo <= 0n || capex < 0n || capex > cfo) return;
+
+  const share = Number(((cfo - capex) * 1000n + cfo / 2n) / cfo) / 1000;
+  const bar = element("span", undefined, "allocation");
+  const retained = element("span");
+  retained.style.width = (share * 100) + "%";
+  bar.setAttribute("aria-hidden", "true");
+  bar.append(retained);
+  const caption = "自由现金流占 " + shareFormat.format(share) + " · 资本开支占 " + shareFormat.format(1 - share);
+  button.append(bar, element("span", caption, "allocation-caption"));
+}
+
 function renderMetrics(amounts) {
   const buttons = metrics.map(([metric, label]) => {
     const button = element("button", undefined, metric === "free_cash_flow" ? "metric featured" : "metric");
@@ -150,6 +221,10 @@ function renderMetrics(amounts) {
     button.setAttribute("aria-controls", "facts");
     const value = amounts[metric];
     button.append(element("span", label), element("strong", money(value), value === null ? "missing" : ""));
+    if (metric === "free_cash_flow") {
+      button.append(element("span", "经营现金流减去现金资本开支", "formula"));
+      showAllocation(button, amounts);
+    }
     button.addEventListener("click", () => {
       showFacts(metric);
       byId("evidence").scrollIntoView({ block: "nearest" });
@@ -167,52 +242,44 @@ async function showSelection() {
     setStatus("empty", "没有可查询的公司或财年。");
     return;
   }
-  const query = new URLSearchParams({ symbol, period });
   try {
     rememberSelection(symbol, period);
-    const [cashflow, source] = await Promise.all([
-      fetchJSON("cashflow?" + query, controller.signal),
-      fetchJSON("facts?" + query, controller.signal),
-    ]);
+    const { row, sourceRows } = await loadSelection(symbol, period, controller.signal);
     if (activeRequest !== controller) return;
-    if ([cashflow, source].some((page) =>
-      page.snapshotId !== snapshot.snapshot_id || page.data.snapshot.snapshot_id !== snapshot.snapshot_id
-    )) {
-      showSnapshotMismatch();
-      return;
-    }
-    const row = cashflow.data.items[0];
     if (!row) {
       setStatus("empty", "该公司与财年没有查询结果。");
       return;
     }
-    facts = source.data.items;
+    facts = sourceRows;
     renderMetrics(row.amounts);
     showFacts();
     results.hidden = false;
     const dates = [row.symbol, fiscalLabel(row.period), row.start + " 至 " + row.end];
     if (row.status === "missing_input") dates.push("存在缺失金额");
     setStatus("ready", dates.join(" · "));
-  } catch {
-    if (activeRequest === controller) setStatus("error", "读取财报失败，请重新读取。");
+  } catch (error) {
+    if (activeRequest !== controller) return;
+    if (error.message === "Snapshot mismatch") showSnapshotMismatch();
+    else setStatus("error", "读取财报失败，请重新读取。");
   }
 }
 
-async function initialize() {
+async function initialize(preferredCutoff) {
   const controller = begin("正在读取数据快照…");
+  const params = new URLSearchParams(window.location.search);
   companySelect.disabled = true;
   periodSelect.disabled = true;
+  cutoffSelect.disabled = true;
   byId("snapshot").hidden = true;
   try {
-    const [metadata, catalog] = await Promise.all([
-      fetchJSON("snapshot", controller.signal),
-      fetchJSON("issuers", controller.signal),
-    ]);
+    const { metadata, catalog, view } = await loadCatalog(preferredCutoff ?? params.get("as_of"), controller.signal);
     if (activeRequest !== controller) return;
-    snapshot = metadata.data;
-    if (!snapshot.snapshot_id || [metadata, catalog].some((item) => item.snapshotId !== snapshot.snapshot_id)) {
-      showSnapshotMismatch();
-      return;
+    snapshot = metadata;
+    savedView = view;
+    if (published) {
+      cutoffSelect.replaceChildren(...savedSnapshots.map(({ snapshot }) => new Option(snapshot.as_of, snapshot.as_of)));
+      cutoffSelect.value = snapshot.as_of;
+      cutoffSelect.disabled = false;
     }
     const cutoff = byId("cutoff");
     cutoff.dateTime = snapshot.as_of;
@@ -221,21 +288,24 @@ async function initialize() {
     byId("snapshot-id").title = snapshot.snapshot_id;
     byId("snapshot").hidden = false;
 
-    issuers = catalog.data;
+    issuers = catalog;
     if (!issuers.length) {
       setStatus("empty", "当前快照没有可浏览的公司。");
       return;
     }
-    const params = new URLSearchParams(window.location.search);
     const preferred = params.get("symbol");
     const match = issuers.find(({ symbol }) => symbol === preferred);
-    companySelect.replaceChildren(...issuers.map(({ symbol }) => new Option(symbol, symbol)));
+    companySelect.replaceChildren(...issuers.map(({ symbol }) =>
+      new Option(Object.hasOwn(companyNames, symbol) ? companyNames[symbol] + " · " + symbol : symbol, symbol)
+    ));
     companySelect.value = (match ?? issuers[0]).symbol;
     companySelect.disabled = false;
     fillPeriods(match ? params.get("period") : null);
     await showSelection();
-  } catch {
-    if (activeRequest === controller) setStatus("error", "读取快照失败，请重新读取。");
+  } catch (error) {
+    if (activeRequest !== controller) return;
+    if (error.message === "Snapshot mismatch") showSnapshotMismatch();
+    else setStatus("error", "读取快照失败，请重新读取。");
   }
 }
 
@@ -244,6 +314,10 @@ companySelect.addEventListener("change", () => {
   void showSelection();
 });
 periodSelect.addEventListener("change", showSelection);
+cutoffSelect.addEventListener("change", () => void initialize(cutoffSelect.value));
 allFacts.addEventListener("click", () => showFacts());
-retry.addEventListener("click", initialize);
+retry.addEventListener("click", () => {
+  savedSnapshots = undefined;
+  void initialize();
+});
 void initialize();

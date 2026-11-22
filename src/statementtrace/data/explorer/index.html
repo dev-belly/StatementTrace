@@ -1,57 +1,66 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-mode="api">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>财报数据浏览器 · StatementTrace</title>
+  <meta name="description" content="比较公开财报中的利润与现金流，核对每个金额对应的 SEC 申报。">
+  <title>财报溯源 · StatementTrace</title>
   <link rel="stylesheet" href="./explorer.css">
   <script type="module" src="./explorer.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">跳到财报</a>
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="https://github.com/dev-belly/StatementTrace">StatementTrace</a>
-      <a href="../docs">API 文档</a>
+      <a class="brand" href="https://github.com/dev-belly/StatementTrace"><span class="brand-mark" aria-hidden="true"></span>StatementTrace</a>
+      <nav aria-label="项目导航">
+        <a href="https://dev-belly.github.io/StatementTrace/cashflow/zh/">研究报告</a>
+        <a id="api-docs" href="../docs">API 文档</a>
+      </nav>
     </div>
   </header>
-  <main>
-    <div class="view-header">
-      <h1>财报数据浏览器</h1>
-      <p id="snapshot" hidden>申报截止日 <time id="cutoff"></time> <code id="snapshot-id"></code></p>
-    </div>
-    <div class="filters">
-      <div class="filter">
-        <label for="symbol">公司</label>
-        <select id="symbol" disabled></select>
+  <main id="main">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="mode" id="mode">财报浏览器</p>
+        <h1 id="page-title">财报溯源</h1>
+        <p class="lead">从自由现金流追到原始申报，核对利润与现金流的每一项金额。</p>
       </div>
-      <div class="filter">
-        <label for="period">财年</label>
-        <select id="period" disabled></select>
+      <div id="snapshot" class="snapshot" hidden>
+        <p>申报截止日 <time id="cutoff"></time></p>
+        <p>快照 <code id="snapshot-id"></code></p>
       </div>
+    </section>
+    <div class="filters" aria-label="财报筛选">
+      <label for="symbol">公司 <select id="symbol" disabled></select></label>
+      <label for="period">财年 <select id="period" disabled></select></label>
+      <label for="cutoff-select" id="cutoff-field" hidden>
+        申报截止日 <select id="cutoff-select" disabled></select>
+      </label>
     </div>
     <div class="status-row">
       <p id="status" role="status">正在读取数据快照…</p>
-      <button type="button" id="retry" hidden>重新读取</button>
+      <button type="button" class="secondary" id="retry" hidden>重新读取</button>
     </div>
-    <noscript>此页面需要 JavaScript 才能查询接口。<a href="https://dev-belly.github.io/StatementTrace/cashflow/zh/">查看静态报告</a></noscript>
+    <noscript>启用 JavaScript 后可以筛选财报。<a href="https://dev-belly.github.io/StatementTrace/cashflow/zh/">查看静态报告</a></noscript>
     <div id="results" hidden>
       <section aria-labelledby="metrics-heading">
         <div class="section-heading">
-          <h2 id="metrics-heading">金额</h2>
-          <span>USD · 选择指标查看来源</span>
+          <h2 id="metrics-heading">财报指标</h2>
+          <span>美元 · 点击金额查看来源</span>
         </div>
         <div id="metrics" class="metrics"></div>
       </section>
       <section id="evidence" class="evidence" aria-labelledby="evidence-heading">
         <div class="section-heading">
           <h2 id="evidence-heading">来源证据</h2>
-          <button type="button" id="all-facts" hidden>查看全部</button>
+          <button type="button" class="secondary" id="all-facts" hidden>查看全部</button>
         </div>
         <p id="evidence-description" role="status" hidden></p>
         <div class="table-wrap">
           <table role="table" aria-label="财报来源表">
             <thead>
-              <tr><th scope="col">指标</th><th scope="col">金额（USD）</th><th scope="col">申报日期</th><th scope="col">原始申报</th></tr>
+              <tr><th scope="col">指标</th><th scope="col">金额（美元）</th><th scope="col">申报日期</th><th scope="col">原始申报</th></tr>
             </thead>
             <tbody id="facts" role="rowgroup"></tbody>
           </table>

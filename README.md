@@ -2,6 +2,8 @@
 
 [English](README.md) · [中文项目说明](README.zh-CN.md) · [中文研究报告](https://dev-belly.github.io/StatementTrace/cashflow/zh/)
 
+[Open the financial explorer](https://dev-belly.github.io/StatementTrace/explorer/). Select an issuer, fiscal year and filing cutoff, then select an amount to inspect the SEC records. At the earlier cutoff, the packet shows Alphabet's amounts as missing. [Run the explorer with the local FastAPI service](docs/API.zh-CN.md#三分钟运行).
+
 **Completed operating-cash-flow drill-down:** [Profit-to-CFO research](https://dev-belly.github.io/StatementTrace/cashflow/profit-bridge/en/) reconciles all six issuer-years and separates tax payments, acquisition-related spending and finance leases. Preserve 116 selected values and 8 explicit missing fields; Python/SQLite check 144 exact fields. [Method, sources and replay](docs/PROFIT_BRIDGE.zh-CN.md).
 
 [![CI](https://github.com/dev-belly/StatementTrace/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-belly/StatementTrace/actions/workflows/ci.yml)
