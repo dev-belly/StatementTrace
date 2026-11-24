@@ -2,7 +2,7 @@
   color-scheme: light;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   color: #17243a;
-  background: #f4f6fb;
+  background: #f6f7fa;
   --surface: #fff;
   --muted: #505f77;
   --accent: #2457b0;
@@ -47,24 +47,25 @@ main { padding: clamp(22px, 5vw, 54px) 0 60px; }
   flex-wrap: wrap;
   gap: 24px;
   padding: clamp(23px, 5vw, 56px);
-  border: 1px solid #263f61;
+  border: 1px solid #dbe4f4;
   border-radius: clamp(18px, 3vw, 30px);
-  background: radial-gradient(ellipse at 92% 90%, #294e82 0%, transparent 64%), linear-gradient(130deg, #101b32, #192d4e);
-  color: #f6f9ff;
+  background: radial-gradient(ellipse at 93% 100%, #e2ebff, transparent 66%), #fff;
+  color: #15263f;
 }
-.mode { color: #bcd5ff; font-size: 0.875rem; font-weight: 650; }
-h1 { font-size: clamp(2.15rem, 5.3vw, 4.1rem); letter-spacing: -0.045em; line-height: 1.12; margin: 8px 0 10px; }
-.lead { color: #d7e4f8; max-width: 37ch; }
+.mode { color: #254da3; font-size: 0.875rem; font-weight: 650; }
+h1 { font-size: clamp(2.3rem, 6.2vw, 5.05rem); letter-spacing: -0.064em; line-height: 1.12; margin: 8px 0 10px; }
+.lead { color: #4b5a73; max-width: 37ch; }
 .snapshot {
   display: grid;
   gap: 4px;
-  border: 1px solid #6481ab;
+  border: 1px solid #d2def3;
+  background: #ffffffc7;
   border-radius: 14px;
   padding: 10px 14px;
   font-size: 0.83rem;
-  color: #d7e4f8;
+  color: #4b5a73;
 }
-.snapshot time, .snapshot code { color: #fff; font-weight: 650; margin-left: 4px; }
+.snapshot time, .snapshot code { color: #203b70; font-weight: 650; margin-left: 4px; }
 
 .filters {
   display: grid;
@@ -108,7 +109,7 @@ select:disabled { opacity: 0.65; }
   padding: 14px 17px;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 15px;
+  border-radius: 20px;
 }
 .metric:hover, .metric[aria-pressed="true"] { border-color: var(--accent); }
 .metric[aria-pressed="true"] { box-shadow: inset 0 0 0 1px var(--accent); }
@@ -135,6 +136,7 @@ tr:last-child td { border-bottom: 0; }
 
 @media (max-width: 680px) {
   .intro { gap: 16px; }
+  .snapshot { width: 100%; }
   .filters { grid-template-columns: minmax(0, 1fr); padding-inline: 12px; }
   [data-mode="snapshot"] .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .filters label:first-child { grid-column: 1 / -1; }

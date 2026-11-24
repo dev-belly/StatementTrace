@@ -227,6 +227,7 @@ function renderMetrics(amounts) {
     }
     button.addEventListener("click", () => {
       showFacts(metric);
+      byId("evidence-heading").focus({ preventScroll: true });
       byId("evidence").scrollIntoView({ block: "nearest" });
     });
     return button;
@@ -315,7 +316,10 @@ companySelect.addEventListener("change", () => {
 });
 periodSelect.addEventListener("change", showSelection);
 cutoffSelect.addEventListener("change", () => void initialize(cutoffSelect.value));
-allFacts.addEventListener("click", () => showFacts());
+allFacts.addEventListener("click", () => {
+  showFacts();
+  byId("evidence-heading").focus();
+});
 retry.addEventListener("click", () => {
   savedSnapshots = undefined;
   void initialize();
